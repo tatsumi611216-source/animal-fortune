@@ -113,6 +113,19 @@
   .aisho-names { font-size:1.05rem; font-weight:bold; color:#7b3a8c; margin:4px 0; }
   .aisho-score { font-size:1.3rem; color:#555; } .aisho-score b { font-size:2.4rem; color:#ff2d6f; } .aisho-score small { font-size:1rem; }
   .aisho-comment { font-size:0.9rem; line-height:1.7; color:#555; text-align:left; margin-top:8px; }
+  .aisho-score .tier { font-size:0.9rem; color:#ff5e8a; font-weight:bold; vertical-align:middle; margin-left:6px; }
+  .aisho-rel { display:flex; justify-content:space-between; align-items:center; background:#fff0f5; border-radius:12px; padding:12px 16px; margin-top:14px; }
+  .aisho-rel span { font-size:0.9rem; font-weight:bold; color:#d6336c; }
+  .aisho-rel b { font-size:1.6rem; color:#ff2d6f; }
+  .aisho-tip { font-size:0.85rem; line-height:1.7; color:#666; text-align:left; margin-top:10px; background:#fafafa; border-left:3px solid #ff8fb1; padding:10px 12px; border-radius:0 8px 8px 0; }
+  .rel-tabs { margin-bottom:14px; }
+  .rel-select { width:100%; max-width:300px; padding:12px; border:2px solid #ffd9e4; border-radius:12px; font-size:0.95rem; background:#fff; cursor:pointer; }
+
+  /* 名言＆あるある */
+  .quote-card { font-size:1.05rem; font-weight:bold; color:#7b3a8c; font-style:italic; line-height:1.7; background:linear-gradient(135deg,#fff0f5,#f3e8ff); border-radius:14px; padding:16px 18px; margin:6px 0 4px; position:relative; }
+  .arusec .aru-list { margin:6px 0 0; padding:0; }
+  .aru-list li { list-style:none; background:#fff; border-radius:10px; padding:9px 12px 9px 30px; margin:7px 0; font-size:0.88rem; line-height:1.6; position:relative; box-shadow:0 2px 6px rgba(255,94,138,.08); }
+  .aru-list li::before { content:"✓"; position:absolute; left:11px; color:#ff5e8a; font-weight:bold; }
 
   .social-proof { font-size:0.78rem; color:#c98aa8; margin-top:12px; }
   .social-proof b { color:#ff5e8a; }
@@ -250,6 +263,22 @@ const EXTRA = {
   "コアラ":{line:"のんびり返信。癒やし系スタンプ多め。急かされると疲れる。",date:"リラックスできるまったりデート。カフェ・自然・おうちが◎。",fall:"一緒にいて心から落ち着けると感じた瞬間に心を許す。",marriage:"穏やかな家庭志向。争いのない関係を長く続ける。",uwaki:22,jealous:38,color:"ターコイズ",day:"木曜",month:"7月・12月"}
 };
 
+// ===== 名言＆恋愛あるある =====
+const VOICE = {
+  "チーター":{quote:"「考えるな、感じろ。そして即・会いに行け。」",ark:["気になった瞬間に即LINE、即既読、即誘う","熱しやすく冷めやすいを自分でも自覚してる","追われると萎えるのに、追うのは大好き"]},
+  "黒ひょう":{quote:"「私は安売りしない。惚れさせるのは、いつも私。」",ark:["既読つけてもあえて少し待ってから返す","デート前の店選びに本気を出しすぎる","『どう思われるか』を常に計算している"]},
+  "ライオン":{quote:"「愛してるなら、まず私を立ててくれ。」",ark:["頼られると断れず全力で尽くす","プライドが邪魔して自分から謝れない","本当は超寂しがりなのを隠している"]},
+  "とら":{quote:"「派手さはいらない。長く隣にいられる人がいい。」",ark:["気づけば相手の世話を焼いている","遊びの恋に時間を使えない","一度決めた相手にはとことん一途"]},
+  "たぬき":{quote:"「無理に追わない。気づけば隣にいる、が私の勝ち方。」",ark:["押しは弱いのに、なぜか手放されない","一緒にいると変に落ち着くと言われる","空気を読みすぎて自分の希望を言えない"]},
+  "こじか":{quote:"「心を開くまでが長い。開いたら…重いよ。」",ark:["最初はそっけない→慣れると甘えMAX","好きな人の前だと挙動不審になる","傷つくのが怖くて先に壁を作りがち"]},
+  "猿":{quote:"「楽しくない恋に、意味なんてある？」",ark:["褒められると秒で好きになる","重い空気になると冗談でごまかす","とにかく一緒に笑える人が好き"]},
+  "ペガサス":{quote:"「理屈じゃない。ピンと来たら、それが運命。」",ark:["気分の波で連絡頻度が乱高下する","束縛された瞬間に冷める","ノッてる時のテンションは天井知らず"]},
+  "ゾウ":{quote:"「口下手でいい。愛は背中で見せる。」",ark:["LINEは短文だけど約束は必ず守る","好きを言葉にするのが死ぬほど苦手","一度決めたら浮気の選択肢が存在しない"]},
+  "ひつじ":{quote:"「つながってる実感がないと、不安で死んじゃう。」",ark:["既読スルー1時間で情緒が乱れる","『みんなで』が好き、ひとりは苦手","尽くしすぎて重いと言われがち"]},
+  "オオカミ":{quote:"「群れない。でも、選んだ一人にはとことん。」",ark:["自分の時間を邪魔されると無理","好きな人にもあえて素っ気なくする","理解されると一気に心を開く（ツンデレ）"]},
+  "コアラ":{quote:"「急かさないで。私のペースで、ちゃんと好きになるから。」",ark:["返信はのんびり、でも誠実","刺激より『居心地』を最優先","争いになりそうだと全力で回避する"]}
+};
+
 const NUM_TO_ANIMAL = [
   "こじか","黒ひょう","猿","チーター","黒ひょう","こじか","ゾウ","ひつじ","ひつじ","ゾウ",
   "ペガサス","ペガサス","ひつじ","たぬき","たぬき","コアラ","黒ひょう","コアラ","ゾウ","チーター",
@@ -290,28 +319,61 @@ function compatScore(me, you){
   base += (diff<6?6:diff>20?-6:0);
   return Math.max(20,Math.min(99,base));
 }
-function compatComment(s, me, you){
-  if(s>=90) return `運命級💞 ${me}と${you}は惹かれ合う最高の相性。お互いの足りない部分を自然に補い合えます。`;
-  if(s>=75) return `好相性💕 ${me}と${you}はうまくいきやすいペア。ちょっとの気遣いで長続きします。`;
-  if(s>=55) return `努力で開花🌱 ${me}と${you}は最初すれ違うことも。価値観をすり合わせれば化けます。`;
-  if(s>=45) return `刺激的⚡ ${me}と${you}は正反対。ハマれば濃いが、距離感の調整が鍵。`;
-  return `試練の恋🔥 ${me}と${you}は地雷を踏みやすい組み合わせ。理解し合う努力が必須です。`;
+// 関係の力学（カテゴリ判定）
+function compatDynamics(me, you, s){
+  const L=LOVE[me];
+  if(me===you) return `同じ「${me}」同士。価値観もテンポもそっくりで、一緒にいて驚くほどラク。ただ似すぎて刺激不足になりやすいので、新しい体験を二人で増やすのが長続きのコツ。`;
+  if(L.good.includes(you)) return `${me}にとって${you}は“運命の相手”候補。${you}の${LOVE[you].catch}が、${me}の${L.catch}を心地よく満たしてくれる、惹かれ合う黄金パターン。`;
+  if(L.bad.includes(you)) return `${me}にとって${you}は最も衝突しやすいタイプ。恋愛のリズムが正反対で、何もしないとすれ違う。だからこそハマった時の振り幅は最大級。`;
+  if(LOVE[you].good.includes(me)) return `${you}側が${me}に強く惹かれやすい片思い優勢パターン。${me}が少し歩み寄れば一気に深まる、伸びしろ大の相性。`;
+  if(LOVE[you].bad.includes(me)) return `${you}が${me}にペースを乱されがちな組み合わせ。${me}が距離感を意識すると、関係はぐっと安定する。`;
+  return `${me}と${you}は“中間距離”の相性。劇的ではないが、丁寧に向き合えば着実に育つ。お互いの違いを面白がれるかが分かれ道。`;
+}
+// 関係タイプ別アドバイス
+function relAdvice(rel, me, you, s){
+  if(rel==="ex"){
+    const fukuen = Math.max(8, Math.min(95, s-10 + (LOVE[me].good.includes(you)?12:0) - (LOVE[me].bad.includes(you)?15:0)));
+    let tip;
+    if(fukuen>=70) tip=`復縁の芽は十分。${you}の「${EXTRA[you].fall}」を思い出させる連絡から再点火を。`;
+    else if(fukuen>=45) tip=`焦りは禁物。${you}が嫌う「${LOVE[you].ng.split("。")[0]}」を絶対に繰り返さないのが条件。`;
+    else tip=`正直ハードモード。一度完全に距離を置き、あなた自身が変わった姿を見せるのが唯一の道。`;
+    return {label:"💔 復縁できる可能性", val:fukuen+"%", tip};
+  }
+  if(rel==="now"){
+    const longev = Math.max(15, Math.min(98, s + (LOVE[me].good.includes(you)?5:0)));
+    let tip;
+    if(longev>=75) tip=`このまま結婚も十分射程。${you}の喜ぶ「${EXTRA[you].fall}」を定期的に。`;
+    else if(longev>=50) tip=`油断するとマンネリ注意。${you}のNG「${LOVE[you].ng.split("。")[0]}」だけは避けて。`;
+    else tip=`すれ違いが起きやすい時期。${you}の「${EXTRA[you].line}」を理解すると衝突が減る。`;
+    return {label:"💍 長続き・結婚向き度", val:longev+"%", tip};
+  }
+  // 気になる人
+  const ochi = Math.max(20, Math.min(97, s+3));
+  return {label:"💘 落とせる可能性", val:ochi+"%", tip:`攻め方のヒント：${you}は「${LOVE[you].how}」。これが効くタイプ。`};
+}
+function tierLabel(s){
+  if(s>=90) return "運命級💞"; if(s>=75) return "好相性💕";
+  if(s>=55) return "努力で開花🌱"; if(s>=45) return "刺激的⚡"; return "試練の恋🔥";
 }
 function shindanAisho(){
   const me=window.__myAnimal;
   if(!me){alert("先にあなたの恋愛タイプを占ってね💘");return;}
   const y=+document.getElementById('pyear').value,mo=+document.getElementById('pmonth').value,d=+document.getElementById('pday').value;
+  const rel=document.getElementById('relType').value;
   const you=NUM_TO_ANIMAL[getAnimalNumber(y,mo,d)];
   const s=compatScore(me,you);
+  const adv=relAdvice(rel,me,you,s);
   const box=document.getElementById('aishoResult');
   box.innerHTML=`
     <div class="aisho-card">
       <div class="aisho-pair">${BASE[me].emoji} <span>×</span> ${BASE[you].emoji}</div>
       <div class="aisho-names">${me} × ${you}</div>
-      <div class="aisho-score">相性 <b>${s}</b><small>%</small></div>
+      <div class="aisho-score">相性 <b>${s}</b><small>%</small> <span class="tier">${tierLabel(s)}</span></div>
       <div class="lm-bar" style="margin:8px 0;"><div class="lm-fill" style="width:${s}%;background:linear-gradient(90deg,#ff8fb1,#ff2d6f);"></div></div>
-      <div class="aisho-comment">${compatComment(s,me,you)}</div>
-      <a class="unlock-btn" style="margin-top:12px;display:inline-block;" href="${LINE_URL}" target="_blank" rel="noopener" onclick="return checkLine();">📱 二人の詳細相性をLINEで見る</a>
+      <div class="aisho-comment">${compatDynamics(me,you,s)}</div>
+      <div class="aisho-rel"><span>${adv.label}</span><b>${adv.val}</b></div>
+      <div class="aisho-tip">🔑 ${adv.tip}</div>
+      <a class="unlock-btn" style="margin-top:14px;display:inline-block;" href="${LINE_URL}" target="_blank" rel="noopener" onclick="return checkLine();">📱 二人の超詳細鑑定をLINEで見る</a>
     </div>`;
   box.scrollIntoView({behavior:"smooth",block:"center"});
 }
@@ -359,10 +421,15 @@ function uranau(){
       <div class="lm-label"><span>💘 恋愛偏差値</span><b>${L.score}</b></div>
       <div class="lm-bar"><div class="lm-fill" id="lmFill"></div></div>
     </div>
-    <div style="font-size:0.7rem;color:#cba;margin:-6px 0 14px;">💕 恋愛動物占い</div>
+    <div class="quote-card">${VOICE[name].quote}</div>
+    <div style="font-size:0.7rem;color:#cba;margin:-2px 0 14px;">💕 恋愛動物占い</div>
     </div><!-- /captureArea -->
 
     <div class="sec"><h4>💗 あなたの恋愛傾向</h4>${L.type}</div>
+
+    <div class="sec arusec"><h4>😂 ${name}の恋愛あるある</h4>
+      <ul class="aru-list">${VOICE[name].ark.map(a=>`<li>${a}</li>`).join("")}</ul>
+    </div>
 
     <div class="stat-grid">
       <div class="stat"><span>💘 浮気しやすさ</span><div class="lm-bar mini"><div class="lm-fill" style="width:${E.uwaki}%;background:linear-gradient(90deg,#ffb347,#ff5e5e);"></div></div><i>${E.uwaki}%</i></div>
@@ -406,8 +473,15 @@ function uranau(){
 
     <!-- 💑 相性診断（バズ＆エンゲージの目玉） -->
     <div class="aisho-section">
-      <h3>💑 気になるあの人との相性は？</h3>
-      <p class="aisho-sub">相手の生年月日を入れて即チェック</p>
+      <h3>💑 あの人との相性は？</h3>
+      <p class="aisho-sub">相手との関係と生年月日を入れて即チェック</p>
+      <div class="rel-tabs">
+        <select id="relType" class="rel-select">
+          <option value="crush">💘 気になる人・片思い</option>
+          <option value="now">💍 今彼・今カノ</option>
+          <option value="ex">💔 元彼・元カノ（復縁）</option>
+        </select>
+      </div>
       <div class="input-row">
         <div class="field"><label>年</label><select id="pyear"></select></div>
         <div class="field"><label>月</label><select id="pmonth"></select></div>
