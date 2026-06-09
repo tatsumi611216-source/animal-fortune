@@ -91,6 +91,29 @@
   .line-sub { font-size:0.72rem; color:#999; margin-top:10px; }
   .footer-note { font-size:0.7rem; color:#cba; margin-top:22px; }
 
+  /* 作り込み：ステータス・ラッキー・相性 */
+  .stat-grid { display:flex; gap:10px; margin:8px 0 14px; }
+  .stat { flex:1; background:#fff6f9; border-radius:12px; padding:10px 12px; text-align:left; }
+  .stat span { font-size:0.76rem; color:#a76; font-weight:bold; }
+  .stat i { font-size:0.8rem; color:#ff5e8a; font-weight:bold; font-style:normal; }
+  .lm-bar.mini { height:9px; margin:6px 0 3px; }
+  .lucky-row { display:flex; gap:8px; margin:4px 0 14px; }
+  .lucky { flex:1; background:linear-gradient(135deg,#fff0f5,#f3e8ff); border-radius:12px; padding:11px 6px; }
+  .lucky span { display:block; font-size:0.68rem; color:#b07; margin-bottom:3px; }
+  .lucky b { font-size:0.82rem; color:#7b3a8c; }
+
+  .aisho-section { margin-top:20px; background:linear-gradient(135deg,#fff0f5,#ffe8f3); border-radius:18px; padding:22px 18px; }
+  .aisho-section h3 { font-size:1.15rem; color:#ff2d6f; margin-bottom:2px; }
+  .aisho-sub { font-size:0.78rem; color:#c98aa8; margin-bottom:14px; }
+  .aisho-btn { background:linear-gradient(90deg,#ff2d6f,#c471f5); color:#fff; border:none; padding:13px 36px; border-radius:28px; font-size:1.02rem; font-weight:bold; cursor:pointer; box-shadow:0 8px 18px rgba(255,45,111,.35); }
+  .aisho-btn:hover { transform:translateY(-2px); }
+  .aisho-card { margin-top:18px; background:#fff; border-radius:16px; padding:20px; box-shadow:0 8px 22px rgba(255,45,111,.18); }
+  .aisho-pair { font-size:2.6rem; }
+  .aisho-pair span { font-size:1.4rem; color:#ff5e8a; vertical-align:middle; }
+  .aisho-names { font-size:1.05rem; font-weight:bold; color:#7b3a8c; margin:4px 0; }
+  .aisho-score { font-size:1.3rem; color:#555; } .aisho-score b { font-size:2.4rem; color:#ff2d6f; } .aisho-score small { font-size:1rem; }
+  .aisho-comment { font-size:0.9rem; line-height:1.7; color:#555; text-align:left; margin-top:8px; }
+
   .social-proof { font-size:0.78rem; color:#c98aa8; margin-top:12px; }
   .social-proof b { color:#ff5e8a; }
 
@@ -211,6 +234,22 @@ const LOVE = {
     good:["オオカミ","コアラ"],bad:["チーター"]}
 };
 
+// ===== 作り込み：恋愛ディテールデータ =====
+const EXTRA = {
+  "チーター":{line:"即レス＆短文。テンポ命で長文は読まない。スタンプ連打しがち。",date:"『今から行こう！』の急な誘いが◎。アクティブ＆映えスポットで一気に距離が縮む。",fall:"自分のスピードに付いてきてくれた瞬間にときめく。",marriage:"結婚も勢いで決める。倦怠期が最大の敵。",uwaki:65,jealous:30,color:"ビビッドオレンジ",day:"金曜",month:"3月・7月"},
+  "黒ひょう":{line:"おしゃれな言い回し・絵文字少なめ。既読をあえて遅らせて余裕を演出。",date:"雰囲気の良い店・トレンドスポット。センスを褒められる場所で機嫌が上がる。",fall:"自分のこだわりを『わかってる』と理解された瞬間に落ちる。",marriage:"見栄えと生活水準を重視。安売りはしない。",uwaki:45,jealous:55,color:"ブラック×ゴールド",day:"土曜",month:"2月・11月"},
+  "ライオン":{line:"返信は丁寧だが主導権は渡さない。頼られるLINEに弱い。",date:"自分がエスコートできる場面で輝く。立ててくれる相手にとことん尽くす。",fall:"『あなたじゃなきゃダメ』と特別扱いされた瞬間に陥落。",marriage:"家庭でも大黒柱でいたい。立ててくれる相手と長続き。",uwaki:50,jealous:60,color:"ロイヤルゴールド",day:"日曜",month:"1月・8月"},
+  "とら":{line:"マメではないが誠実。約束は必ず守る安心感。",date:"落ち着いた雰囲気＆手料理に弱い。長く居心地のいい関係を好む。",fall:"自分を心から頼ってくれる安心感に本気になる。",marriage:"結婚向き度トップクラス。家庭を大切にする良きパートナー。",uwaki:20,jealous:40,color:"アースブラウン",day:"木曜",month:"5月・10月"},
+  "たぬき":{line:"ほっこり系。スタンプ多め。返信は安定して優しい。",date:"定番デートで安心感を。何気ない日常の共有が効く。",fall:"一緒にいて落ち着くと気づいた瞬間にじわっと好きになる。",marriage:"超結婚向き。家庭円満の達人で愛され続ける。",uwaki:15,jealous:35,color:"ベージュ",day:"水曜",month:"4月・9月"},
+  "こじか":{line:"最初はそっけない→心を開くと激甘＆甘えLINE連発。",date:"静かで安心できる場所。警戒を解くまで焦らないのが鍵。",fall:"『この人は裏切らない』と確信した瞬間に一気に甘える。",marriage:"一途で家庭的。安心できる相手となら深く結ばれる。",uwaki:18,jealous:70,color:"ベビーピンク",day:"火曜",month:"3月・6月"},
+  "猿":{line:"ノリ重視・即レス・面白いネタ送りがち。重い空気は即スルー。",date:"楽しさ最優先。笑える・盛り上がるデートでテンションUP。",fall:"一緒にいて最高に楽しいと感じた瞬間に好きになる。",marriage:"明るい家庭を作る。マンネリと退屈が最大の敵。",uwaki:55,jealous:25,color:"イエロー",day:"金曜",month:"5月・12月"},
+  "ペガサス":{line:"気分で爆速or放置。ノッてる時は超ハイテンション。",date:"型にはまらない自由なデート。サプライズや非日常に弱い。",fall:"フィーリングが完璧に合った瞬間に一直線に落ちる。",marriage:"自由を尊重してくれる相手と。束縛されると窒息する。",uwaki:60,jealous:20,color:"パステルパープル",day:"日曜",month:"4月・8月"},
+  "ゾウ":{line:"返信は遅め・短いが一貫して誠実。言葉より行動で示す。",date:"派手さより堅実。コツコツ通って信頼を積み上げるタイプ。",fall:"自分の努力を認めてもらえた瞬間に心を開く。",marriage:"超安定志向。一度決めたら浮気せず添い遂げる。",uwaki:10,jealous:45,color:"スチールグレー",day:"月曜",month:"2月・9月"},
+  "ひつじ":{line:"超マメ。こまめな連絡＝愛情表現。既読スルーに弱い。",date:"二人の時間をたっぷり。共感し合えるデートで満たされる。",fall:"自分の気持ちに深く共感してもらえた瞬間に夢中になる。",marriage:"愛情深く尽くす。つながりを感じられれば一生添う。",uwaki:12,jealous:75,color:"ミントグリーン",day:"水曜",month:"6月・11月"},
+  "オオカミ":{line:"独特の間・自分のペース。心を許すと急に饒舌になる。",date:"少人数・静かな空間。自分の世界を理解してくれる人に弱い。",fall:"自分の独自性を否定せず面白がってくれた瞬間に落ちる。",marriage:"自分の時間を尊重する相手と。詰めすぎると逃げる。",uwaki:25,jealous:50,color:"インディゴ",day:"月曜",month:"1月・10月"},
+  "コアラ":{line:"のんびり返信。癒やし系スタンプ多め。急かされると疲れる。",date:"リラックスできるまったりデート。カフェ・自然・おうちが◎。",fall:"一緒にいて心から落ち着けると感じた瞬間に心を許す。",marriage:"穏やかな家庭志向。争いのない関係を長く続ける。",uwaki:22,jealous:38,color:"ターコイズ",day:"木曜",month:"7月・12月"}
+};
+
 const NUM_TO_ANIMAL = [
   "こじか","黒ひょう","猿","チーター","黒ひょう","こじか","ゾウ","ひつじ","ひつじ","ゾウ",
   "ペガサス","ペガサス","ひつじ","たぬき","たぬき","コアラ","黒ひょう","コアラ","ゾウ","チーター",
@@ -237,6 +276,46 @@ yearSel.onchange=fillDays;monthSel.onchange=fillDays;
 
 function checkLine(){if(LINE_URL.includes("XXXXXXX")){alert("（設定メモ）LINE_URL を友だち追加URLに差し替えてください。");return false;}return true;}
 
+// ===== 相性スコア計算（自分の動物 × 相手の動物）=====
+function compatScore(me, you){
+  const L=LOVE[me];
+  let base=58;
+  if(L.good.includes(you)) base=92;
+  else if(L.bad.includes(you)) base=34;
+  else if(LOVE[you].good.includes(me)) base=80;
+  else if(LOVE[you].bad.includes(me)) base=42;
+  if(me===you) base=Math.max(base,70); // 同じ動物は安定
+  // 偏差値差で微調整（価値観の近さ）
+  const diff=Math.abs(L.score-LOVE[you].score);
+  base += (diff<6?6:diff>20?-6:0);
+  return Math.max(20,Math.min(99,base));
+}
+function compatComment(s, me, you){
+  if(s>=90) return `運命級💞 ${me}と${you}は惹かれ合う最高の相性。お互いの足りない部分を自然に補い合えます。`;
+  if(s>=75) return `好相性💕 ${me}と${you}はうまくいきやすいペア。ちょっとの気遣いで長続きします。`;
+  if(s>=55) return `努力で開花🌱 ${me}と${you}は最初すれ違うことも。価値観をすり合わせれば化けます。`;
+  if(s>=45) return `刺激的⚡ ${me}と${you}は正反対。ハマれば濃いが、距離感の調整が鍵。`;
+  return `試練の恋🔥 ${me}と${you}は地雷を踏みやすい組み合わせ。理解し合う努力が必須です。`;
+}
+function shindanAisho(){
+  const me=window.__myAnimal;
+  if(!me){alert("先にあなたの恋愛タイプを占ってね💘");return;}
+  const y=+document.getElementById('pyear').value,mo=+document.getElementById('pmonth').value,d=+document.getElementById('pday').value;
+  const you=NUM_TO_ANIMAL[getAnimalNumber(y,mo,d)];
+  const s=compatScore(me,you);
+  const box=document.getElementById('aishoResult');
+  box.innerHTML=`
+    <div class="aisho-card">
+      <div class="aisho-pair">${BASE[me].emoji} <span>×</span> ${BASE[you].emoji}</div>
+      <div class="aisho-names">${me} × ${you}</div>
+      <div class="aisho-score">相性 <b>${s}</b><small>%</small></div>
+      <div class="lm-bar" style="margin:8px 0;"><div class="lm-fill" style="width:${s}%;background:linear-gradient(90deg,#ff8fb1,#ff2d6f);"></div></div>
+      <div class="aisho-comment">${compatComment(s,me,you)}</div>
+      <a class="unlock-btn" style="margin-top:12px;display:inline-block;" href="${LINE_URL}" target="_blank" rel="noopener" onclick="return checkLine();">📱 二人の詳細相性をLINEで見る</a>
+    </div>`;
+  box.scrollIntoView({behavior:"smooth",block:"center"});
+}
+
 // 社会的証明：日付シードで「今日◯◯人が診断」を安定生成
 (function(){
   const t=new Date(); const seed=t.getFullYear()*1000+ (t.getMonth()+1)*40 + t.getDate();
@@ -259,7 +338,8 @@ function saveCard(){
 function uranau(){
   const y=+yearSel.value,m=+monthSel.value,d=+daySel.value;
   const name=NUM_TO_ANIMAL[getAnimalNumber(y,m,d)];
-  const b=BASE[name], L=LOVE[name];
+  const b=BASE[name], L=LOVE[name], E=EXTRA[name];
+  window.__myAnimal=name;
   const goodE=L.good.map(g=>BASE[g].emoji+g).join("・");
   const badE=L.bad.map(g=>BASE[g].emoji+g).join("・");
   const shareText=`【恋愛動物占い】私の恋愛タイプは ${L.nick}「${name}」💘\n恋愛偏差値 ${L.score} / 上位${L.rarity}%！\nあなたの恋愛タイプは？▼`;
@@ -283,18 +363,34 @@ function uranau(){
     </div><!-- /captureArea -->
 
     <div class="sec"><h4>💗 あなたの恋愛傾向</h4>${L.type}</div>
+
+    <div class="stat-grid">
+      <div class="stat"><span>💘 浮気しやすさ</span><div class="lm-bar mini"><div class="lm-fill" style="width:${E.uwaki}%;background:linear-gradient(90deg,#ffb347,#ff5e5e);"></div></div><i>${E.uwaki}%</i></div>
+      <div class="stat"><span>🔥 ヤキモチ度</span><div class="lm-bar mini"><div class="lm-fill" style="width:${E.jealous}%;background:linear-gradient(90deg,#c471f5,#ff2d6f);"></div></div><i>${E.jealous}%</i></div>
+    </div>
+
+    <div class="sec"><h4>📱 あなたのLINE・連絡の特徴</h4>${E.line}</div>
+    <div class="sec"><h4>💖 心がときめく「落ちる瞬間」</h4>${E.fall}</div>
     <div class="sec"><h4>🚫 これをやると即冷められるNG行動</h4>${L.ng}</div>
+
+    <div class="lucky-row">
+      <div class="lucky"><span>🎨 恋のラッキーカラー</span><b>${E.color}</b></div>
+      <div class="lucky"><span>📅 勝負の曜日</span><b>${E.day}</b></div>
+      <div class="lucky"><span>🌙 恋が動く月</span><b>${E.month}</b></div>
+    </div>
 
     <!-- ★ここが一番知りたい部分＝LINE登録で解放（リスト獲得の核） -->
     <div class="locked">
       <div class="sec"><h4>🎯 あなたの落とし方（脈ありにさせるコツ）</h4>${L.how}</div>
+      <div class="sec"><h4>🌹 効果的なデートの誘い方</h4>${E.date}</div>
+      <div class="sec"><h4>💍 あなたの結婚観</h4>${E.marriage}</div>
       <div class="compat">
         <div class="compat-box good"><span>💞 運命の相手</span><b>${goodE}</b></div>
         <div class="compat-box bad"><span>⚡ 危険な恋</span><b>${badE}</b></div>
       </div>
       <div class="lock-overlay">
         <div class="big">🔒💘</div>
-        <p>あなたの「落とし方」と「運命の相手」は<br>LINE登録で今すぐ無料解放！</p>
+        <p>「落とし方」「デートの誘い方」「結婚観」「運命の相手」は<br>LINE登録で今すぐ無料解放！</p>
         <a class="unlock-btn" href="${LINE_URL}" target="_blank" rel="noopener" onclick="return checkLine();">📱 LINEで結果を解放する</a>
       </div>
     </div>
@@ -307,6 +403,19 @@ function uranau(){
     </div>
 
     <p style="font-size:0.78rem;color:#c9a;margin-top:10px;">あなたの誕生日：${y}年${m}月${d}日</p>
+
+    <!-- 💑 相性診断（バズ＆エンゲージの目玉） -->
+    <div class="aisho-section">
+      <h3>💑 気になるあの人との相性は？</h3>
+      <p class="aisho-sub">相手の生年月日を入れて即チェック</p>
+      <div class="input-row">
+        <div class="field"><label>年</label><select id="pyear"></select></div>
+        <div class="field"><label>月</label><select id="pmonth"></select></div>
+        <div class="field"><label>日</label><select id="pday"></select></div>
+      </div>
+      <button class="aisho-btn" onclick="shindanAisho()">相性を見る 💞</button>
+      <div id="aishoResult"></div>
+    </div>
 
     <div class="line-cta">
       <div class="lock">🔒</div>
@@ -322,6 +431,13 @@ function uranau(){
     </div>
   `;
   res.classList.remove('show'); void res.offsetWidth; res.classList.add('show');
+  // 相手用プルダウンを生成
+  const py=document.getElementById('pyear'),pm=document.getElementById('pmonth'),pd=document.getElementById('pday');
+  for(let yy=2025;yy>=1930;yy--)py.add(new Option(yy+"年",yy));
+  for(let mm=1;mm<=12;mm++)pm.add(new Option(mm+"月",mm));
+  py.value=1995;pm.value=1;
+  const fillPDays=()=>{const dim=new Date(+py.value,+pm.value,0).getDate();pd.innerHTML="";for(let dd=1;dd<=dim;dd++)pd.add(new Option(dd+"日",dd));};
+  fillPDays(); py.onchange=fillPDays; pm.onchange=fillPDays;
   setTimeout(()=>{const f=document.getElementById('lmFill'); if(f)f.style.width=L.score+"%";},150);
   res.scrollIntoView({behavior:"smooth",block:"start"});
 }
