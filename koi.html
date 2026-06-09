@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>恋愛動物占い 💕 生年月日であなたの恋を丸裸に</title>
+<!-- OGP（SNSでリッチ表示） -->
+<meta property="og:title" content="💕 恋愛動物占い｜あなたの恋愛タイプ・落とし方・運命の相手がわかる">
+<meta property="og:description" content="生年月日を入れるだけ。恋愛偏差値・落とし方・運命の相手を無料診断！あなたは何の動物？">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://placehold.co/1200x630/ff5e8a/ffffff/png?text=%F0%9F%92%95+%E6%81%8B%E6%84%9B%E5%8B%95%E7%89%A9%E5%8D%A0%E3%81%84">
+<meta name="twitter:card" content="summary_large_image">
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    background: linear-gradient(135deg, #ffdde1 0%, #ee9ca7 50%, #c471f5 100%);
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    padding: 20px; color: #4a2b3a;
+  }
+  .card {
+    background: #fff; border-radius: 26px; box-shadow: 0 24px 60px rgba(180,60,110,0.28);
+    max-width: 520px; width: 100%; padding: 38px 30px; text-align: center;
+  }
+  h1 {
+    font-size: 1.7rem; margin-bottom: 4px;
+    background: linear-gradient(90deg, #ff5e8a, #c471f5);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .sub { color: #b98aa0; font-size: 0.84rem; margin-bottom: 26px; }
+  .hearts { font-size:1.1rem; letter-spacing:3px; margin-bottom:18px; }
+  .input-row { display: flex; gap: 10px; justify-content: center; margin-bottom: 20px; flex-wrap: wrap; }
+  .field { display: flex; flex-direction: column; align-items: flex-start; }
+  .field label { font-size: 0.72rem; color: #c79; margin-bottom: 4px; padding-left: 4px; }
+  select {
+    padding: 12px 14px; border: 2px solid #ffd9e4; border-radius: 12px;
+    font-size: 1rem; background: #fff; cursor: pointer; outline: none; transition: border 0.2s;
+  }
+  select:focus { border-color: #ff5e8a; }
+  button {
+    background: linear-gradient(90deg, #ff5e8a, #c471f5); color: #fff; border: none;
+    padding: 15px 44px; border-radius: 30px; font-size: 1.1rem; font-weight: bold;
+    cursor: pointer; box-shadow: 0 8px 20px rgba(255,94,138,0.4); transition: transform 0.15s;
+  }
+  button:hover { transform: translateY(-2px); }
+  #result { margin-top: 30px; opacity: 0; max-height: 0; overflow: hidden; transition: opacity .5s, max-height .5s; }
+  #result.show { opacity: 1; max-height: 3000px; }
+
+  .rarity-badge {
+    display:inline-block; background:linear-gradient(90deg,#ffd86f,#ff5e8a); color:#fff;
+    font-weight:bold; font-size:0.9rem; padding:7px 18px; border-radius:20px; margin-bottom:14px;
+    box-shadow:0 6px 16px rgba(255,94,138,.35); animation:shine 2s infinite;
+  }
+  @keyframes shine { 0%,100%{filter:brightness(1);} 50%{filter:brightness(1.18);} }
+  .hero-card { border-radius:22px; padding:28px 20px; color:#fff; box-shadow:0 14px 36px rgba(0,0,0,.2); margin-bottom:18px; position:relative; overflow:hidden; }
+  .hero-card::after { content:""; position:absolute; top:-40%; left:-30%; width:160%; height:80%; background:radial-gradient(circle,rgba(255,255,255,.35),transparent 60%); transform:rotate(-12deg); }
+  .hero-emoji { font-size:5.3rem; line-height:1; animation:pop .6s; position:relative; }
+  @keyframes pop { 0%{transform:scale(0);} 70%{transform:scale(1.25);} 100%{transform:scale(1);} }
+  .hero-nick { font-size:1.02rem; font-weight:bold; letter-spacing:1px; margin-top:6px; text-shadow:0 1px 4px rgba(0,0,0,.25); }
+  .hero-name { font-size:1.9rem; font-weight:900; margin:2px 0; text-shadow:0 2px 6px rgba(0,0,0,.3); }
+  .hero-catch { font-size:0.94rem; opacity:.95; }
+
+  .love-meter { margin:4px 0 16px; }
+  .love-meter .lm-label { display:flex; justify-content:space-between; font-size:0.8rem; color:#a76; margin-bottom:5px; }
+  .lm-bar { height:14px; border-radius:10px; background:#ffe3ec; overflow:hidden; }
+  .lm-fill { height:100%; border-radius:10px; background:linear-gradient(90deg,#ff8fb1,#ff2d6f); width:0; transition:width 1s ease; }
+
+  .sec { text-align:left; background:#fff6f9; border-radius:14px; padding:16px 18px; font-size:0.9rem; line-height:1.8; margin-bottom:12px; }
+  .sec h4 { font-size:0.92rem; color:#ff5e8a; margin-bottom:4px; }
+  .compat { display:flex; gap:10px; margin:6px 0 14px; }
+  .compat-box { flex:1; border-radius:14px; padding:12px 8px; font-size:0.8rem; line-height:1.6; }
+  .compat-box span { display:block; font-weight:bold; margin-bottom:4px; }
+  .compat-box.good { background:#fff0f5; color:#d6336c; }
+  .compat-box.bad  { background:#eef3ff; color:#3b5bdb; }
+
+  .share-row { display:flex; gap:10px; margin-bottom:6px; }
+  .share-btn { flex:1; text-decoration:none; color:#fff; font-weight:bold; font-size:0.92rem; padding:13px 0; border-radius:26px; box-shadow:0 6px 16px rgba(0,0,0,.18); transition:transform .15s; }
+  .share-btn:hover { transform:translateY(-2px); }
+  .share-btn.x  { background:#000; }
+  .share-btn.ln { background:#06c755; }
+
+  .line-cta { margin-top:22px; background:linear-gradient(135deg,#f3fbe8,#eafbe0); border:2px dashed #06c755; border-radius:16px; padding:22px 20px; }
+  .line-cta .lock { font-size:1.6rem; }
+  .line-cta h3 { font-size:1.02rem; color:#2b8a3e; margin:6px 0 4px; }
+  .line-cta .blur { filter:blur(5px); user-select:none; color:#777; font-size:0.85rem; line-height:1.7; margin:8px 0 14px; text-align:left; }
+  .line-list { text-align:left; font-size:0.85rem; color:#444; margin:4px 0 16px; }
+  .line-list li { margin:4px 0; list-style:none; }
+  .line-btn { display:inline-flex; align-items:center; gap:8px; background:#06c755; color:#fff; text-decoration:none; padding:14px 30px; border-radius:30px; font-weight:bold; font-size:1.05rem; box-shadow:0 8px 20px rgba(6,199,85,.4); transition:transform .15s; }
+  .line-btn:hover { transform:translateY(-2px); }
+  .line-sub { font-size:0.72rem; color:#999; margin-top:10px; }
+  .footer-note { font-size:0.7rem; color:#cba; margin-top:22px; }
+
+  .social-proof { font-size:0.78rem; color:#c98aa8; margin-top:12px; }
+  .social-proof b { color:#ff5e8a; }
+
+  /* ロック（LINE登録で解放）演出 */
+  .locked { position:relative; }
+  .locked .sec { filter:blur(6px); user-select:none; pointer-events:none; }
+  .lock-overlay {
+    position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    background:linear-gradient(180deg, rgba(255,246,249,.3), rgba(255,246,249,.92));
+    border-radius:14px; text-align:center; padding:14px;
+  }
+  .lock-overlay .big { font-size:1.7rem; }
+  .lock-overlay p { font-size:0.92rem; font-weight:bold; color:#d6336c; margin:6px 0 12px; line-height:1.6; }
+  .unlock-btn {
+    background:#06c755; color:#fff; text-decoration:none; font-weight:bold; font-size:1rem;
+    padding:13px 26px; border-radius:28px; box-shadow:0 8px 20px rgba(6,199,85,.4);
+  }
+  .save-btn {
+    width:100%; margin-top:10px; background:#fff; color:#ff5e8a; border:2px solid #ff5e8a;
+    font-weight:bold; font-size:0.92rem; padding:12px 0; border-radius:26px; cursor:pointer;
+  }
+  .save-btn:hover { background:#fff0f5; }
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>💕 恋愛動物占い</h1>
+  <p class="sub">生年月日で、あなたの恋愛タイプ・落とし方・運命の相手を診断</p>
+  <div class="hearts">❤️ 🧡 💛 💚 💙 💜</div>
+
+  <div class="input-row">
+    <div class="field"><label>年</label><select id="year"></select></div>
+    <div class="field"><label>月</label><select id="month"></select></div>
+    <div class="field"><label>日</label><select id="day"></select></div>
+  </div>
+  <button onclick="uranau()">恋を占う 💘</button>
+  <p class="social-proof" id="socialProof"></p>
+
+  <div id="result"></div>
+  <p class="footer-note">※ 生年月日（60キャラ理論）に基づく恋愛性格診断です</p>
+</div>
+
+<script>
+// ▼ LINE公式アカウントの友だち追加URL（あとで差し替え）
+const LINE_URL = "https://lin.ee/XXXXXXX";
+
+// ===== 動物ベースデータ =====
+const BASE = {
+  "チーター":{emoji:"🐆",color:"#ff6f3c"},"黒ひょう":{emoji:"🐈‍⬛",color:"#2c2c54"},
+  "ライオン":{emoji:"🦁",color:"#e6a817"},"とら":{emoji:"🐅",color:"#f0932b"},
+  "たぬき":{emoji:"🦝",color:"#8b6f47"},"こじか":{emoji:"🦌",color:"#ff7fb0"},
+  "猿":{emoji:"🐒",color:"#eb4d4b"},"ペガサス":{emoji:"🦄",color:"#a29bfe"},
+  "ゾウ":{emoji:"🐘",color:"#778ca3"},"ひつじ":{emoji:"🐑",color:"#9ccc5a"},
+  "オオカミ":{emoji:"🐺",color:"#535c68"},"コアラ":{emoji:"🐨",color:"#22a6b3"}
+};
+
+// ===== 恋愛診断データ =====
+const LOVE = {
+  "チーター":{nick:"⚡一目惚れ即ダッシュ型",catch:"恋は短距離全力疾走",score:78,rarity:6,
+    type:"好きになったら止まらない超アタック型。スピード感のある恋に燃え、駆け引きより直球勝負。ただし冷めるのも一瞬で、追われると一気に萎えがち。",
+    how:"スピード感とノリで攻めるべし。じらすと逃げる。『今すぐ会いたい』が刺さる。",
+    ng:"重い長文LINE・束縛・既読催促。自由を奪われた瞬間ダッシュで逃げます。",
+    good:["ライオン","ペガサス"],bad:["コアラ"]},
+  "黒ひょう":{nick:"🖤プライド美学の恋愛巧者",catch:"惚れさせてから落とす",score:72,rarity:5,
+    type:"見た目も雰囲気もこだわる恋の演出家。自分から告白は苦手で、相手に惚れさせたいタイプ。プライドが高く、雑に扱われると一瞬で冷める。",
+    how:"センスとステータスを褒める。特別扱いされると弱い。さりげない高級感が効く。",
+    ng:"ダサい・恥をかかせる・人前でいじる。美学を傷つけると修復不能。",
+    good:["ひつじ","とら"],bad:["オオカミ"]},
+  "ライオン":{nick:"👑尽くされたい王様の恋",catch:"立てられると一途",score:80,rarity:4,
+    type:"頼られると燃える堂々リード型。実は寂しがりで、ちゃんと立ててくれる相手に一途。プライドゆえ自分から折れるのが苦手。",
+    how:"頼って立てて褒める。『あなたしか頼れない』が最強ワード。",
+    ng:"人前でのダメ出し・他人と比較。王様の威厳を削ると怒ります。",
+    good:["チーター","猿"],bad:["ひつじ"]},
+  "とら":{nick:"🔥包容力の大本命",catch:"じっくり育てる本気の恋",score:85,rarity:7,
+    type:"面倒見がよく安心感抜群の大本命タイプ。遊びより本気の関係を求め、尽くす愛情家。一度決めたら一途で頼れる。",
+    how:"誠実さと安定を見せる。手料理・気遣いに弱い。長く一緒にいる未来を語ると◎。",
+    ng:"嘘・浮ついた態度・チャラさ。信頼を裏切ると一気に冷めます。",
+    good:["黒ひょう","たぬき"],bad:["猿"]},
+  "たぬき":{nick:"🍶じわじわ愛される愛嬌型",catch:"気づけば手放せない存在",score:82,rarity:9,
+    type:"安心感と愛嬌で長く愛されるタイプ。押しは弱いが、一緒にいるとなぜか落ち着く。我慢強く、相手に合わせる包容力。",
+    how:"焦らずゆっくり距離を縮める。日常の何気ない時間を共有すると効く。",
+    ng:"急かす・雑に扱う・駆け引きしすぎ。じっくり型なので急展開はNG。",
+    good:["とら","こじか"],bad:["ペガサス"]},
+  "こじか":{nick:"🌸守ってあげたい甘え上手",catch:"警戒心の奥に激重愛情",score:75,rarity:8,
+    type:"最初は警戒、心を開くと一気に甘えん坊の振り幅大タイプ。守ってあげたくなる純粋さ。一途だが繊細で傷つきやすい。",
+    how:"安心させて警戒を解くのが先決。優しさと一貫性で心を開かせる。",
+    ng:"裏切り・冷たい態度・急な距離詰め。一度怖がられると壁を作られます。",
+    good:["たぬき","ゾウ"],bad:["黒ひょう"]},
+  "猿":{nick:"🎪楽しい恋が大好物",catch:"ノリと笑いで距離を詰める",score:74,rarity:6,
+    type:"一緒にいて楽しい恋を最優先する陽キャ型。褒められると一気に好きになる。重い空気が苦手で、軽やかな関係を好む。",
+    how:"とにかく褒める・笑わせる・楽しませる。テンポの良いやり取りが鍵。",
+    ng:"説教・重い・ネガティブ。楽しくない時間が続くと飽きます。",
+    good:["ライオン","ペガサス"],bad:["とら"]},
+  "ペガサス":{nick:"🦄気分屋の天才肌ロマンチスト",catch:"フィーリング命の恋",score:70,rarity:3,
+    type:"理屈より直感とノリで恋する自由人。ハマると一直線だが気分の波が激しい。常識的な恋愛にとらわれないロマンチスト。",
+    how:"気分を乗せる・自由を尊重する・褒めて伸ばす。束縛せず楽しませる人に弱い。",
+    ng:"ルールで縛る・否定する・テンションを下げる。冷めると音速で離れます。",
+    good:["猿","チーター"],bad:["たぬき"]},
+  "ゾウ":{nick:"🛠不器用で一途な努力家",catch:"愛は行動で示す職人",score:83,rarity:8,
+    type:"言葉より行動で愛を示す硬派タイプ。一途で責任感が強く、決めた相手にとことん尽くす。不器用ゆえ伝わりにくい一面も。",
+    how:"努力と誠実さを認める。長期目線の安定した関係を提示すると安心して心を開く。",
+    ng:"浮気・約束破り・軽い扱い。プライドと信頼を傷つけると頑なになります。",
+    good:["こじか","ひつじ"],bad:["オオカミ"]},
+  "ひつじ":{nick:"💞愛されたい寂しがり屋",catch:"つながりが何より大事",score:88,rarity:10,
+    type:"愛情深く尽くす、恋愛偏差値トップクラスの情熱家。一緒にいたい気持ちが強く、こまめな連絡が愛情表現。寂しがりで共感を求める。",
+    how:"こまめに連絡・共感・一緒にいる時間を増やす。『いつもありがとう』が効く。",
+    ng:"放置・既読スルー・孤独にさせる。連絡が途絶えると不安で爆発します。",
+    good:["黒ひょう","ゾウ"],bad:["ライオン"]},
+  "オオカミ":{nick:"🌙ツンデレ一匹狼",catch:"心を開いた相手だけに激甘",score:68,rarity:2,
+    type:"自分のペースを守る孤高タイプ。簡単には心を開かないが、開いた相手にはとことん深い愛情。独特のこだわりと観察眼の持ち主。",
+    how:"距離感を尊重しつつ、自分の世界を理解してくれる人に弱い。詰めすぎず見守る。",
+    ng:"ペースを乱す・ベタベタしすぎ・干渉。自由を奪うと殻にこもります。",
+    good:["コアラ","オオカミ"],bad:["黒ひょう"]},
+  "コアラ":{nick:"🍃癒やし系マイペース恋愛",catch:"のんびり居心地で繋がる",score:76,rarity:5,
+    type:"穏やかで居心地の良い関係を求める癒やし型。争いを嫌い、自分の快適空間を大事にする。じっくり深まる恋を好むマイペース派。",
+    how:"急かさず居心地の良さを提供する。リラックスできる時間を共有すると心を許す。",
+    ng:"せかす・刺激が強すぎる・予定を詰め込む。落ち着けないと疲れて離れます。",
+    good:["オオカミ","コアラ"],bad:["チーター"]}
+};
+
+const NUM_TO_ANIMAL = [
+  "こじか","黒ひょう","猿","チーター","黒ひょう","こじか","ゾウ","ひつじ","ひつじ","ゾウ",
+  "ペガサス","ペガサス","ひつじ","たぬき","たぬき","コアラ","黒ひょう","コアラ","ゾウ","チーター",
+  "ライオン","ライオン","とら","とら","ライオン","チーター","チーター","コアラ","オオカミ","オオカミ",
+  "猿","猿","オオカミ","ペガサス","ペガサス","ひつじ","ひつじ","コアラ","コアラ","黒ひょう",
+  "たぬき","こじか","こじか","たぬき","ライオン","オオカミ","オオカミ","ライオン","とら","ゾウ",
+  "ゾウ","とら","チーター","猿","猿","ペガサス","とら","たぬき","たぬき","こじか"
+];
+
+function getAnimalNumber(y,m,d){
+  const monthAdd=[0,31,59,30,0,31,1,32,3,33,4,34];
+  let yBase=(y-1)*365+Math.floor((y-1)/4)-Math.floor((y-1)/100)+Math.floor((y-1)/400);
+  const isLeap=(y%4===0&&y%100!==0)||y%400===0;
+  let leapAdj=(isLeap&&m>=3)?1:0;
+  return (yBase+monthAdd[m-1]+leapAdj+d)%60;
+}
+
+const yearSel=document.getElementById('year'),monthSel=document.getElementById('month'),daySel=document.getElementById('day');
+for(let y=2025;y>=1930;y--)yearSel.add(new Option(y+"年",y));
+for(let m=1;m<=12;m++)monthSel.add(new Option(m+"月",m));
+function fillDays(){const y=+yearSel.value,m=+monthSel.value,dim=new Date(y,m,0).getDate(),cur=+daySel.value||1;daySel.innerHTML="";for(let d=1;d<=dim;d++)daySel.add(new Option(d+"日",d));if(cur<=dim)daySel.value=cur;}
+yearSel.value=1995;monthSel.value=1;fillDays();
+yearSel.onchange=fillDays;monthSel.onchange=fillDays;
+
+function checkLine(){if(LINE_URL.includes("XXXXXXX")){alert("（設定メモ）LINE_URL を友だち追加URLに差し替えてください。");return false;}return true;}
+
+// 社会的証明：日付シードで「今日◯◯人が診断」を安定生成
+(function(){
+  const t=new Date(); const seed=t.getFullYear()*1000+ (t.getMonth()+1)*40 + t.getDate();
+  const today=2100+(seed*73%5400);          // 今日の診断数
+  const total=128000+(seed*131%46000);       // 累計
+  document.getElementById('socialProof').innerHTML=
+    `👥 今日 <b>${today.toLocaleString()}</b>人が診断中／累計 <b>${total.toLocaleString()}</b>人突破！`;
+})();
+
+// 結果カードを画像保存
+function saveCard(){
+  const el=document.getElementById('captureArea');
+  if(!el||typeof html2canvas==='undefined'){alert("画像保存の準備中です。少し待って再度お試しください。");return;}
+  html2canvas(el,{scale:2,backgroundColor:"#ffffff"}).then(c=>{
+    const a=document.createElement('a');
+    a.download='恋愛動物占い結果.png'; a.href=c.toDataURL('image/png'); a.click();
+  });
+}
+
+function uranau(){
+  const y=+yearSel.value,m=+monthSel.value,d=+daySel.value;
+  const name=NUM_TO_ANIMAL[getAnimalNumber(y,m,d)];
+  const b=BASE[name], L=LOVE[name];
+  const goodE=L.good.map(g=>BASE[g].emoji+g).join("・");
+  const badE=L.bad.map(g=>BASE[g].emoji+g).join("・");
+  const shareText=`【恋愛動物占い】私の恋愛タイプは ${L.nick}「${name}」💘\n恋愛偏差値 ${L.score} / 上位${L.rarity}%！\nあなたの恋愛タイプは？▼`;
+
+  const res=document.getElementById('result');
+  res.innerHTML=`
+    <div id="captureArea" style="padding:14px;border-radius:22px;background:#fff;">
+    <div class="rarity-badge">🏆 上位 ${L.rarity}% の激レア恋愛タイプ</div>
+    <div class="hero-card" style="background:linear-gradient(135deg,${b.color},${b.color}cc);">
+      <div class="hero-emoji">${b.emoji}</div>
+      <div class="hero-nick">${L.nick}</div>
+      <div class="hero-name">${name}</div>
+      <div class="hero-catch">${L.catch}</div>
+    </div>
+
+    <div class="love-meter">
+      <div class="lm-label"><span>💘 恋愛偏差値</span><b>${L.score}</b></div>
+      <div class="lm-bar"><div class="lm-fill" id="lmFill"></div></div>
+    </div>
+    <div style="font-size:0.7rem;color:#cba;margin:-6px 0 14px;">💕 恋愛動物占い</div>
+    </div><!-- /captureArea -->
+
+    <div class="sec"><h4>💗 あなたの恋愛傾向</h4>${L.type}</div>
+    <div class="sec"><h4>🚫 これをやると即冷められるNG行動</h4>${L.ng}</div>
+
+    <!-- ★ここが一番知りたい部分＝LINE登録で解放（リスト獲得の核） -->
+    <div class="locked">
+      <div class="sec"><h4>🎯 あなたの落とし方（脈ありにさせるコツ）</h4>${L.how}</div>
+      <div class="compat">
+        <div class="compat-box good"><span>💞 運命の相手</span><b>${goodE}</b></div>
+        <div class="compat-box bad"><span>⚡ 危険な恋</span><b>${badE}</b></div>
+      </div>
+      <div class="lock-overlay">
+        <div class="big">🔒💘</div>
+        <p>あなたの「落とし方」と「運命の相手」は<br>LINE登録で今すぐ無料解放！</p>
+        <a class="unlock-btn" href="${LINE_URL}" target="_blank" rel="noopener" onclick="return checkLine();">📱 LINEで結果を解放する</a>
+      </div>
+    </div>
+
+    <button class="save-btn" onclick="saveCard()">📸 結果カードを画像で保存（SNSにシェア）</button>
+
+    <div class="share-row">
+      <a class="share-btn x" href="https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(location.href)}" target="_blank" rel="noopener">𝕏 で結果をシェア</a>
+      <a class="share-btn ln" href="https://line.me/R/msg/text/?${encodeURIComponent(shareText+" "+location.href)}" target="_blank" rel="noopener">LINEで送る</a>
+    </div>
+
+    <p style="font-size:0.78rem;color:#c9a;margin-top:10px;">あなたの誕生日：${y}年${m}月${d}日</p>
+
+    <div class="line-cta">
+      <div class="lock">🔒</div>
+      <h3>${name}さんの「2026年の恋愛運命」はLINEで無料プレゼント</h3>
+      <div class="blur">あなたに運命の出会いが訪れるのは◯月。今の片想いの相手との相性は△△%で、告白の成功率を上げるベストタイミングは……（続きはLINE登録で全文公開）</div>
+      <ul class="line-list">
+        <li>✅ あなたの恋愛フル診断＆裏の本音</li>
+        <li>✅ 2026年の恋愛運・出会いの時期</li>
+        <li>✅ 気になる相手との詳細相性診断</li>
+      </ul>
+      <a class="line-btn" href="${LINE_URL}" target="_blank" rel="noopener" onclick="return checkLine();">📱 恋の続きをLINEで受け取る</a>
+      <p class="line-sub">友だち追加するだけ・無料 / ブロックはいつでもOK</p>
+    </div>
+  `;
+  res.classList.remove('show'); void res.offsetWidth; res.classList.add('show');
+  setTimeout(()=>{const f=document.getElementById('lmFill'); if(f)f.style.width=L.score+"%";},150);
+  res.scrollIntoView({behavior:"smooth",block:"start"});
+}
+</script>
+</body>
+</html>

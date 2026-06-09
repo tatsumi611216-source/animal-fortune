@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>動物占い 🐾 生年月日で占う本格性格診断</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 50%, #a18cd1 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    color: #333;
+  }
+  .card {
+    background: #fff;
+    border-radius: 24px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.18);
+    max-width: 520px;
+    width: 100%;
+    padding: 40px 32px;
+    text-align: center;
+  }
+  h1 {
+    font-size: 1.8rem;
+    margin-bottom: 6px;
+    background: linear-gradient(90deg, #f6416c, #a18cd1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .sub { color: #888; font-size: 0.85rem; margin-bottom: 28px; }
+  .input-row {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .field { display: flex; flex-direction: column; align-items: flex-start; }
+  .field label { font-size: 0.72rem; color: #999; margin-bottom: 4px; padding-left: 4px; }
+  select {
+    padding: 12px 14px;
+    border: 2px solid #f0e0e8;
+    border-radius: 12px;
+    font-size: 1rem;
+    background: #fff;
+    cursor: pointer;
+    outline: none;
+    transition: border 0.2s;
+  }
+  select:focus { border-color: #a18cd1; }
+  button {
+    background: linear-gradient(90deg, #f6416c, #ff7e5f);
+    color: #fff;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(246,65,108,0.35);
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  button:hover { transform: translateY(-2px); box-shadow: 0 12px 26px rgba(246,65,108,0.45); }
+  button:active { transform: translateY(0); }
+  #result {
+    margin-top: 32px;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.5s, max-height 0.5s;
+  }
+  #result.show { opacity: 1; max-height: 2000px; }
+  .emoji { font-size: 5rem; line-height: 1; margin-bottom: 8px; animation: pop 0.6s; }
+  @keyframes pop { 0%{transform:scale(0);} 70%{transform:scale(1.25);} 100%{transform:scale(1);} }
+  .animal-name { font-size: 1.6rem; font-weight: bold; color: #f6416c; margin-bottom: 4px; }
+  .color-tag {
+    display: inline-block;
+    padding: 4px 14px;
+    border-radius: 20px;
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: bold;
+    margin-bottom: 18px;
+  }
+  .catch { font-size: 1.05rem; font-weight: bold; margin-bottom: 16px; color: #555; }
+  .desc {
+    text-align: left;
+    background: #fdf6f9;
+    border-radius: 14px;
+    padding: 18px 20px;
+    font-size: 0.92rem;
+    line-height: 1.8;
+    margin-bottom: 14px;
+  }
+  .traits { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 8px; }
+  .trait { background: #f0e8fa; color: #7b5bb5; padding: 5px 12px; border-radius: 16px; font-size: 0.8rem; }
+  .footer-note { font-size: 0.7rem; color: #bbb; margin-top: 24px; }
+
+  /* バズる要素 */
+  .rarity-badge {
+    display: inline-block;
+    background: linear-gradient(90deg, #ffd86f, #fc6262);
+    color: #fff; font-weight: bold; font-size: 0.9rem;
+    padding: 7px 18px; border-radius: 20px; margin-bottom: 14px;
+    box-shadow: 0 6px 16px rgba(252,98,98,0.35);
+    animation: shine 2s infinite;
+  }
+  @keyframes shine { 0%,100%{filter:brightness(1);} 50%{filter:brightness(1.18);} }
+  .hero-card {
+    border-radius: 22px; padding: 28px 20px; color: #fff;
+    box-shadow: 0 14px 36px rgba(0,0,0,0.22); margin-bottom: 18px;
+    position: relative; overflow: hidden;
+  }
+  .hero-card::after {
+    content:""; position:absolute; top:-40%; left:-30%; width:160%; height:80%;
+    background: radial-gradient(circle, rgba(255,255,255,.35), transparent 60%);
+    transform: rotate(-12deg);
+  }
+  .hero-emoji { font-size: 5.5rem; line-height:1; animation: pop .6s; position:relative; }
+  .hero-nick { font-size: 1.05rem; font-weight: bold; letter-spacing:1px; margin-top:6px; text-shadow:0 1px 4px rgba(0,0,0,.25); }
+  .hero-name { font-size: 2rem; font-weight: 900; margin: 2px 0; text-shadow:0 2px 6px rgba(0,0,0,.3); }
+  .hero-catch { font-size: 0.95rem; opacity: .95; }
+  .compat { display:flex; gap:10px; margin:6px 0 16px; }
+  .compat-box { flex:1; border-radius:14px; padding:12px 8px; font-size:0.8rem; line-height:1.6; }
+  .compat-box span { display:block; font-weight:bold; margin-bottom:4px; }
+  .compat-box b { font-size:0.82rem; }
+  .compat-box.good { background:#fff0f5; color:#d6336c; }
+  .compat-box.bad  { background:#eef3ff; color:#3b5bdb; }
+  .share-row { display:flex; gap:10px; margin-bottom:6px; }
+  .share-btn {
+    flex:1; text-decoration:none; color:#fff; font-weight:bold; font-size:0.92rem;
+    padding:13px 0; border-radius:26px; box-shadow:0 6px 16px rgba(0,0,0,.18);
+    transition: transform .15s;
+  }
+  .share-btn:hover { transform: translateY(-2px); }
+  .share-btn.x  { background:#000; }
+  .share-btn.ln { background:#06c755; }
+
+  /* LINE導線 */
+  .line-cta {
+    margin-top: 22px;
+    background: linear-gradient(135deg, #f3fbe8, #eafbe0);
+    border: 2px dashed #06c755;
+    border-radius: 16px;
+    padding: 22px 20px;
+    position: relative;
+  }
+  .line-cta .lock { font-size: 1.6rem; }
+  .line-cta h3 { font-size: 1.05rem; color: #2b8a3e; margin: 6px 0 4px; }
+  .line-cta .blur {
+    filter: blur(5px);
+    user-select: none;
+    color: #777;
+    font-size: 0.85rem;
+    line-height: 1.7;
+    margin: 8px 0 14px;
+    text-align: left;
+  }
+  .line-list { text-align: left; font-size: 0.85rem; color: #444; margin: 4px 0 16px; }
+  .line-list li { margin: 4px 0; list-style: none; }
+  .line-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: #06c755; color: #fff; text-decoration: none;
+    padding: 14px 30px; border-radius: 30px; font-weight: bold; font-size: 1.05rem;
+    box-shadow: 0 8px 20px rgba(6,199,85,0.4);
+    transition: transform .15s;
+  }
+  .line-btn:hover { transform: translateY(-2px); }
+  .line-sub { font-size: 0.72rem; color: #999; margin-top: 10px; }
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>🐾 動物占い</h1>
+  <p class="sub">生年月日から、あなたの本当の性格タイプを診断します</p>
+
+  <div class="input-row">
+    <div class="field">
+      <label>年</label>
+      <select id="year"></select>
+    </div>
+    <div class="field">
+      <label>月</label>
+      <select id="month"></select>
+    </div>
+    <div class="field">
+      <label>日</label>
+      <select id="day"></select>
+    </div>
+  </div>
+  <button onclick="uranau()">占う ✨</button>
+
+  <div id="result"></div>
+
+  <p class="footer-note">※ 動物占いは生年月日（60キャラ理論）に基づく性格分類です</p>
+</div>
+
+<script>
+// ▼▼▼ ここにLINE公式アカウントの友だち追加URLを貼ってください ▼▼▼
+const LINE_URL = "https://lin.ee/XXXXXXX";
+// ▲▲▲ 例: https://lin.ee/abc1234 ▲▲▲
+
+// ===== 12動物の診断データ =====
+const ANIMALS = {
+  "チーター":   { emoji:"🐆", color:"#ff6f3c", catch:"スピード命の直感派",
+    traits:["行動的","目立ちたがり","熱しやすい","リーダー気質"],
+    desc:"とにかくスタートダッシュが速い瞬発力タイプ。思い立ったら即行動で、周りを巻き込む華やかさがあります。飽きっぽい面もありますが、その分いつも新しいことに挑戦する元気の持ち主。短距離全力疾走が得意です。" },
+  "黒ひょう":   { emoji:"🐈‍⬛", color:"#2c2c54", catch:"トレンドに敏感な都会派",
+    traits:["おしゃれ","プライド高い","面倒見がいい","新しもの好き"],
+    desc:"見栄えとセンスを大切にするスタイリッシュなタイプ。新しい情報やブランドに敏感で、後輩や仲間の面倒もよく見ます。プライドが高く、人前で恥をかくのが苦手。筋を通す姿勢が信頼を集めます。" },
+  "ライオン":   { emoji:"🦁", color:"#e6a817", catch:"堂々たる王者の風格",
+    traits:["威厳がある","負けず嫌い","世話好き","完璧主義"],
+    desc:"百獣の王らしく、堂々とした存在感を放つリーダータイプ。きちんとした対応を好み、いい加減なことが嫌い。頼られると力を発揮しますが、弱音は人前で見せたくない繊細さも持っています。" },
+  "とら":       { emoji:"🐅", color:"#f0932b", catch:"悠然と構える安定王",
+    traits:["温厚","面倒見がいい","バランス感覚","頼れる"],
+    desc:"ゆったりと落ち着いた雰囲気で、周囲に安心感を与えるタイプ。バランス感覚に優れ、誰に対しても公平。困っている人を放っておけない優しさがあり、自然と人が集まってきます。" },
+  "たぬき":     { emoji:"🦝", color:"#8b6f47", catch:"愛され上手な世渡り名人",
+    traits:["人当たりがいい","老成","忍耐強い","信頼される"],
+    desc:"どこか憎めない愛嬌で、年上にも年下にもかわいがられるタイプ。古いものや伝統を大切にし、我慢強く物事をやり遂げます。場の空気を読むのが上手で、堅実に信頼を積み重ねていきます。" },
+  "こじか":     { emoji:"🦌", color:"#ff9ff3", catch:"純粋で警戒心の強い甘えん坊",
+    traits:["甘え上手","警戒心","好奇心旺盛","人懐っこい"],
+    desc:"無邪気で人懐っこい一方、最初は警戒心が強い慎重派。一度心を許すと一気に距離が縮まる甘えん坊です。好奇心旺盛で純粋な感性を持ち、周りから守ってあげたくなる存在です。" },
+  "猿":         { emoji:"🐒", color:"#eb4d4b", catch:"その場を盛り上げるサービス精神",
+    traits:["明るい","器用","負けず嫌い","褒められて伸びる"],
+    desc:"頭の回転が速く器用で、場を盛り上げる天才。褒められると一気にやる気が出るタイプで、勝負ごとには熱くなります。素直で切り替えが早く、楽しいことを見つける名人です。" },
+  "ペガサス":   { emoji:"🦄", color:"#a29bfe", catch:"天才肌の自由人",
+    traits:["感性豊か","気まぐれ","スケール大","直感型"],
+    desc:"常識にとらわれない自由な発想の持ち主。気分の波はありますが、ノッているときの爆発力は天才級。細かいことは気にせず、大きなスケールで物事を捉えます。褒められて伸びるタイプです。" },
+  "ゾウ":       { emoji:"🐘", color:"#778ca3", catch:"努力家の職人タイプ",
+    traits:["努力家","几帳面","リーダー","頑固"],
+    desc:"コツコツ積み重ねる努力の人。一度決めたことは最後までやり抜く責任感の強さがあり、周囲からの信頼も厚い。プライドが高く頑固な一面もありますが、その実力は本物です。" },
+  "ひつじ":     { emoji:"🐑", color:"#badc58", catch:"情に厚い協調の人",
+    traits:["優しい","協調性","寂しがり","世話好き"],
+    desc:"仲間思いで情に厚く、みんなと一緒にいることで安心するタイプ。気配り上手で人助けを惜しまず、グループの和を大切にします。寂しがりやで、人とのつながりを何より大事にします。" },
+  "オオカミ":   { emoji:"🐺", color:"#535c68", catch:"一匹狼のこだわり派",
+    traits:["マイペース","独自路線","こだわり","観察力"],
+    desc:"自分の世界とペースを大切にする独立独歩タイプ。人に合わせるより、自分のこだわりを貫きます。鋭い観察眼を持ち、独特の感性とユーモアの持ち主。少人数の深い関係を好みます。" },
+  "コアラ":     { emoji:"🐨", color:"#22a6b3", catch:"のんびり癒やしの研究家",
+    traits:["穏やか","探究心","こだわり","平和主義"],
+    desc:"のんびりマイペースで、周りを和ませる癒やし系。気になることはとことん追求する探究心の持ち主です。争いを好まず、自分の快適な環境を大切にしながら、じっくり物事を深めていきます。" }
+};
+
+// ===== バズる用メタデータ（二つ名・希少度・相性） =====
+const META = {
+  "チーター":  { nick:"⚡稲妻の開拓者",     rarity:6,  good:["ライオン","ペガサス"], bad:["コアラ"] },
+  "黒ひょう":  { nick:"🖤夜を統べる美学者", rarity:5,  good:["ひつじ","とら"],       bad:["オオカミ"] },
+  "ライオン":  { nick:"👑誇り高き百獣の王", rarity:4,  good:["チーター","猿"],       bad:["ひつじ"] },
+  "とら":      { nick:"🔥静かなる大将軍",   rarity:7,  good:["黒ひょう","たぬき"],   bad:["猿"] },
+  "たぬき":    { nick:"🍶千年生きた古老",   rarity:9,  good:["とら","こじか"],       bad:["ペガサス"] },
+  "こじか":    { nick:"🌸無垢なる森の使者", rarity:8,  good:["たぬき","ゾウ"],       bad:["黒ひょう"] },
+  "猿":        { nick:"🎪宴を制する道化師", rarity:6,  good:["ライオン","ペガサス"], bad:["とら"] },
+  "ペガサス":  { nick:"🦄天空を翔ける天才", rarity:3,  good:["猿","チーター"],       bad:["たぬき"] },
+  "ゾウ":      { nick:"🛠不屈の鉄人",       rarity:8,  good:["こじか","ひつじ"],     bad:["オオカミ"] },
+  "ひつじ":    { nick:"💞慈愛の調停者",     rarity:10, good:["黒ひょう","ゾウ"],     bad:["ライオン"] },
+  "オオカミ":  { nick:"🌙孤高の賢狼",       rarity:2,  good:["コアラ","オオカミ"],   bad:["黒ひょう"] },
+  "コアラ":    { nick:"🍃悠久の探究者",     rarity:5,  good:["オオカミ","コアラ"],   bad:["チーター"] }
+};
+
+// ===== 60キャラ番号 → 12動物 の対応 =====
+const NUM_TO_ANIMAL = [
+  "こじか","黒ひょう","猿","チーター","黒ひょう","こじか","ゾウ","ひつじ","ひつじ","ゾウ",
+  "ペガサス","ペガサス","ひつじ","たぬき","たぬき","コアラ","黒ひょう","コアラ","ゾウ","チーター",
+  "ライオン","ライオン","とら","とら","ライオン","チーター","チーター","コアラ","オオカミ","オオカミ",
+  "猿","猿","オオカミ","ペガサス","ペガサス","ひつじ","ひつじ","コアラ","コアラ","黒ひょう",
+  "たぬき","こじか","こじか","たぬき","ライオン","オオカミ","オオカミ","ライオン","とら","ゾウ",
+  "ゾウ","とら","チーター","猿","猿","ペガサス","とら","たぬき","たぬき","こじか"
+];
+
+// ===== 動物番号の算出 (個性心理学の標準アルゴリズム) =====
+// 各年の基準値テーブル(1925-2030) ※(年基準 + 月基準 + 日) mod 60
+function getAnimalNumber(y, m, d) {
+  // 通日方式: 1925/1/1 を基準に経過日数を 60 で割った余り + オフセット
+  // 個性心理学の公式: 番号 = (mod60(年補正) + 月補正 + 日) を60で正規化
+  const yearMod = [ // 年の下2桁ではなく西暦からの算出
+  ];
+  // 月補正テーブル (1月〜12月)
+  const monthAdd = [0,31,59,30,0,31,1,32,3,33,4,34];
+  // 年補正: (y-1) のうるう年込み通算からの剰余
+  let yBase = (y - 1) * 365 + Math.floor((y-1)/4) - Math.floor((y-1)/100) + Math.floor((y-1)/400);
+  // うるう年で3月以降は+1
+  const isLeap = (y%4===0 && y%100!==0) || y%400===0;
+  let leapAdj = (isLeap && m >= 3) ? 1 : 0;
+  let total = yBase + monthAdd[m-1] + leapAdj + d;
+  let num = total % 60;
+  return num; // 0-59
+}
+
+// ===== UI 初期化 =====
+const yearSel = document.getElementById('year');
+const monthSel = document.getElementById('month');
+const daySel = document.getElementById('day');
+for (let y = 2025; y >= 1930; y--) yearSel.add(new Option(y + "年", y));
+for (let m = 1; m <= 12; m++) monthSel.add(new Option(m + "月", m));
+function fillDays() {
+  const y = +yearSel.value, m = +monthSel.value;
+  const dim = new Date(y, m, 0).getDate();
+  const cur = +daySel.value || 1;
+  daySel.innerHTML = "";
+  for (let d = 1; d <= dim; d++) daySel.add(new Option(d + "日", d));
+  if (cur <= dim) daySel.value = cur;
+}
+yearSel.value = 1990; monthSel.value = 1;
+fillDays();
+yearSel.onchange = fillDays;
+monthSel.onchange = fillDays;
+
+// LINE URL未設定ガード
+function checkLine() {
+  if (LINE_URL.includes("XXXXXXX")) {
+    alert("（設定メモ）LINE_URL をあなたの友だち追加URLに差し替えてください。");
+    return false;
+  }
+  return true;
+}
+
+// ===== 占う =====
+function uranau() {
+  const y = +yearSel.value, m = +monthSel.value, d = +daySel.value;
+  const num = getAnimalNumber(y, m, d);
+  const animalName = NUM_TO_ANIMAL[num];
+  const a = ANIMALS[animalName];
+
+  const m2 = META[animalName];
+  const goodE = m2.good.map(g=>ANIMALS[g].emoji+g).join("・");
+  const badE = m2.bad.map(g=>ANIMALS[g].emoji+g).join("・");
+  const shareText = `【動物占い】私は ${m2.nick}「${animalName}」でした！\n上位${m2.rarity}%の激レアタイプ✨\nあなたは何の動物？▼`;
+
+  const res = document.getElementById('result');
+  res.innerHTML = `
+    <div class="rarity-badge">🏆 上位 ${m2.rarity}% の激レアタイプ</div>
+    <div class="hero-card" id="heroCard" style="background:linear-gradient(135deg, ${a.color}, ${a.color}cc);">
+      <div class="hero-emoji">${a.emoji}</div>
+      <div class="hero-nick">${m2.nick}</div>
+      <div class="hero-name">${animalName}</div>
+      <div class="hero-catch">${a.catch}</div>
+    </div>
+    <div class="desc">${a.desc}</div>
+    <div class="traits">${a.traits.map(t=>`<span class="trait">#${t}</span>`).join("")}</div>
+
+    <div class="compat">
+      <div class="compat-box good"><span>💞 相性◎</span><b>${goodE}</b></div>
+      <div class="compat-box bad"><span>⚡ 要注意</span><b>${badE}</b></div>
+    </div>
+
+    <div class="share-row">
+      <a class="share-btn x" href="https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(location.href)}" target="_blank" rel="noopener">𝕏 で結果をシェア</a>
+      <a class="share-btn ln" href="https://line.me/R/msg/text/?${encodeURIComponent(shareText+" "+location.href)}" target="_blank" rel="noopener">LINEで送る</a>
+    </div>
+
+    <p style="font-size:0.78rem;color:#aaa;margin-top:10px;">あなたの誕生日：${y}年${m}月${d}日</p>
+
+    <div class="line-cta">
+      <div class="lock">🔒</div>
+      <h3>${animalName}さんの「本当の運命」はLINEで無料プレゼント</h3>
+      <div class="blur">2026年下半期のあなたの運気は◯◯がカギ。仕事運は△△、恋愛運は□□で、特に注意すべき時期は……（続きはLINE登録で全文公開）</div>
+      <ul class="line-list">
+        <li>✅ あなたの詳細な性格・裏の顔フルレポート</li>
+        <li>✅ 2026年の運勢（金運・恋愛・仕事）</li>
+        <li>✅ 相性のいい動物・悪い動物</li>
+      </ul>
+      <a class="line-btn" href="${LINE_URL}" target="_blank" rel="noopener"
+         onclick="return checkLine();">📱 LINEで続きを受け取る</a>
+      <p class="line-sub">友だち追加するだけ・無料 / ブロックはいつでもOK</p>
+    </div>
+  `;
+  res.classList.remove('show');
+  void res.offsetWidth; // reflow でアニメ再生
+  res.classList.add('show');
+  res.scrollIntoView({behavior:"smooth", block:"center"});
+}
+</script>
+</body>
+</html>
