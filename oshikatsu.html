@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>推し活アニマル診断 🎀 あなたの推し活タイプ・沼り度・界隈での立ち回り</title>
+<meta property="og:title" content="🎀 推し活アニマル診断｜あなたの推し活タイプ・沼り度・推し友相性がわかる">
+<meta property="og:description" content="生年月日を入れるだけ。あなたの推し活スタイル・散財度・界隈での立ち回りを無料診断！あなたは何アニマル？">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://placehold.co/1200x630/8c52ff/ffffff/png?text=%F0%9F%8E%80+%E6%8E%A8%E3%81%97%E6%B4%BB%E3%82%A2%E3%83%8B%E3%83%9E%E3%83%AB%E8%A8%BA%E6%96%AD">
+<meta name="twitter:card" content="summary_large_image">
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    background: linear-gradient(135deg, #c2e9fb 0%, #a18cd1 45%, #fbc2eb 100%);
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    padding: 20px; color: #3a2b4a;
+  }
+  .card { background: #fff; border-radius: 26px; box-shadow: 0 24px 60px rgba(120,60,180,0.28); max-width: 520px; width: 100%; padding: 38px 30px; text-align: center; }
+  h1 { font-size: 1.55rem; margin-bottom: 4px; background: linear-gradient(90deg, #8c52ff, #ff5edb); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .sub { color: #9a7ab8; font-size: 0.84rem; margin-bottom: 20px; }
+  .hearts { font-size:1.1rem; letter-spacing:3px; margin-bottom:18px; }
+  .input-row { display: flex; gap: 10px; justify-content: center; margin-bottom: 20px; flex-wrap: wrap; }
+  .field { display: flex; flex-direction: column; align-items: flex-start; }
+  .field label { font-size: 0.72rem; color: #a98; margin-bottom: 4px; padding-left: 4px; }
+  select { padding: 12px 14px; border: 2px solid #e9d9f4; border-radius: 12px; font-size: 1rem; background: #fff; cursor: pointer; outline: none; transition: border 0.2s; }
+  select:focus { border-color: #8c52ff; }
+  button { background: linear-gradient(90deg, #8c52ff, #ff5edb); color: #fff; border: none; padding: 15px 44px; border-radius: 30px; font-size: 1.1rem; font-weight: bold; cursor: pointer; box-shadow: 0 8px 20px rgba(140,82,255,0.4); transition: transform 0.15s; }
+  button:hover { transform: translateY(-2px); }
+  .social-proof { font-size:0.78rem; color:#a98ac0; margin-top:12px; }
+  .social-proof b { color:#8c52ff; }
+  #result { margin-top: 30px; opacity: 0; max-height: 0; overflow: hidden; transition: opacity .5s, max-height .5s; }
+  #result.show { opacity: 1; max-height: 4000px; }
+
+  .rarity-badge { display:inline-block; background:linear-gradient(90deg,#ffd86f,#ff5edb); color:#fff; font-weight:bold; font-size:0.9rem; padding:7px 18px; border-radius:20px; margin-bottom:14px; box-shadow:0 6px 16px rgba(140,82,255,.35); animation:shine 2s infinite; }
+  @keyframes shine { 0%,100%{filter:brightness(1);} 50%{filter:brightness(1.18);} }
+  .hero-card { border-radius:22px; padding:28px 20px; color:#fff; box-shadow:0 14px 36px rgba(0,0,0,.2); margin-bottom:14px; position:relative; overflow:hidden; }
+  .hero-card::after { content:""; position:absolute; top:-40%; left:-30%; width:160%; height:80%; background:radial-gradient(circle,rgba(255,255,255,.35),transparent 60%); transform:rotate(-12deg); }
+  .hero-emoji { font-size:5.3rem; line-height:1; animation:pop .6s; position:relative; }
+  @keyframes pop { 0%{transform:scale(0);} 70%{transform:scale(1.25);} 100%{transform:scale(1);} }
+  .hero-nick { font-size:1.02rem; font-weight:bold; letter-spacing:1px; margin-top:6px; text-shadow:0 1px 4px rgba(0,0,0,.25); }
+  .hero-name { font-size:1.7rem; font-weight:900; margin:2px 0; text-shadow:0 2px 6px rgba(0,0,0,.3); }
+  .hero-catch { font-size:0.94rem; opacity:.95; }
+  .quote-card { font-size:1.05rem; font-weight:bold; color:#6a3a9c; font-style:italic; line-height:1.7; background:linear-gradient(135deg,#f3e8ff,#ffe8fb); border-radius:14px; padding:16px 18px; margin:6px 0 4px; }
+
+  .stat-grid { display:flex; gap:10px; margin:8px 0 14px; }
+  .stat { flex:1; background:#f7f0ff; border-radius:12px; padding:10px 12px; text-align:left; }
+  .stat span { font-size:0.76rem; color:#86c; font-weight:bold; }
+  .stat i { font-size:0.8rem; color:#8c52ff; font-weight:bold; font-style:normal; }
+  .lm-bar { height:14px; border-radius:10px; background:#ece3f7; overflow:hidden; }
+  .lm-bar.mini { height:9px; margin:6px 0 3px; }
+  .lm-fill { height:100%; border-radius:10px; width:0; transition:width 1s ease; }
+
+  .sec { text-align:left; background:#f8f3ff; border-radius:14px; padding:16px 18px; font-size:0.9rem; line-height:1.8; margin-bottom:12px; }
+  .sec h4 { font-size:0.92rem; color:#8c52ff; margin-bottom:4px; }
+  .arusec .aru-list { margin:6px 0 0; padding:0; }
+  .aru-list li { list-style:none; background:#fff; border-radius:10px; padding:9px 12px 9px 30px; margin:7px 0; font-size:0.88rem; line-height:1.6; position:relative; box-shadow:0 2px 6px rgba(140,82,255,.08); }
+  .aru-list li::before { content:"✓"; position:absolute; left:11px; color:#8c52ff; font-weight:bold; }
+
+  .lucky-row { display:flex; gap:8px; margin:4px 0 14px; }
+  .lucky { flex:1; background:linear-gradient(135deg,#f3e8ff,#ffe8fb); border-radius:12px; padding:11px 6px; }
+  .lucky span { display:block; font-size:0.68rem; color:#86c; margin-bottom:3px; }
+  .lucky b { font-size:0.82rem; color:#6a3a9c; }
+
+  .compat { display:flex; gap:10px; margin:6px 0 14px; }
+  .compat-box { flex:1; border-radius:14px; padding:12px 8px; font-size:0.8rem; line-height:1.6; }
+  .compat-box span { display:block; font-weight:bold; margin-bottom:4px; }
+  .compat-box.good { background:#f0fff5; color:#1a9c5b; }
+  .compat-box.bad  { background:#f3e8ff; color:#8c52ff; }
+
+  .locked { position:relative; }
+  .locked .sec { filter:blur(6px); user-select:none; pointer-events:none; }
+  .lock-overlay { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; background:linear-gradient(180deg, rgba(248,243,255,.3), rgba(248,243,255,.93)); border-radius:14px; text-align:center; padding:14px; }
+  .lock-overlay .big { font-size:1.7rem; }
+  .lock-overlay p { font-size:0.92rem; font-weight:bold; color:#8c52ff; margin:6px 0 12px; line-height:1.6; }
+  .unlock-btn { background:#06c755; color:#fff; text-decoration:none; font-weight:bold; font-size:1rem; padding:13px 26px; border-radius:28px; box-shadow:0 8px 20px rgba(6,199,85,.4); }
+  .save-btn { width:100%; margin-top:10px; background:#fff; color:#8c52ff; border:2px solid #8c52ff; font-weight:bold; font-size:0.92rem; padding:12px 0; border-radius:26px; cursor:pointer; }
+  .save-btn:hover { background:#f8f3ff; }
+
+  .share-row { display:flex; gap:10px; margin-bottom:6px; }
+  .share-btn { flex:1; text-decoration:none; color:#fff; font-weight:bold; font-size:0.92rem; padding:13px 0; border-radius:26px; box-shadow:0 6px 16px rgba(0,0,0,.18); }
+  .share-btn:hover { transform:translateY(-2px); }
+  .share-btn.x  { background:#000; }
+  .share-btn.ln { background:#06c755; }
+
+  .aisho-section { margin-top:20px; background:linear-gradient(135deg,#f3e8ff,#ffe8fb); border-radius:18px; padding:22px 18px; }
+  .aisho-section h3 { font-size:1.15rem; color:#8c52ff; margin-bottom:2px; }
+  .aisho-sub { font-size:0.78rem; color:#a98ac0; margin-bottom:14px; }
+  .aisho-btn { background:linear-gradient(90deg,#8c52ff,#ff5edb); color:#fff; border:none; padding:13px 36px; border-radius:28px; font-size:1.02rem; font-weight:bold; cursor:pointer; box-shadow:0 8px 18px rgba(140,82,255,.35); }
+  .aisho-card { margin-top:18px; background:#fff; border-radius:16px; padding:20px; box-shadow:0 8px 22px rgba(140,82,255,.18); }
+  .aisho-pair { font-size:2.6rem; } .aisho-pair span { font-size:1.4rem; color:#8c52ff; vertical-align:middle; }
+  .aisho-names { font-size:1.05rem; font-weight:bold; color:#6a3a9c; margin:4px 0; }
+  .aisho-score { font-size:1.3rem; color:#555; } .aisho-score b { font-size:2.4rem; color:#8c52ff; } .aisho-score small{font-size:1rem;}
+  .aisho-comment { font-size:0.9rem; line-height:1.7; color:#555; text-align:left; margin-top:8px; }
+
+  .line-cta { margin-top:22px; background:linear-gradient(135deg,#f3fbe8,#eafbe0); border:2px dashed #06c755; border-radius:16px; padding:22px 20px; }
+  .line-cta .lock { font-size:1.6rem; }
+  .line-cta h3 { font-size:1.02rem; color:#2b8a3e; margin:6px 0 4px; }
+  .line-cta .blur { filter:blur(5px); user-select:none; color:#777; font-size:0.85rem; line-height:1.7; margin:8px 0 14px; text-align:left; }
+  .line-list { text-align:left; font-size:0.85rem; color:#444; margin:4px 0 16px; }
+  .line-list li { margin:4px 0; list-style:none; }
+  .line-btn { display:inline-flex; align-items:center; gap:8px; background:#06c755; color:#fff; text-decoration:none; padding:14px 30px; border-radius:30px; font-weight:bold; font-size:1.05rem; box-shadow:0 8px 20px rgba(6,199,85,.4); }
+  .line-sub { font-size:0.72rem; color:#999; margin-top:10px; }
+  .footer-note { font-size:0.7rem; color:#b8a8c8; margin-top:22px; }
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>🎀 推し活アニマル診断</h1>
+  <p class="sub">生年月日で、あなたの推し活タイプ・沼り度・界隈での立ち回りを診断</p>
+  <div class="hearts">🐾 💜 🎀 ✨ 🎤 📣</div>
+
+  <div class="input-row">
+    <div class="field"><label>年</label><select id="year"></select></div>
+    <div class="field"><label>月</label><select id="month"></select></div>
+    <div class="field"><label>日</label><select id="day"></select></div>
+  </div>
+  <button onclick="uranau()">推し活タイプを診断 🎤</button>
+  <p class="social-proof" id="socialProof"></p>
+
+  <div id="result"></div>
+  <p class="footer-note">※ 生年月日に基づく推し活タイプ診断（エンタメ目的）です</p>
+</div>
+
+<script>
+// ▼ LINE公式アカウントの友だち追加URL（あとで差し替え）
+const LINE_URL = "https://lin.ee/XXXXXXX";
+
+const BASE = {
+  "チーター":{emoji:"🐆",color:"#ff6f3c"},"黒ひょう":{emoji:"🐈‍⬛",color:"#2c2c54"},
+  "ライオン":{emoji:"🦁",color:"#e6a817"},"とら":{emoji:"🐅",color:"#f0932b"},
+  "たぬき":{emoji:"🦝",color:"#8b6f47"},"こじか":{emoji:"🦌",color:"#ff7fb0"},
+  "猿":{emoji:"🐒",color:"#eb4d4b"},"ペガサス":{emoji:"🦄",color:"#a18cd1"},
+  "ゾウ":{emoji:"🐘",color:"#778ca3"},"ひつじ":{emoji:"🐑",color:"#9ccc5a"},
+  "オオカミ":{emoji:"🐺",color:"#535c68"},"コアラ":{emoji:"🐨",color:"#22a6b3"}
+};
+
+// ===== 推し活タイプ診断データ =====
+const OSHI = {
+  "チーター":{nick:"⚡猪突猛進ガチ恋型",catch:"供給きたら秒で課金",score:84,rarity:6,
+    style:"新規供給・新グッズに秒で飛びつく瞬発力タイプ。発売日0時に張り込み、チケットは全公演申し込む。熱量は界隈最速だが、燃え尽きも早い。",
+    tachimawari:"界隈の『一番乗り』担当。情報を真っ先に掴んで拡散する起爆剤。",
+    how:"新規供給で即課金させるのが鉄板。限定・先着・カウントダウンに激弱。",
+    sanzai:88,numa:80,style2:"現場最前線・即課金型",
+    good:["ライオン","ペガサス"],bad:["コアラ"]},
+  "黒ひょう":{nick:"🖤美意識高い系・布教型",catch:"推しを“映え”で世界に布教",score:80,rarity:5,
+    style:"推しの良さをおしゃれにまとめて発信する界隈の広報。痛バもSNSもセンス重視。布教力が高く、新規を沼に引きずり込む達人。",
+    tachimawari:"界隈の『顔・広報』担当。クオリティの高い発信でファンを増やす。",
+    how:"『あなたのセンスすごい』と承認するのが効く。限定デザイン・コラボに弱い。",
+    sanzai:75,numa:70,style2:"発信・布教型",
+    good:["ひつじ","とら"],bad:["オオカミ"]},
+  "ライオン":{nick:"📣現場最前線・声出し番長型",catch:"現場の熱量はワイが作る",score:82,rarity:4,
+    style:"ライブ・現場で全力。声出し・うちわ・最前狙いの熱血派。推しに認知されたい欲が強く、存在感は界隈一。仕切りも得意。",
+    tachimawari:"界隈の『リーダー・番長』。現場をまとめ、盛り上げの中心になる。",
+    how:"『あなたがいると現場が盛り上がる』と立てるのが効く。最前列・特典に弱い。",
+    sanzai:82,numa:78,style2:"現場・リーダー型",
+    good:["チーター","猿"],bad:["ひつじ"]},
+  "とら":{nick:"🛡安定運営・古参の番人型",catch:"デビューから添い遂げる",score:86,rarity:7,
+    style:"一度推したら長く深く、ブレずに支える古参タイプ。新規にも優しく、界隈の治安を守る頼れる存在。一途で浮気しない。",
+    tachimawari:"界隈の『古参の番人』。歴史を知り、揉め事を鎮める安定の柱。",
+    how:"長く支えてきた歴史をリスペクトするのが効く。記念グッズ・周年に弱い。",
+    sanzai:70,numa:85,style2:"古参・継続型",
+    good:["黒ひょう","たぬき"],bad:["猿"]},
+  "たぬき":{nick:"🍵のんびり継続・愛され古参型",catch:"ゆるく長く、気づけば古参",score:83,rarity:9,
+    style:"マイペースに無理なく長続きする愛されタイプ。ガツガツしないのに、なぜか界隈に馴染んで信頼される。継続力No.1。",
+    tachimawari:"界隈の『癒やし・潤滑油』。穏やかで誰とでも仲良くなる。",
+    how:"日常的なゆるい接点を増やすのが効く。日替わり・コツコツ系特典に弱い。",
+    sanzai:62,numa:82,style2:"ゆる継続型",
+    good:["とら","こじか"],bad:["ペガサス"]},
+  "こじか":{nick:"🌸沼落ち慎重→ドハマリ型",catch:"ハマったら抜け出せない",score:78,rarity:8,
+    style:"最初は様子見、一度ハマると一気に沼落ちする振り幅最大タイプ。推しへの愛は重め。繊細で界隈の雰囲気に敏感。",
+    tachimawari:"界隈の『純粋培養ガチ勢』。深く狭く、推し一筋。",
+    how:"安心できる雰囲気で沼に引き込むのが鍵。世界観・ストーリー性に弱い。",
+    sanzai:74,numa:90,style2:"重ガチ勢型",
+    good:["たぬき","ゾウ"],bad:["黒ひょう"]},
+  "猿":{nick:"🎪楽しさ最優先・複数推し型",catch:"推しは多ければ多いほど良い",score:79,rarity:6,
+    style:"とにかく楽しい推し活が正義。掛け持ち・DD気味で、界隈をまたいでわいわい楽しむ。フットワーク激軽。",
+    tachimawari:"界隈の『盛り上げ役』。横の繋がりが広く、コラボを生む。",
+    how:"『一緒に楽しもう』のノリが効く。イベント・コラボ・お祭り企画に弱い。",
+    sanzai:72,numa:60,style2:"複数推し・お祭り型",
+    good:["ライオン","ペガサス"],bad:["とら"]},
+  "ペガサス":{nick:"🎨天才クリエイター・二次創作型",catch:"愛は作品で爆発させる",score:81,rarity:3,
+    style:"ファンアート・考察・MAD等、創作で愛を表現する天才肌。独自の世界観で界隈に作品を供給する側。気分の波は激しい。",
+    tachimawari:"界隈の『供給する神絵師/考察勢』。二次創作で界隈を潤す。",
+    how:"作品・才能を絶賛するのが効く。創作意欲を刺激する展開・余白に弱い。",
+    sanzai:65,numa:75,style2:"創作・考察型",
+    good:["猿","チーター"],bad:["たぬき"]},
+  "ゾウ":{nick:"💎貢ぎ職人・課金は誠意型",catch:"愛の重さ＝積んだ金額",score:85,rarity:8,
+    style:"グッズ全集め・複数積み・課金は誠意と考えるガチ支援タイプ。コツコツ着実に推しに貢ぐ。売上貢献度は界隈トップ。",
+    tachimawari:"界隈の『重課金・支援の柱』。数字（売上・順位）で推しを支える。",
+    how:"支援が推しに届いていると示すのが効く。コンプ・限定・ランキングに弱い。",
+    sanzai:95,numa:84,style2:"重課金・支援型",
+    good:["こじか","ひつじ"],bad:["オオカミ"]},
+  "ひつじ":{nick:"🤝仲間との絆・同担協力型",catch:"推し友がいてこその推し活",score:88,rarity:10,
+    style:"FC仲間・同担と繋がってこそ楽しい絆重視タイプ。情報共有・遠征の同行・チケ融通など、横の繋がりが生命線。寂しがり。",
+    tachimawari:"界隈の『コミュニティの中心』。人を繋ぎ、助け合いを生む。",
+    how:"『一緒に行こう』『繋がろう』が効く。仲間と参加する企画・FC特典に弱い。",
+    sanzai:73,numa:80,style2:"同担・コミュ型",
+    good:["黒ひょう","ゾウ"],bad:["ライオン"]},
+  "オオカミ":{nick:"🌙単独行動・ぼっち最強型",catch:"一人現場が至高",score:74,rarity:2,
+    style:"一人で現場・一人で考察、自分の推し方を貫く孤高タイプ。群れず、こだわりが強い。愛は深いが表に出さないツンデレ。",
+    tachimawari:"界隈の『一匹狼の玄人』。独自の視点で深く推す。",
+    how:"推し方を否定せず尊重するのが効く。一人で堪能できる特典・限定版に弱い。",
+    sanzai:68,numa:88,style2:"単独・玄人型",
+    good:["コアラ","オオカミ"],bad:["黒ひょう"]},
+  "コアラ":{nick:"🛋在宅・配信勢の癒やし型",catch:"おうちでまったり推す",score:76,rarity:5,
+    style:"配信・SNSをまったり楽しむ在宅推し活タイプ。現場より日常に溶け込む推し方。争いを好まず、平和に長く推す。",
+    tachimawari:"界隈の『在宅の癒やし』。穏やかな空気で居心地を作る。",
+    how:"おうちで完結できる楽しみ方を提案するのが効く。配信・デジタル特典に弱い。",
+    sanzai:60,numa:78,style2:"在宅・配信型",
+    good:["オオカミ","コアラ"],bad:["チーター"]}
+};
+
+const EXTRA = {
+  "チーター":{color:"ビビッドオレンジ",item:"ペンライト",month:"発売記念月"},
+  "黒ひょう":{color:"ブラック×シルバー",item:"痛バ（高見え）",month:"ビジュアル解禁月"},
+  "ライオン":{color:"ロイヤルゴールド",item:"団扇（うちわ）",month:"ツアー月"},
+  "とら":{color:"アースブラウン",item:"周年グッズ",month:"デビュー記念月"},
+  "たぬき":{color:"ベージュ",item:"ぬいぐるみ",month:"日常のいつでも"},
+  "こじか":{color:"ベビーピンク",item:"アクスタ",month:"新展開・新章"},
+  "猿":{color:"イエロー",item:"コラボカフェ",month:"イベント月"},
+  "ペガサス":{color:"パステルパープル",item:"同人・ファンアート",month:"供給ラッシュ月"},
+  "ゾウ":{color:"プラチナグレー",item:"CD/Blu-ray複数積み",month:"リリース月"},
+  "ひつじ":{color:"ミントグリーン",item:"おそろいグッズ",month:"FCイベント月"},
+  "オオカミ":{color:"インディゴ",item:"円盤（保存用）",month:"単独公演月"},
+  "コアラ":{color:"ターコイズ",item:"配信チケット",month:"配信ライブ月"}
+};
+
+const VOICE = {
+  "チーター":{quote:"「迷ってる時間に売り切れる。だから即・課金。」",ark:["発売0時に張り込んで秒でカートに入れる","新規供給で1日のテンションが決まる","全通(全公演参戦)を当然だと思っている"]},
+  "黒ひょう":{quote:"「推しの良さは、世界一おしゃれに伝えたい。」",ark:["痛バの配置に何時間もかける","SNS投稿のクオリティに妥協できない","『その情報どこで?』とよく聞かれる"]},
+  "ライオン":{quote:"「現場の熱量は、最前のワイが作る。」",ark:["声出し解禁で誰より叫ぶ","推しに認知されたくてうちわを工夫","遠征の仕切りはいつも自分"]},
+  "とら":{quote:"「デビューから見てる。これからもずっと。」",ark:["『あの頃から応援してた』が口ぐせ","新規担にやさしく沼の案内をする","推し変(推し替え)が考えられない"]},
+  "たぬき":{quote:"「ゆるく長く。それが私の推し方。」",ark:["無理しないのに気づけば古参","課金は控えめ、でも愛は本物","界隈の人みんなとなんとなく仲良し"]},
+  "こじか":{quote:"「ハマるまでが長い。ハマったら…重いよ。」",ark:["最初は様子見、気づけば全財産投入","推しのこと考えて夜眠れない","界隈のギスギスに人一倍敏感"]},
+  "猿":{quote:"「推しは何人いてもいい。楽しいが正義。」",ark:["気づけば推しが増えている(DD)","コラボカフェは全制覇したい","重い空気の界隈からはそっと離れる"]},
+  "ペガサス":{quote:"「語るより、描く。供給は自分で作る。」",ark:["考察スレを朝まで読んでしまう","ファンアートやMADを作る側","解釈違いには静かに距離を取る"]},
+  "ゾウ":{quote:"「愛の重さは、積んだ金額で示す。」",ark:["同じCDを特典の数だけ積む","グッズはコンプしないと気が済まない","売上ランキングを自分ごとで気にする"]},
+  "ひつじ":{quote:"「推し友がいるから、推し活は楽しい。」",ark:["遠征は誰かと一緒じゃないと不安","チケ余りは秒で同担に融通する","FCの集いが生きがい"]},
+  "オオカミ":{quote:"「群れない。一人現場が、いちばん集中できる。」",ark:["基本ぼっち参戦、それが快適","愛は深いのに表に出さない","推し方を否定されると一気に冷める"]},
+  "コアラ":{quote:"「現場も尊い。けど、おうち配信も最高。」",ark:["配信ライブを寝転んで堪能","争い系の界隈ゴシップは見ない","グッズよりデジタル派"]}
+};
+
+const NUM_TO_ANIMAL = [
+  "こじか","黒ひょう","猿","チーター","黒ひょう","こじか","ゾウ","ひつじ","ひつじ","ゾウ",
+  "ペガサス","ペガサス","ひつじ","たぬき","たぬき","コアラ","黒ひょう","コアラ","ゾウ","チーター",
+  "ライオン","ライオン","とら","とら","ライオン","チーター","チーター","コアラ","オオカミ","オオカミ",
+  "猿","猿","オオカミ","ペガサス","ペガサス","ひつじ","ひつじ","コアラ","コアラ","黒ひょう",
+  "たぬき","こじか","こじか","たぬき","ライオン","オオカミ","オオカミ","ライオン","とら","ゾウ",
+  "ゾウ","とら","チーター","猿","猿","ペガサス","とら","たぬき","たぬき","こじか"
+];
+
+function getAnimalNumber(y,m,d){
+  const monthAdd=[0,31,59,30,0,31,1,32,3,33,4,34];
+  let yBase=(y-1)*365+Math.floor((y-1)/4)-Math.floor((y-1)/100)+Math.floor((y-1)/400);
+  const isLeap=(y%4===0&&y%100!==0)||y%400===0;
+  let leapAdj=(isLeap&&m>=3)?1:0;
+  return (yBase+monthAdd[m-1]+leapAdj+d)%60;
+}
+
+const yearSel=document.getElementById('year'),monthSel=document.getElementById('month'),daySel=document.getElementById('day');
+for(let y=2025;y>=1930;y--)yearSel.add(new Option(y+"年",y));
+for(let m=1;m<=12;m++)monthSel.add(new Option(m+"月",m));
+function fillDays(){const y=+yearSel.value,m=+monthSel.value,dim=new Date(y,m,0).getDate(),cur=+daySel.value||1;daySel.innerHTML="";for(let d=1;d<=dim;d++)daySel.add(new Option(d+"日",d));if(cur<=dim)daySel.value=cur;}
+yearSel.value=2000;monthSel.value=1;fillDays();
+yearSel.onchange=fillDays;monthSel.onchange=fillDays;
+
+function checkLine(){if(LINE_URL.includes("XXXXXXX")){alert("（設定メモ）LINE_URL を友だち追加URLに差し替えてください。");return false;}return true;}
+
+(function(){
+  const t=new Date(); const seed=t.getFullYear()*1000+(t.getMonth()+1)*40+t.getDate();
+  const today=3200+(seed*73%6100); const total=210000+(seed*131%58000);
+  document.getElementById('socialProof').innerHTML=`👥 今日 <b>${today.toLocaleString()}</b>人が診断中／累計 <b>${total.toLocaleString()}</b>人突破！`;
+})();
+
+function saveCard(){
+  const el=document.getElementById('captureArea');
+  if(!el||typeof html2canvas==='undefined'){alert("画像保存の準備中です。少し待って再度お試しください。");return;}
+  html2canvas(el,{scale:2,backgroundColor:"#ffffff"}).then(c=>{const a=document.createElement('a');a.download='推し活アニマル診断.png';a.href=c.toDataURL('image/png');a.click();});
+}
+
+function compatScore(me,you){
+  const O=OSHI[me]; let base=58;
+  if(O.good.includes(you)) base=92;
+  else if(O.bad.includes(you)) base=36;
+  else if(OSHI[you].good.includes(me)) base=80;
+  else if(OSHI[you].bad.includes(me)) base=44;
+  if(me===you) base=Math.max(base,72);
+  const diff=Math.abs(O.score-OSHI[you].score);
+  base+=(diff<6?6:diff>20?-6:0);
+  return Math.max(20,Math.min(99,base));
+}
+function compatComment(s,me,you){
+  if(s>=90) return `最高の推し友💜 ${me}と${you}は一緒に沼に潜れる神コンビ。遠征もチケ融通も完璧に回る相性。`;
+  if(s>=75) return `好相性✨ ${me}と${you}は楽しく推し活できるペア。お互いの強みで界隈を盛り上げられる。`;
+  if(s>=55) return `バランス型🎀 ${me}と${you}は推し方は違うけど、補い合えば良い推し友に。`;
+  if(s>=44) return `刺激枠⚡ ${me}と${you}はスタイルが正反対。理解し合えれば新鮮、合わないと衝突も。`;
+  return `要注意🔥 ${me}と${you}は推し活の価値観がぶつかりやすい。距離感を大事に。`;
+}
+function shindanAisho(){
+  const me=window.__myAnimal; if(!me){alert("先にあなたの推し活タイプを診断してね🎤");return;}
+  const y=+document.getElementById('pyear').value,mo=+document.getElementById('pmonth').value,d=+document.getElementById('pday').value;
+  const you=NUM_TO_ANIMAL[getAnimalNumber(y,mo,d)];
+  const s=compatScore(me,you);
+  const box=document.getElementById('aishoResult');
+  box.innerHTML=`
+    <div class="aisho-card">
+      <div class="aisho-pair">${BASE[me].emoji} <span>×</span> ${BASE[you].emoji}</div>
+      <div class="aisho-names">${me} × ${you}</div>
+      <div class="aisho-score">推し友相性 <b>${s}</b><small>%</small></div>
+      <div class="lm-bar" style="margin:8px 0;"><div class="lm-fill" style="width:${s}%;background:linear-gradient(90deg,#a18cd1,#8c52ff);"></div></div>
+      <div class="aisho-comment">${compatComment(s,me,you)}</div>
+      <a class="unlock-btn" style="margin-top:12px;display:inline-block;" href="${LINE_URL}" target="_blank" rel="noopener" onclick="return checkLine();">📱 二人の詳しい相性をLINEで見る</a>
+    </div>`;
+  box.scrollIntoView({behavior:"smooth",block:"center"});
+}
+
+function uranau(){
+  const y=+yearSel.value,m=+monthSel.value,d=+daySel.value;
+  const name=NUM_TO_ANIMAL[getAnimalNumber(y,m,d)];
+  window.__myAnimal=name;
+  const b=BASE[name], O=OSHI[name], E=EXTRA[name], V=VOICE[name];
+  const goodE=O.good.map(g=>BASE[g].emoji+g).join("・");
+  const badE=O.bad.map(g=>BASE[g].emoji+g).join("・");
+  const shareText=`【推し活アニマル診断】私の推し活タイプは ${O.nick}「${name}」🎀\n推し活偏差値 ${O.score} / 上位${O.rarity}%！\n散財度${O.sanzai}% 沼り度${O.numa}%…\nあなたの推し活タイプは？▼`;
+
+  const res=document.getElementById('result');
+  res.innerHTML=`
+    <div id="captureArea" style="padding:14px;border-radius:22px;background:#fff;">
+    <div class="rarity-badge">🏆 上位 ${O.rarity}% の激レア推し活タイプ</div>
+    <div class="hero-card" style="background:linear-gradient(135deg,${b.color},${b.color}cc);">
+      <div class="hero-emoji">${b.emoji}</div>
+      <div class="hero-nick">${O.nick}</div>
+      <div class="hero-name">${name}</div>
+      <div class="hero-catch">${O.catch}</div>
+    </div>
+    <div class="stat-grid">
+      <div class="stat"><span>💸 散財度</span><div class="lm-bar mini"><div class="lm-fill" style="width:${O.sanzai}%;background:linear-gradient(90deg,#ffb347,#ff5e5e);"></div></div><i>${O.sanzai}%</i></div>
+      <div class="stat"><span>🌊 沼り度</span><div class="lm-bar mini"><div class="lm-fill" style="width:${O.numa}%;background:linear-gradient(90deg,#8c52ff,#ff5edb);"></div></div><i>${O.numa}%</i></div>
+    </div>
+    <div class="quote-card">${V.quote}</div>
+    <div style="font-size:0.7rem;color:#b8a8c8;margin:-2px 0 14px;">🎀 推し活アニマル診断</div>
+    </div><!-- /captureArea -->
+
+    <div class="love-meter" style="margin-bottom:14px;">
+      <div style="display:flex;justify-content:space-between;font-size:0.8rem;color:#86c;margin-bottom:5px;"><span>🎤 推し活偏差値</span><b>${O.score}</b></div>
+      <div class="lm-bar"><div class="lm-fill" id="lmFill" style="background:linear-gradient(90deg,#a18cd1,#8c52ff);"></div></div>
+    </div>
+
+    <div class="sec"><h4>🎀 あなたの推し活スタイル</h4>${O.style}</div>
+    <div class="sec"><h4>🏟 界隈での立ち回り</h4>${O.tachimawari}</div>
+    <div class="sec arusec"><h4>😂 ${name}の推し活あるある</h4><ul class="aru-list">${V.ark.map(a=>`<li>${a}</li>`).join("")}</ul></div>
+
+    <div class="lucky-row">
+      <div class="lucky"><span>🎨 ラッキーカラー</span><b>${E.color}</b></div>
+      <div class="lucky"><span>🎁 推しアイテム</span><b>${E.item}</b></div>
+      <div class="lucky"><span>📅 散財注意月</span><b>${E.month}</b></div>
+    </div>
+
+    <div class="locked">
+      <div class="sec"><h4>💡 あなたが沼りやすい“沼落ちポイント”</h4>${O.how}</div>
+      <div class="compat">
+        <div class="compat-box good"><span>💜 最高の推し友</span><b>${goodE}</b></div>
+        <div class="compat-box bad"><span>⚡ 衝突しやすい</span><b>${badE}</b></div>
+      </div>
+      <div class="lock-overlay">
+        <div class="big">🔒🎀</div>
+        <p>「沼落ちポイント」と「最高の推し友タイプ」は<br>LINE登録で今すぐ無料解放！</p>
+        <a class="unlock-btn" href="${LINE_URL}" target="_blank" rel="noopener" onclick="return checkLine();">📱 LINEで結果を解放する</a>
+      </div>
+    </div>
+
+    <button class="save-btn" onclick="saveCard()">📸 結果カードを画像で保存（SNSにシェア）</button>
+    <div class="share-row">
+      <a class="share-btn x" href="https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(location.href)}" target="_blank" rel="noopener">𝕏 で結果をシェア</a>
+      <a class="share-btn ln" href="https://line.me/R/msg/text/?${encodeURIComponent(shareText+" "+location.href)}" target="_blank" rel="noopener">LINEで送る</a>
+    </div>
+
+    <p style="font-size:0.78rem;color:#b8a;margin-top:10px;">あなたの誕生日：${y}年${m}月${d}日</p>
+
+    <div class="aisho-section">
+      <h3>💜 推し友・同担との相性は？</h3>
+      <p class="aisho-sub">相手の生年月日を入れて即チェック</p>
+      <div class="input-row">
+        <div class="field"><label>年</label><select id="pyear"></select></div>
+        <div class="field"><label>月</label><select id="pmonth"></select></div>
+        <div class="field"><label>日</label><select id="pday"></select></div>
+      </div>
+      <button class="aisho-btn" onclick="shindanAisho()">推し友相性を見る 💜</button>
+      <div id="aishoResult"></div>
+    </div>
+
+    <div class="line-cta">
+      <div class="lock">🔒</div>
+      <h3>${name}さんの「2026年の推し活運」はLINEで無料プレゼント</h3>
+      <div class="blur">2026年、あなたに供給ラッシュが来るのは◯月。散財に注意すべき時期は△△で、推しとの距離が縮まるベストタイミングは……（続きはLINE登録で全文公開）</div>
+      <ul class="line-list">
+        <li>✅ あなたの推し活フル診断＆隠れ性質</li>
+        <li>✅ 2026年の推し活運・散財注意マップ</li>
+        <li>✅ 推し友・同担との詳しい相性診断</li>
+      </ul>
+      <a class="line-btn" href="${LINE_URL}" target="_blank" rel="noopener" onclick="return checkLine();">📱 続きをLINEで受け取る</a>
+      <p class="line-sub">友だち追加するだけ・無料 / ブロックはいつでもOK</p>
+    </div>
+  `;
+  res.classList.remove('show'); void res.offsetWidth; res.classList.add('show');
+  const py=document.getElementById('pyear'),pm=document.getElementById('pmonth'),pd=document.getElementById('pday');
+  for(let yy=2025;yy>=1930;yy--)py.add(new Option(yy+"年",yy));
+  for(let mm=1;mm<=12;mm++)pm.add(new Option(mm+"月",mm));
+  py.value=2000;pm.value=1;
+  const fillPDays=()=>{const dim=new Date(+py.value,+pm.value,0).getDate();pd.innerHTML="";for(let dd=1;dd<=dim;dd++)pd.add(new Option(dd+"日",dd));};
+  fillPDays(); py.onchange=fillPDays; pm.onchange=fillPDays;
+  setTimeout(()=>{const f=document.getElementById('lmFill'); if(f)f.style.width=O.score+"%";},150);
+  res.scrollIntoView({behavior:"smooth",block:"start"});
+}
+</script>
+</body>
+</html>
