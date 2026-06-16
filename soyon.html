@@ -31,6 +31,11 @@
   button.main { background: linear-gradient(90deg,#ffd86f,#ff9e3d); color:#2a1648; border:none; padding:15px 40px; border-radius:30px; font-size:1.08rem; font-weight:bold; cursor:pointer; box-shadow:0 8px 24px rgba(255,158,61,.4); letter-spacing:1px; }
   button.main:hover { transform:translateY(-2px); }
   .social-proof { font-size:0.76rem; color:#a892d6; margin-top:12px; } .social-proof b { color:#ffd86f; }
+  .q-block { background:rgba(255,255,255,.04); border:1px solid rgba(255,216,111,.18); border-radius:14px; padding:16px 16px 6px; margin-bottom:18px; }
+  .q-title { font-size:0.78rem; color:#c8b3ff; letter-spacing:2px; margin-bottom:12px; }
+  .q { text-align:left; margin-bottom:12px; }
+  .q label { display:block; font-size:0.8rem; color:#ece4ff; margin-bottom:5px; }
+  .q select { width:100%; }
   #result { margin-top:28px; opacity:0; max-height:0; overflow:hidden; transition:opacity .6s, max-height .6s; }
   #result.show { opacity:1; max-height:5000px; }
 
@@ -120,6 +125,17 @@
     <div class="field"><label>月</label><select id="month"></select></div>
     <div class="field"><label>日</label><select id="day"></select></div>
   </div>
+
+  <div class="q-block">
+    <p class="q-title">― 今のあなたの波動を視ます ―</p>
+    <div class="q"><label>Q1. 今の心の状態は？</label>
+      <select id="q1"><option value="calm">凪いでいる・落ち着いている</option><option value="shake">揺れている・不安がある</option><option value="burn">燃えている・気合十分</option></select></div>
+    <div class="q"><label>Q2. いま一番ほしいものは？</label>
+      <select id="q2"><option value="love">愛・ご縁</option><option value="money">お金・成功</option><option value="peace">安らぎ・癒やし</option><option value="power">前に進む力</option></select></div>
+    <div class="q"><label>Q3. 最近の運の流れは？</label>
+      <select id="q3"><option value="up">上向き</option><option value="flat">停滞している</option><option value="down">下り坂に感じる</option></select></div>
+  </div>
+
   <button class="main" onclick="uranau()">ソヨンに視てもらう 🐉</button>
   <p class="social-proof" id="socialProof"></p>
 
@@ -208,6 +224,15 @@ const NUM_TO_STONE = [
 
 function getNum(y,m,d){ const a=[0,31,59,30,0,31,1,32,3,33,4,34]; let b=(y-1)*365+Math.floor((y-1)/4)-Math.floor((y-1)/100)+Math.floor((y-1)/400); const lp=(y%4===0&&y%100!==0)||y%400===0; return (b+a[m-1]+((lp&&m>=3)?1:0)+d)%60; }
 
+// 今の波動（設問）→ 必要な石・お告げ補正
+const WANT_STONE = { love:"rose", money:"citrine", peace:"amethyst", power:"peridot" };
+const WANT_WORD  = { love:"愛とご縁", money:"豊かさと成功", peace:"安らぎと癒やし", power:"前へ進む力" };
+const STATE_WORD = { calm:"いま、あなたの波動は静かに整っている。", shake:"いま、あなたの波動は揺らぎ、わずかに乱れが見える。", burn:"いま、あなたの波動は熱く高ぶっている。" };
+const FLOW_WORD  = { up:"運気は上昇の流れにある。追い風を逃さぬように。", flat:"運気は停滞の淵にある。今は石で流れを整える時。", down:"運気は下りの局面にある。だが、底を打てば必ず昇る。" };
+// 波動レベル補正
+const STATE_ADJ = { calm:6, shake:-8, burn:3 };
+const FLOW_ADJ  = { up:6, flat:-3, down:-7 };
+
 const yearSel=document.getElementById('year'),monthSel=document.getElementById('month'),daySel=document.getElementById('day');
 for(let y=2025;y>=1930;y--)yearSel.add(new Option(y+"年",y));
 for(let m=1;m<=12;m++)monthSel.add(new Option(m+"月",m));
@@ -246,10 +271,15 @@ function shindanAisho(){ const me=window.__myStone; if(!me){alert("先にソヨ�
 function uranau(){
   const y=+yearSel.value,m=+monthSel.value,d=+daySel.value;
   const key=NUM_TO_STONE[getNum(y,m,d)]; window.__myStone=key; const S=STONE[key];
+  // 設問（今の波動）
+  const q1=document.getElementById('q1').value, q2=document.getElementById('q2').value, q3=document.getElementById('q3').value;
+  const waveNow=Math.max(40,Math.min(99, S.wave + (STATE_ADJ[q1]||0) + (FLOW_ADJ[q3]||0)));
+  const needKey=WANT_STONE[q2]; const N=STONE[needKey]; const needBuy=N.buy||SHOP_URL;
+  const sameStone=(needKey===key);
   const goodE=S.good.map(g=>STONE[g].emoji+STONE[g].name).join("・");
   const badE=S.bad.map(g=>STONE[g].emoji+STONE[g].name).join("・");
   const buyUrl=S.buy||SHOP_URL;
-  const shareText=`【波動霊石院】院主ソヨンが視た私の守護霊石は「${S.name}」🐉 (${S.nick})\n波動レベル${S.wave} / 上位${S.rarity}%！\nあなたの守護霊石は？▼`;
+  const shareText=`【波動霊石院】院主ソヨンが視た私の守護霊石は「${S.name}」🐉 (${S.nick})\n波動レベル${waveNow} / 上位${S.rarity}%！\nあなたの守護霊石は？▼`;
 
   const res=document.getElementById('result');
   res.innerHTML=`
@@ -263,14 +293,28 @@ function uranau(){
       <div class="hero-catch">守護の軸：${S.keep}</div>
     </div>
     <div class="wave-meter">
-      <div class="lbl"><span>🐉 あなたの波動レベル</span><b>${S.wave}</b></div>
+      <div class="lbl"><span>🐉 今のあなたの波動レベル</span><b>${waveNow}</b></div>
       <div class="lm-bar"><div class="lm-fill" id="waveFill"></div></div>
     </div>
     <div style="font-size:0.66rem;color:#7d6aa8;margin:-4px 0 12px;">― 波動霊石院 ―</div>
     </div><!-- /captureArea -->
 
-    <div class="oracle"><h4>🔮 院主ソヨンのお告げ</h4><p>「${S.oracle}」</p></div>
+    <div class="oracle"><h4>🔮 院主ソヨンのお告げ</h4><p>「${STATE_WORD[q1]}${FLOW_WORD[q3]}<br><br>${S.oracle}」</p></div>
     <div class="sec"><h4>💠 ${S.name}の意味（言い伝え）</h4>${S.mean}</div>
+
+    ${sameStone ? `
+    <div class="oracle" style="border-color:rgba(126,255,179,.4);">
+      <h4>✨ 今あなたに必要な石</h4>
+      <p>あなたが今求める「${WANT_WORD[q2]}」。それを司るのは、まさにあなたの守護霊石「${S.name}」そのもの。今このタイミングで持つべき石が、生まれ持った石と重なっている――稀なる導きです。</p>
+    </div>` : `
+    <div class="buy-box" style="border-color:rgba(126,255,179,.5);">
+      <div style="font-size:0.78rem;color:#8effc0;font-weight:bold;margin-bottom:4px;">✨ 今あなたに必要な石</div>
+      <div class="stone-img">${N.emoji}</div>
+      <h3>${N.name}</h3>
+      <p style="font-size:0.86rem;line-height:1.8;color:#ece4ff;margin:6px 0;">今のあなたが求める「${WANT_WORD[q2]}」を司る石。守護霊石「${S.name}」と重ね持つことで、今の波動を整える助けとなるでしょう。</p>
+      <div class="price">¥${N.price.toLocaleString()}〜 <small>（${N.name}ブレスレット）</small></div>
+      <a class="buy-btn" href="${needBuy}" target="_blank" rel="noopener">🛒 ${N.name}を授かる</a>
+    </div>`}
 
     <div class="buy-box">
       <div class="stone-img">${S.emoji}✨</div>
