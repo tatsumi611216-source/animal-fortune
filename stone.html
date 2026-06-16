@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>守護石診断 💎 生年月日であなたのパワーストーンを占う</title>
+<meta property="og:title" content="💎 守護石診断｜生年月日であなたのパワーストーンがわかる">
+<meta property="og:description" content="生年月日を入れるだけ。あなたを守るパワーストーン（守護石）と意味・相性を無料診断！">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://placehold.co/1200x630/6c5ce7/ffffff/png?text=%F0%9F%92%8E+%E5%AE%88%E8%AD%B7%E7%9F%B3%E8%A8%BA%E6%96%AD">
+<meta name="twitter:card" content="summary_large_image">
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif; background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 50%, #d4a5ff 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; color: #2e2545; }
+  .card { background: #fff; border-radius: 26px; box-shadow: 0 24px 60px rgba(90,60,160,0.28); max-width: 520px; width: 100%; padding: 38px 30px; text-align: center; }
+  h1 { font-size: 1.55rem; margin-bottom: 4px; background: linear-gradient(90deg, #6c5ce7, #d63edb); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .sub { color: #8a7ab0; font-size: 0.84rem; margin-bottom: 20px; }
+  .hearts { font-size:1.1rem; letter-spacing:4px; margin-bottom:18px; }
+  .input-row { display: flex; gap: 10px; justify-content: center; margin-bottom: 20px; flex-wrap: wrap; }
+  .field { display: flex; flex-direction: column; align-items: flex-start; }
+  .field label { font-size: 0.72rem; color: #a89; margin-bottom: 4px; padding-left: 4px; }
+  select { padding: 12px 14px; border: 2px solid #e4dcf4; border-radius: 12px; font-size: 1rem; background: #fff; cursor: pointer; outline: none; transition: border 0.2s; }
+  select:focus { border-color: #6c5ce7; }
+  button { background: linear-gradient(90deg, #6c5ce7, #d63edb); color: #fff; border: none; padding: 15px 44px; border-radius: 30px; font-size: 1.1rem; font-weight: bold; cursor: pointer; box-shadow: 0 8px 20px rgba(108,92,231,0.4); transition: transform 0.15s; }
+  button:hover { transform: translateY(-2px); }
+  .social-proof { font-size:0.78rem; color:#9a8ac0; margin-top:12px; } .social-proof b { color:#6c5ce7; }
+  #result { margin-top: 30px; opacity: 0; max-height: 0; overflow: hidden; transition: opacity .5s, max-height .5s; }
+  #result.show { opacity: 1; max-height: 4500px; }
+
+  .rarity-badge { display:inline-block; background:linear-gradient(90deg,#ffd86f,#d63edb); color:#fff; font-weight:bold; font-size:0.9rem; padding:7px 18px; border-radius:20px; margin-bottom:14px; box-shadow:0 6px 16px rgba(108,92,231,.35); animation:shine 2s infinite; }
+  @keyframes shine { 0%,100%{filter:brightness(1);} 50%{filter:brightness(1.18);} }
+  .hero-card { border-radius:22px; padding:30px 20px; color:#fff; box-shadow:0 14px 36px rgba(0,0,0,.2); margin-bottom:14px; position:relative; overflow:hidden; }
+  .hero-card::after { content:""; position:absolute; top:-40%; left:-30%; width:160%; height:80%; background:radial-gradient(circle,rgba(255,255,255,.4),transparent 60%); transform:rotate(-12deg); }
+  .hero-emoji { font-size:5rem; line-height:1; animation:pop .6s; position:relative; filter:drop-shadow(0 4px 10px rgba(0,0,0,.25)); }
+  @keyframes pop { 0%{transform:scale(0);} 70%{transform:scale(1.25);} 100%{transform:scale(1);} }
+  .hero-nick { font-size:0.95rem; font-weight:bold; letter-spacing:1px; margin-top:8px; text-shadow:0 1px 4px rgba(0,0,0,.25); }
+  .hero-name { font-size:1.8rem; font-weight:900; margin:2px 0; text-shadow:0 2px 6px rgba(0,0,0,.3); }
+  .hero-catch { font-size:0.92rem; opacity:.95; }
+  .quote-card { font-size:1.02rem; font-weight:bold; color:#5a3a9c; font-style:italic; line-height:1.7; background:linear-gradient(135deg,#f0eaff,#fbe8ff); border-radius:14px; padding:16px 18px; margin:6px 0 4px; }
+
+  .sec { text-align:left; background:#f6f2ff; border-radius:14px; padding:16px 18px; font-size:0.9rem; line-height:1.8; margin-bottom:12px; }
+  .sec h4 { font-size:0.92rem; color:#6c5ce7; margin-bottom:4px; }
+  .stat-grid { display:flex; gap:10px; margin:8px 0 14px; }
+  .stat { flex:1; background:#f3eeff; border-radius:12px; padding:10px 12px; text-align:left; }
+  .stat span { font-size:0.76rem; color:#86c; font-weight:bold; }
+  .stat i { font-size:0.8rem; color:#6c5ce7; font-weight:bold; font-style:normal; }
+  .lm-bar { height:13px; border-radius:10px; background:#e8e0f7; overflow:hidden; } .lm-bar.mini { height:9px; margin:6px 0 3px; }
+  .lm-fill { height:100%; border-radius:10px; width:0; transition:width 1s ease; }
+
+  /* 購入ボックス（物販導線の核） */
+  .buy-box { background:linear-gradient(135deg,#fff8e8,#fff0f8); border:2px solid #e9c8ff; border-radius:18px; padding:22px 18px; margin:6px 0 14px; }
+  .buy-box .stone-img { font-size:3.4rem; }
+  .buy-box h3 { font-size:1.1rem; color:#6c5ce7; margin:4px 0; }
+  .buy-box .price { font-size:1.3rem; font-weight:900; color:#d63edb; margin:6px 0; }
+  .buy-box .price small { font-size:0.75rem; color:#999; font-weight:normal; }
+  .buy-btn { display:inline-block; background:linear-gradient(90deg,#ff7a59,#ff3d8b); color:#fff; text-decoration:none; font-weight:bold; font-size:1.05rem; padding:15px 36px; border-radius:30px; box-shadow:0 8px 20px rgba(255,61,139,.4); margin-top:6px; }
+  .buy-btn:hover { transform:translateY(-2px); }
+  .buy-note { font-size:0.7rem; color:#b0a0c0; margin-top:10px; line-height:1.5; }
+
+  .lucky-row { display:flex; gap:8px; margin:4px 0 14px; }
+  .lucky { flex:1; background:linear-gradient(135deg,#f0eaff,#fbe8ff); border-radius:12px; padding:11px 6px; }
+  .lucky span { display:block; font-size:0.68rem; color:#86c; margin-bottom:3px; }
+  .lucky b { font-size:0.82rem; color:#5a3a9c; }
+
+  .compat { display:flex; gap:10px; margin:6px 0 14px; }
+  .compat-box { flex:1; border-radius:14px; padding:12px 8px; font-size:0.8rem; line-height:1.6; }
+  .compat-box span { display:block; font-weight:bold; margin-bottom:4px; }
+  .compat-box.good { background:#f0fff5; color:#1a9c5b; }
+  .compat-box.bad  { background:#f3eeff; color:#6c5ce7; }
+
+  .locked { position:relative; }
+  .locked .sec { filter:blur(6px); user-select:none; pointer-events:none; }
+  .lock-overlay { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; background:linear-gradient(180deg, rgba(246,242,255,.3), rgba(246,242,255,.93)); border-radius:14px; text-align:center; padding:14px; }
+  .lock-overlay .big { font-size:1.7rem; }
+  .lock-overlay p { font-size:0.92rem; font-weight:bold; color:#6c5ce7; margin:6px 0 12px; line-height:1.6; }
+  .unlock-btn { background:#06c755; color:#fff; text-decoration:none; font-weight:bold; font-size:1rem; padding:13px 26px; border-radius:28px; box-shadow:0 8px 20px rgba(6,199,85,.4); }
+  .save-btn { width:100%; margin-top:10px; background:#fff; color:#6c5ce7; border:2px solid #6c5ce7; font-weight:bold; font-size:0.92rem; padding:12px 0; border-radius:26px; cursor:pointer; }
+  .save-btn:hover { background:#f6f2ff; }
+  .share-row { display:flex; gap:10px; margin-bottom:6px; }
+  .share-btn { flex:1; text-decoration:none; color:#fff; font-weight:bold; font-size:0.92rem; padding:13px 0; border-radius:26px; box-shadow:0 6px 16px rgba(0,0,0,.18); }
+  .share-btn.x  { background:#000; } .share-btn.ln { background:#06c755; }
+
+  .aisho-section { margin-top:20px; background:linear-gradient(135deg,#f0eaff,#fbe8ff); border-radius:18px; padding:22px 18px; }
+  .aisho-section h3 { font-size:1.12rem; color:#6c5ce7; margin-bottom:2px; }
+  .aisho-sub { font-size:0.78rem; color:#9a8ac0; margin-bottom:14px; }
+  .aisho-btn { background:linear-gradient(90deg,#6c5ce7,#d63edb); color:#fff; border:none; padding:13px 36px; border-radius:28px; font-size:1.02rem; font-weight:bold; cursor:pointer; box-shadow:0 8px 18px rgba(108,92,231,.35); }
+  .aisho-card { margin-top:18px; background:#fff; border-radius:16px; padding:20px; box-shadow:0 8px 22px rgba(108,92,231,.18); }
+  .aisho-pair { font-size:2.4rem; } .aisho-pair span { font-size:1.3rem; color:#6c5ce7; vertical-align:middle; }
+  .aisho-names { font-size:1.02rem; font-weight:bold; color:#5a3a9c; margin:4px 0; }
+  .aisho-score { font-size:1.3rem; color:#555; } .aisho-score b { font-size:2.4rem; color:#6c5ce7; } .aisho-score small{font-size:1rem;}
+  .aisho-comment { font-size:0.9rem; line-height:1.7; color:#555; text-align:left; margin-top:8px; }
+
+  .line-cta { margin-top:22px; background:linear-gradient(135deg,#f3fbe8,#eafbe0); border:2px dashed #06c755; border-radius:16px; padding:22px 20px; }
+  .line-cta .lock { font-size:1.6rem; } .line-cta h3 { font-size:1.02rem; color:#2b8a3e; margin:6px 0 4px; }
+  .line-cta .blur { filter:blur(5px); user-select:none; color:#777; font-size:0.85rem; line-height:1.7; margin:8px 0 14px; text-align:left; }
+  .line-list { text-align:left; font-size:0.85rem; color:#444; margin:4px 0 16px; } .line-list li { margin:4px 0; list-style:none; }
+  .line-btn { display:inline-flex; align-items:center; gap:8px; background:#06c755; color:#fff; text-decoration:none; padding:14px 30px; border-radius:30px; font-weight:bold; font-size:1.05rem; box-shadow:0 8px 20px rgba(6,199,85,.4); }
+  .line-sub { font-size:0.72rem; color:#999; margin-top:10px; }
+  .footer-note { font-size:0.68rem; color:#b0a0c0; margin-top:22px; line-height:1.6; }
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>💎 守護石診断</h1>
+  <p class="sub">生年月日で、あなたを守るパワーストーン（守護石）を占います</p>
+  <div class="hearts">💎 🔮 ✨ 💠 🌙 💜</div>
+
+  <div class="input-row">
+    <div class="field"><label>年</label><select id="year"></select></div>
+    <div class="field"><label>月</label><select id="month"></select></div>
+    <div class="field"><label>日</label><select id="day"></select></div>
+  </div>
+  <button onclick="uranau()">守護石を占う 🔮</button>
+  <p class="social-proof" id="socialProof"></p>
+
+  <div id="result"></div>
+  <p class="footer-note">※ 本診断はエンタメ目的です。石の意味は言い伝え・イメージに基づくもので、効果効能を保証するものではありません。</p>
+</div>
+
+<script>
+// ▼ 設定（あとで差し替え）
+const LINE_URL = "https://lin.ee/XXXXXXX";
+const SHOP_URL = "https://yourshop.base.shop"; // BASEショップのトップ（各石のbuyが未設定ならここへ）
+
+const COLORS = {
+  rose:"#ff9bb3", amethyst:"#9b59b6", crystal:"#b8c6db", tiger:"#c89b3c",
+  lapis:"#2c5fa8", moon:"#cdd6f4", citrine:"#f4b942", aqua:"#5fc9d6",
+  garnet:"#9b2335", turquoise:"#3bb9b3", onyx:"#3a3a44", peridot:"#9bc24a"
+};
+
+// ===== 12守護石データ =====
+const STONE = {
+  rose:{emoji:"💗",name:"ローズクォーツ",nick:"愛と優しさのお守り石",color:COLORS.rose,price:2980,rarity:6,
+    mean:"古くから「愛の石」と呼ばれ、優しさや人とのご縁の象徴とされてきた石。自分を大切にしたい時のお守りに。",
+    chara:"あなたは愛情深く、人の気持ちに寄り添える優しいタイプ。その温かさが何よりの魅力です。",
+    advice:"がんばり屋ゆえ自分を後回しにしがち。自分を労わる時間を意識して。",
+    keep:"愛・人間関係・自己肯定",lucky:"ローズピンク",day:"金曜",good:["moon","amethyst"],bad:["onyx"]},
+  amethyst:{emoji:"💜",name:"アメジスト",nick:"癒やしと直感のお守り石",color:COLORS.amethyst,price:3280,rarity:5,
+    mean:"「心を静める石」として親しまれ、安らぎや直感の象徴とされる紫水晶。リラックスしたい夜のお守りに。",
+    chara:"あなたは感受性が豊かで直感が鋭い、芯のあるタイプ。静かな強さを持っています。",
+    advice:"考えすぎて疲れやすい一面も。ひとりで休む時間を大切に。",
+    keep:"癒やし・直感・安眠",lucky:"パープル",day:"土曜",good:["crystal","rose"],bad:["citrine"]},
+  crystal:{emoji:"💎",name:"水晶（クリスタル）",nick:"浄化と万能のお守り石",color:COLORS.crystal,price:2680,rarity:8,
+    mean:"あらゆる石の基本とされる「浄化と万能の石」。気持ちをリセットしたい時の定番のお守り。",
+    chara:"あなたはバランス感覚に優れ、まっすぐで誠実なタイプ。誰からも信頼される存在。",
+    advice:"何でもこなせる分、抱え込みがち。時には人に頼って。",
+    keep:"浄化・全体運・リセット",lucky:"クリア",day:"日曜",good:["amethyst","aqua"],bad:["garnet"]},
+  tiger:{emoji:"🐯",name:"タイガーアイ",nick:"決断と金運のお守り石",color:COLORS.tiger,price:3480,rarity:4,
+    mean:"「見通す眼の石」と呼ばれ、決断力や仕事運の象徴とされる石。勝負どころのお守りに。",
+    chara:"あなたは行動力と決断力に長けたリーダータイプ。目標に向かう推進力が武器です。",
+    advice:"突き進むあまり周りが見えなくなることも。一呼吸おく余裕を。",
+    keep:"仕事・金運・決断",lucky:"ゴールドブラウン",day:"木曜",good:["citrine","onyx"],bad:["moon"]},
+  lapis:{emoji:"🔵",name:"ラピスラズリ",nick:"幸運と知性のお守り石",color:COLORS.lapis,price:3680,rarity:3,
+    mean:"世界最古の「幸運の石」のひとつとされ、知性や真実の象徴。人生の節目のお守りに。",
+    chara:"あなたは聡明で誠実、本質を見抜く力を持つタイプ。静かな信頼を集めます。",
+    advice:"理想が高く自分に厳しい面も。完璧を求めすぎないで。",
+    keep:"幸運・知性・成長",lucky:"ディープブルー",day:"木曜",good:["aqua","crystal"],bad:["rose"]},
+  moon:{emoji:"🌙",name:"ムーンストーン",nick:"ご縁と女性性のお守り石",color:COLORS.moon,price:3180,rarity:7,
+    mean:"「月の石」と呼ばれ、ご縁や優しさの象徴とされる石。新しい出会いの季節のお守りに。",
+    chara:"あなたは柔らかな包容力を持つ、ご縁に恵まれるタイプ。人を惹きつける魅力があります。",
+    advice:"流されやすい一面も。自分の軸を意識すると◎。",
+    keep:"恋愛・ご縁・直感",lucky:"ホワイトブルー",day:"月曜",good:["rose","amethyst"],bad:["tiger"]},
+  citrine:{emoji:"💛",name:"シトリン",nick:"金運と自信のお守り石",color:COLORS.citrine,price:2980,rarity:6,
+    mean:"「商売繁盛・豊かさの石」として親しまれる黄水晶。前向きになりたい時のお守りに。",
+    chara:"あなたは明るくポジティブで、場を温めるムードメーカータイプ。",
+    advice:"楽観的すぎて詰めが甘くなることも。最後のひと手間を大切に。",
+    keep:"金運・自信・繁栄",lucky:"イエロー",day:"日曜",good:["tiger","garnet"],bad:["amethyst"]},
+  aqua:{emoji:"🩵",name:"アクアマリン",nick:"癒やしと対話のお守り石",color:COLORS.aqua,price:3280,rarity:5,
+    mean:"「幸せな結婚を象徴する石」とも言われ、安らぎや円滑なコミュニケーションの象徴。",
+    chara:"あなたは穏やかで聞き上手、人間関係を和ませるタイプ。安心感を与えます。",
+    advice:"遠慮しがちで本音を言えないことも。たまには自分を主張して。",
+    keep:"人間関係・癒やし・対話",lucky:"アクアブルー",day:"水曜",good:["crystal","lapis"],bad:["onyx"]},
+  garnet:{emoji:"❤️",name:"ガーネット",nick:"情熱と継続のお守り石",color:COLORS.garnet,price:3180,rarity:8,
+    mean:"「実りの石」と呼ばれ、努力の継続や情熱の象徴とされる石。目標を貫きたい時のお守りに。",
+    chara:"あなたは一途で粘り強く、こうと決めたらやり抜くタイプ。情熱を内に秘めています。",
+    advice:"頑固になりがちな面も。時には柔軟に方向転換を。",
+    keep:"継続・情熱・勝負",lucky:"ワインレッド",day:"火曜",good:["citrine","peridot"],bad:["crystal"]},
+  turquoise:{emoji:"🟢",name:"ターコイズ",nick:"旅と自由のお守り石",color:COLORS.turquoise,price:2880,rarity:6,
+    mean:"古来「旅人を守る石」とされ、自由や厄除けの象徴。新しい挑戦のお守りに。",
+    chara:"あなたは自由でフットワークが軽く、好奇心旺盛なタイプ。変化を楽しめる人。",
+    advice:"飽きっぽい一面も。ひとつを続ける意識で大きく伸びます。",
+    keep:"旅・挑戦・厄除け",lucky:"ターコイズ",day:"水曜",good:["peridot","aqua"],bad:["onyx"]},
+  onyx:{emoji:"🖤",name:"オニキス",nick:"守護と意志のお守り石",color:COLORS.onyx,price:2780,rarity:2,
+    mean:"「魔除け・守護の石」として親しまれる黒石。ブレずに進みたい時のお守りに。",
+    chara:"あなたは意志が強く冷静、自分を貫けるタイプ。芯のある佇まいが魅力です。",
+    advice:"一人で抱えがち。心を開ける相手を大切に。",
+    keep:"守護・意志・集中",lucky:"ブラック",day:"土曜",good:["tiger","crystal"],bad:["rose"]},
+  peridot:{emoji:"💚",name:"ペリドット",nick:"希望と前進のお守り石",color:COLORS.peridot,price:3080,rarity:5,
+    mean:"「太陽の石」と呼ばれ、希望や前向きさの象徴とされる石。気分を上げたい時のお守りに。",
+    chara:"あなたは明るく前向きで、周りに元気を与える太陽のようなタイプ。",
+    advice:"頑張りすぎて空回りすることも。休むのも前進のうち。",
+    keep:"希望・前進・人気",lucky:"ライトグリーン",day:"金曜",good:["garnet","turquoise"],bad:["amethyst"]}
+};
+
+// 12スロット → 守護石（生年月日マッピング）
+const NUM_TO_STONE = [
+  "rose","amethyst","citrine","tiger","amethyst","rose","garnet","aqua","aqua","garnet",
+  "peridot","peridot","aqua","moon","moon","crystal","amethyst","crystal","garnet","tiger",
+  "lapis","lapis","onyx","onyx","lapis","tiger","tiger","crystal","turquoise","turquoise",
+  "citrine","citrine","turquoise","peridot","peridot","aqua","aqua","crystal","crystal","amethyst",
+  "moon","rose","rose","moon","lapis","turquoise","turquoise","lapis","onyx","garnet",
+  "garnet","onyx","tiger","citrine","citrine","peridot","onyx","moon","moon","rose"
+];
+
+function getNum(y,m,d){
+  const monthAdd=[0,31,59,30,0,31,1,32,3,33,4,34];
+  let yBase=(y-1)*365+Math.floor((y-1)/4)-Math.floor((y-1)/100)+Math.floor((y-1)/400);
+  const isLeap=(y%4===0&&y%100!==0)||y%400===0; let leapAdj=(isLeap&&m>=3)?1:0;
+  return (yBase+monthAdd[m-1]+leapAdj+d)%60;
+}
+
+const yearSel=document.getElementById('year'),monthSel=document.getElementById('month'),daySel=document.getElementById('day');
+for(let y=2025;y>=1930;y--)yearSel.add(new Option(y+"年",y));
+for(let m=1;m<=12;m++)monthSel.add(new Option(m+"月",m));
+function fillDays(){const y=+yearSel.value,m=+monthSel.value,dim=new Date(y,m,0).getDate(),cur=+daySel.value||1;daySel.innerHTML="";for(let d=1;d<=dim;d++)daySel.add(new Option(d+"日",d));if(cur<=dim)daySel.value=cur;}
+yearSel.value=1990;monthSel.value=1;fillDays(); yearSel.onchange=fillDays;monthSel.onchange=fillDays;
+
+function checkLine(){if(LINE_URL.includes("XXXXXXX")){alert("（設定メモ）LINE_URL を友だち追加URLに差し替えてください。");return false;}return true;}
+
+(function(){ const t=new Date(); const seed=t.getFullYear()*1000+(t.getMonth()+1)*40+t.getDate();
+  const today=1800+(seed*73%4200); const total=96000+(seed*131%38000);
+  document.getElementById('socialProof').innerHTML=`👥 今日 <b>${today.toLocaleString()}</b>人が診断中／累計 <b>${total.toLocaleString()}</b>人突破！`;
+})();
+
+function saveCard(){ const el=document.getElementById('captureArea');
+  if(!el||typeof html2canvas==='undefined'){alert("画像保存の準備中です。");return;}
+  html2canvas(el,{scale:2,backgroundColor:"#ffffff"}).then(c=>{const a=document.createElement('a');a.download='守護石診断.png';a.href=c.toDataURL('image/png');a.click();}); }
+
+function compatScore(me,you){ const S=STONE[me]; let base=58;
+  if(S.good.includes(you))base=92; else if(S.bad.includes(you))base=38;
+  else if(STONE[you].good.includes(me))base=80; else if(STONE[you].bad.includes(me))base=46;
+  if(me===you)base=Math.max(base,74); return Math.max(25,Math.min(99,base)); }
+function compatComment(s,me,you){ const a=STONE[me].name,b=STONE[you].name;
+  if(s>=90)return `最高の組み合わせ💎 ${a}と${b}は互いの力を高め合う、重ね付けにも理想的なペア。`;
+  if(s>=75)return `好相性✨ ${a}と${b}は一緒に持つと心地よく調和するとされる組み合わせ。`;
+  if(s>=55)return `バランス型💠 ${a}と${b}は個性が違うぶん、状況で使い分けると◎。`;
+  return `個性派⚡ ${a}と${b}は方向性が異なる組み合わせ。シーンを分けて持つのがおすすめ。`; }
+function shindanAisho(){ const me=window.__myStone; if(!me){alert("先に守護石を占ってね🔮");return;}
+  const y=+document.getElementById('pyear').value,mo=+document.getElementById('pmonth').value,d=+document.getElementById('pday').value;
+  const you=NUM_TO_STONE[getNum(y,mo,d)]; const s=compatScore(me,you);
+  document.getElementById('aishoResult').innerHTML=`
+    <div class="aisho-card">
+      <div class="aisho-pair">${STONE[me].emoji} <span>×</span> ${STONE[you].emoji}</div>
+      <div class="aisho-names">${STONE[me].name} × ${STONE[you].name}</div>
+      <div class="aisho-score">石の相性 <b>${s}</b><small>%</small></div>
+      <div class="lm-bar" style="margin:8px 0;"><div class="lm-fill" style="width:${s}%;background:linear-gradient(90deg,#a18cd1,#6c5ce7);"></div></div>
+      <div class="aisho-comment">${compatComment(s,me,you)}</div>
+      <a class="unlock-btn" style="margin-top:12px;display:inline-block;" href="${LINE_URL}" target="_blank" rel="noopener" onclick="return checkLine();">📱 相性のいい石セットをLINEで見る</a>
+    </div>`;
+  document.getElementById('aishoResult').scrollIntoView({behavior:"smooth",block:"center"}); }
+
+function uranau(){
+  const y=+yearSel.value,m=+monthSel.value,d=+daySel.value;
+  const key=NUM_TO_STONE[getNum(y,m,d)]; window.__myStone=key;
+  const S=STONE[key];
+  const goodE=S.good.map(g=>STONE[g].emoji+STONE[g].name).join("・");
+  const badE=S.bad.map(g=>STONE[g].emoji+STONE[g].name).join("・");
+  const buyUrl=S.buy||SHOP_URL;
+  const shareText=`【守護石診断】私の守護石は「${S.name}」💎 (${S.nick})\n上位${S.rarity}%の激レア！\nあなたの守護石は？▼`;
+
+  const res=document.getElementById('result');
+  res.innerHTML=`
+    <div id="captureArea" style="padding:14px;border-radius:22px;background:#fff;">
+    <div class="rarity-badge">🏆 上位 ${S.rarity}% の激レア守護石</div>
+    <div class="hero-card" style="background:linear-gradient(135deg,${S.color},${S.color}bb);">
+      <div class="hero-emoji">${S.emoji}</div>
+      <div class="hero-nick">${S.nick}</div>
+      <div class="hero-name">${S.name}</div>
+      <div class="hero-catch">守護キーワード：${S.keep}</div>
+    </div>
+    <div style="font-size:0.7rem;color:#b0a0c0;margin:-2px 0 12px;">💎 守護石診断</div>
+    </div><!-- /captureArea -->
+
+    <div class="sec"><h4>💠 ${S.name}の意味（言い伝え）</h4>${S.mean}</div>
+    <div class="sec"><h4>🔮 あなたの性質</h4>${S.chara}</div>
+
+    <!-- ★物販導線：そのまま販売ページへ -->
+    <div class="buy-box">
+      <div class="stone-img">${S.emoji}✨</div>
+      <h3>あなたの守護石「${S.name}」</h3>
+      <div class="price">¥${S.price.toLocaleString()}〜 <small>（天然石ブレスレット）</small></div>
+      <a class="buy-btn" href="${buyUrl}" target="_blank" rel="noopener">🛒 この守護石を見てみる</a>
+      <p class="buy-note">お守りとして身につけたい方へ。※効果効能を保証するものではありません</p>
+    </div>
+
+    <div class="lucky-row">
+      <div class="lucky"><span>🎨 ラッキーカラー</span><b>${S.lucky}</b></div>
+      <div class="lucky"><span>📅 ラッキー曜日</span><b>${S.day}</b></div>
+      <div class="lucky"><span>💠 守護キーワード</span><b>${S.keep}</b></div>
+    </div>
+
+    <div class="locked">
+      <div class="sec"><h4>💡 ${S.name}があなたに伝えるアドバイス</h4>${S.advice}</div>
+      <div class="compat">
+        <div class="compat-box good"><span>💎 相性のいい石</span><b>${goodE}</b></div>
+        <div class="compat-box bad"><span>⚡ 組み合わせ注意</span><b>${badE}</b></div>
+      </div>
+      <div class="lock-overlay">
+        <div class="big">🔒💎</div>
+        <p>「あなたへのアドバイス」と「相性のいい石」は<br>LINE登録で今すぐ無料解放！</p>
+        <a class="unlock-btn" href="${LINE_URL}" target="_blank" rel="noopener" onclick="return checkLine();">📱 LINEで結果を解放する</a>
+      </div>
+    </div>
+
+    <button class="save-btn" onclick="saveCard()">📸 結果カードを画像で保存（SNSにシェア）</button>
+    <div class="share-row">
+      <a class="share-btn x" href="https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(location.href)}" target="_blank" rel="noopener">𝕏 で結果をシェア</a>
+      <a class="share-btn ln" href="https://line.me/R/msg/text/?${encodeURIComponent(shareText+" "+location.href)}" target="_blank" rel="noopener">LINEで送る</a>
+    </div>
+
+    <p style="font-size:0.78rem;color:#b8a;margin-top:10px;">あなたの誕生日：${y}年${m}月${d}日</p>
+
+    <div class="aisho-section">
+      <h3>💎 大切な人との「石の相性」は？</h3>
+      <p class="aisho-sub">相手の生年月日を入れて即チェック（ペア・プレゼント選びにも）</p>
+      <div class="input-row">
+        <div class="field"><label>年</label><select id="pyear"></select></div>
+        <div class="field"><label>月</label><select id="pmonth"></select></div>
+        <div class="field"><label>日</label><select id="pday"></select></div>
+      </div>
+      <button class="aisho-btn" onclick="shindanAisho()">石の相性を見る 💠</button>
+      <div id="aishoResult"></div>
+    </div>
+
+    <div class="line-cta">
+      <div class="lock">🔒</div>
+      <h3>${S.name}さんの「2026年の開運アドバイス」はLINEで無料プレゼント</h3>
+      <div class="blur">2026年、あなたの運気が動くのは◯月。持つといい石の組み合わせは△△で、特にお守りにしたい時期は……（続きはLINE登録で全文公開）</div>
+      <ul class="line-list">
+        <li>✅ あなたの守護石フル診断＆活かし方</li>
+        <li>✅ 2026年の開運アドバイス</li>
+        <li>✅ 相性のいい石・組み合わせ提案</li>
+      </ul>
+      <a class="line-btn" href="${LINE_URL}" target="_blank" rel="noopener" onclick="return checkLine();">📱 続きをLINEで受け取る</a>
+      <p class="line-sub">友だち追加するだけ・無料 / ブロックはいつでもOK</p>
+    </div>
+  `;
+  res.classList.remove('show'); void res.offsetWidth; res.classList.add('show');
+  const py=document.getElementById('pyear'),pm=document.getElementById('pmonth'),pd=document.getElementById('pday');
+  for(let yy=2025;yy>=1930;yy--)py.add(new Option(yy+"年",yy));
+  for(let mm=1;mm<=12;mm++)pm.add(new Option(mm+"月",mm));
+  py.value=1990;pm.value=1;
+  const fillPDays=()=>{const dim=new Date(+py.value,+pm.value,0).getDate();pd.innerHTML="";for(let dd=1;dd<=dim;dd++)pd.add(new Option(dd+"日",dd));};
+  fillPDays(); py.onchange=fillPDays; pm.onchange=fillPDays;
+  res.scrollIntoView({behavior:"smooth",block:"start"});
+}
+</script>
+</body>
+</html>
