@@ -104,6 +104,12 @@
   .line-btn { display:inline-flex; align-items:center; gap:8px; background:#06c755; color:#fff; text-decoration:none; padding:14px 30px; border-radius:30px; font-weight:bold; font-size:1.05rem; box-shadow:0 8px 20px rgba(6,199,85,.4); }
   .line-sub { font-size:0.72rem; color:#999; margin-top:10px; }
   .footer-note { font-size:0.7rem; color:#b8a8c8; margin-top:22px; }
+  .affi-card { margin-top:18px; background:linear-gradient(135deg,#fff4e6,#ffe8f3); border:1px solid #ffd2a8; border-radius:16px; padding:20px 18px; }
+  .affi-emoji { font-size:2.4rem; }
+  .affi-card h3 { font-size:1.02rem; color:#d6336c; margin:4px 0 6px; }
+  .affi-card p { font-size:0.84rem; line-height:1.7; color:#6a4a5a; }
+  .affi-btn { display:inline-block; margin-top:12px; background:linear-gradient(90deg,#a18cd1,#8c52ff); color:#fff; text-decoration:none; font-weight:bold; font-size:1rem; padding:13px 30px; border-radius:28px; box-shadow:0 8px 18px rgba(140,82,255,.35); }
+  .affi-note { font-size:0.68rem; color:#b0a0c0; margin-top:8px; }
 </style>
 </head>
 <body>
@@ -125,8 +131,10 @@
 </div>
 
 <script>
-// ▼ LINE公式アカウントの友だち追加URL（あとで差し替え）
+// ▼ 推し活【専用】LINE公式アカウントの友だち追加URL（新規作成して差し替え）
 const LINE_URL = "https://lin.ee/XXXXXXX";
+// ▼ 占いアフィリエイト導線（電話占い等ASPの計測リンクに差し替え）
+const AFFILIATE_URL = "https://example.com/affiliate-uranai";
 
 const BASE = {
   "チーター":{emoji:"🐆",color:"#ff6f3c"},"黒ひょう":{emoji:"🐈‍⬛",color:"#2c2c54"},
@@ -379,6 +387,14 @@ function uranau(){
     </div>
 
     <p style="font-size:0.78rem;color:#b8a;margin-top:10px;">あなたの誕生日：${y}年${m}月${d}日</p>
+
+    <div class="affi-card">
+      <div class="affi-emoji">🔮</div>
+      <h3>推し活の悩み、プロに聞いてみる？</h3>
+      <p>「推しに会えるか」「同担とこじれた」「次の現場どうしよう」——<br>恋愛・人間関係のプロ占い師に相談できます（初回特典あり）。</p>
+      <a class="affi-btn" href="${AFFILIATE_URL}" target="_blank" rel="noopener sponsored">🔮 プロの占い師に相談する</a>
+      <p class="affi-note">※提携サービスへのリンクです（PR）</p>
+    </div>
 
     <div class="aisho-section">
       <h3>💜 推し友・同担との相性は？</h3>
