@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>波動霊石院｜院主ソヨンの守護霊石診断 🐉 生年月日であなたの守護石と波動を視る</title>
+<meta property="og:title" content="🐉 波動霊石院｜院主ソヨンが視る、あなたの守護霊石診断">
+<meta property="og:description" content="生年月日を入れるだけ。龍波動伝道師ソヨンが、あなたを守る霊石とエネルギー軸を視ます。無料診断。">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://placehold.co/1200x630/3a1c5e/ffd86f/png?text=%F0%9F%90%89+%E6%B3%A2%E5%8B%95%E9%9C%8A%E7%9F%B3%E9%99%A2">
+<meta name="twitter:card" content="summary_large_image">
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "Hiragino Mincho ProN", "Yu Mincho", "Hiragino Kaku Gothic ProN", serif; background: radial-gradient(circle at 50% 0%, #4a2c7a 0%, #2a1648 45%, #160a2e 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; color: #ece4ff; }
+  .card { background: linear-gradient(180deg, #241140, #1a0d33); border: 1px solid rgba(255,216,111,0.35); border-radius: 24px; box-shadow: 0 24px 70px rgba(0,0,0,0.55), inset 0 0 60px rgba(120,80,200,0.15); max-width: 540px; width: 100%; padding: 38px 28px; text-align: center; position:relative; overflow:hidden; }
+  .card::before { content:"🐉"; position:absolute; top:-10px; right:-6px; font-size:6rem; opacity:0.06; transform:rotate(12deg); }
+  .crest { font-size:2.2rem; }
+  h1 { font-size: 1.5rem; margin: 4px 0; color:#ffd86f; letter-spacing:2px; text-shadow:0 0 18px rgba(255,216,111,.4); }
+  .temple { font-size:0.8rem; color:#c8b3ff; letter-spacing:3px; margin-bottom:6px; }
+  .lead { color:#bfa9e6; font-size:0.86rem; line-height:1.9; margin:14px 0 8px; }
+  .master { display:flex; align-items:center; gap:12px; justify-content:center; background:rgba(120,80,200,.15); border-radius:14px; padding:12px 14px; margin:14px 0 22px; }
+  .master .ava { font-size:2.2rem; }
+  .master .txt { text-align:left; font-size:0.76rem; line-height:1.6; color:#d8c8ff; }
+  .master .txt b { color:#ffd86f; font-size:0.86rem; }
+  .input-row { display:flex; gap:10px; justify-content:center; margin-bottom:18px; flex-wrap:wrap; }
+  .field { display:flex; flex-direction:column; align-items:flex-start; }
+  .field label { font-size:0.72rem; color:#a892d6; margin-bottom:4px; padding-left:4px; }
+  select { padding:12px 14px; border:1px solid rgba(255,216,111,.3); border-radius:10px; font-size:1rem; background:#1a0d33; color:#ece4ff; cursor:pointer; outline:none; }
+  select:focus { border-color:#ffd86f; }
+  button.main { background: linear-gradient(90deg,#ffd86f,#ff9e3d); color:#2a1648; border:none; padding:15px 40px; border-radius:30px; font-size:1.08rem; font-weight:bold; cursor:pointer; box-shadow:0 8px 24px rgba(255,158,61,.4); letter-spacing:1px; }
+  button.main:hover { transform:translateY(-2px); }
+  .social-proof { font-size:0.76rem; color:#a892d6; margin-top:12px; } .social-proof b { color:#ffd86f; }
+  #result { margin-top:28px; opacity:0; max-height:0; overflow:hidden; transition:opacity .6s, max-height .6s; }
+  #result.show { opacity:1; max-height:5000px; }
+
+  .rarity-badge { display:inline-block; background:linear-gradient(90deg,#ffd86f,#ff7eb3); color:#2a1648; font-weight:bold; font-size:0.86rem; padding:7px 18px; border-radius:20px; margin-bottom:14px; box-shadow:0 6px 18px rgba(255,126,179,.35); animation:shine 2.5s infinite; }
+  @keyframes shine { 0%,100%{filter:brightness(1);} 50%{filter:brightness(1.2);} }
+  .hero-card { border-radius:20px; padding:30px 20px; color:#fff; box-shadow:0 14px 40px rgba(0,0,0,.5); margin-bottom:14px; position:relative; overflow:hidden; border:1px solid rgba(255,255,255,.25); }
+  .hero-card::after { content:""; position:absolute; inset:0; background:radial-gradient(circle at 50% 25%, rgba(255,255,255,.45), transparent 55%); }
+  .aura { position:absolute; inset:-40%; background:conic-gradient(from 0deg, transparent, rgba(255,255,255,.25), transparent 40%); animation:spin 7s linear infinite; }
+  @keyframes spin { to { transform:rotate(360deg);} }
+  .hero-emoji { font-size:4.6rem; line-height:1; position:relative; animation:pop .7s; filter:drop-shadow(0 4px 14px rgba(0,0,0,.4)); }
+  @keyframes pop { 0%{transform:scale(0);} 70%{transform:scale(1.25);} 100%{transform:scale(1);} }
+  .hero-nick { font-size:0.92rem; font-weight:bold; letter-spacing:1px; margin-top:8px; position:relative; }
+  .hero-name { font-size:1.8rem; font-weight:900; margin:2px 0; position:relative; text-shadow:0 2px 8px rgba(0,0,0,.4); }
+  .hero-catch { font-size:0.9rem; opacity:.96; position:relative; }
+
+  .wave-meter { margin:4px 0 14px; }
+  .wave-meter .lbl { display:flex; justify-content:space-between; font-size:0.8rem; color:#c8b3ff; margin-bottom:5px; }
+  .lm-bar { height:13px; border-radius:10px; background:rgba(255,255,255,.1); overflow:hidden; }
+  .lm-fill { height:100%; border-radius:10px; width:0; transition:width 1.2s ease; background:linear-gradient(90deg,#9d7bff,#ffd86f); }
+
+  .oracle { text-align:left; background:linear-gradient(135deg, rgba(255,216,111,.12), rgba(157,123,255,.12)); border:1px solid rgba(255,216,111,.25); border-radius:14px; padding:18px; margin-bottom:12px; }
+  .oracle h4 { font-size:0.9rem; color:#ffd86f; margin-bottom:6px; } .oracle p { font-size:0.92rem; line-height:1.9; color:#ece4ff; }
+  .sec { text-align:left; background:rgba(255,255,255,.05); border-radius:14px; padding:16px 18px; font-size:0.9rem; line-height:1.8; margin-bottom:12px; }
+  .sec h4 { font-size:0.9rem; color:#c8b3ff; margin-bottom:4px; }
+
+  .buy-box { background:linear-gradient(135deg, rgba(255,216,111,.14), rgba(255,126,179,.12)); border:1px solid rgba(255,216,111,.4); border-radius:18px; padding:22px 18px; margin:6px 0 14px; }
+  .buy-box .stone-img { font-size:3.2rem; }
+  .buy-box h3 { font-size:1.05rem; color:#ffd86f; margin:4px 0; }
+  .buy-box .price { font-size:1.25rem; font-weight:900; color:#ff9e3d; margin:6px 0; } .buy-box .price small { font-size:0.72rem; color:#bfa9e6; font-weight:normal; }
+  .buy-btn { display:inline-block; background:linear-gradient(90deg,#ff7a59,#ff3d8b); color:#fff; text-decoration:none; font-weight:bold; font-size:1.02rem; padding:14px 34px; border-radius:30px; box-shadow:0 8px 22px rgba(255,61,139,.45); }
+  .buy-note { font-size:0.68rem; color:#a892d6; margin-top:10px; line-height:1.5; }
+
+  .lucky-row { display:flex; gap:8px; margin:4px 0 14px; }
+  .lucky { flex:1; background:rgba(255,255,255,.05); border-radius:12px; padding:11px 6px; }
+  .lucky span { display:block; font-size:0.66rem; color:#a892d6; margin-bottom:3px; } .lucky b { font-size:0.8rem; color:#ffd86f; }
+
+  .compat { display:flex; gap:10px; margin:6px 0 14px; }
+  .compat-box { flex:1; border-radius:14px; padding:12px 8px; font-size:0.8rem; line-height:1.6; }
+  .compat-box span { display:block; font-weight:bold; margin-bottom:4px; }
+  .compat-box.good { background:rgba(118,255,179,.12); color:#8effc0; }
+  .compat-box.bad  { background:rgba(157,123,255,.14); color:#c8b3ff; }
+
+  .locked { position:relative; }
+  .locked .sec { filter:blur(6px); user-select:none; pointer-events:none; }
+  .lock-overlay { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; background:linear-gradient(180deg, rgba(26,13,51,.3), rgba(26,13,51,.94)); border-radius:14px; text-align:center; padding:14px; }
+  .lock-overlay .big { font-size:1.7rem; }
+  .lock-overlay p { font-size:0.9rem; font-weight:bold; color:#ffd86f; margin:6px 0 12px; line-height:1.7; }
+  .unlock-btn { background:#06c755; color:#fff; text-decoration:none; font-weight:bold; font-size:1rem; padding:13px 26px; border-radius:28px; box-shadow:0 8px 20px rgba(6,199,85,.4); }
+  .save-btn { width:100%; margin-top:10px; background:transparent; color:#ffd86f; border:1px solid #ffd86f; font-weight:bold; font-size:0.9rem; padding:12px 0; border-radius:26px; cursor:pointer; }
+  .share-row { display:flex; gap:10px; margin-bottom:6px; }
+  .share-btn { flex:1; text-decoration:none; color:#fff; font-weight:bold; font-size:0.9rem; padding:13px 0; border-radius:26px; }
+  .share-btn.x { background:#000; } .share-btn.ln { background:#06c755; }
+
+  .aisho-section { margin-top:20px; background:rgba(255,255,255,.05); border:1px solid rgba(255,216,111,.2); border-radius:18px; padding:22px 18px; }
+  .aisho-section h3 { font-size:1.08rem; color:#ffd86f; margin-bottom:2px; }
+  .aisho-sub { font-size:0.78rem; color:#a892d6; margin-bottom:14px; }
+  .aisho-btn { background:linear-gradient(90deg,#9d7bff,#ffd86f); color:#2a1648; border:none; padding:13px 34px; border-radius:28px; font-size:1rem; font-weight:bold; cursor:pointer; }
+  .aisho-card { margin-top:18px; background:rgba(26,13,51,.7); border:1px solid rgba(255,216,111,.25); border-radius:16px; padding:20px; }
+  .aisho-pair { font-size:2.4rem; } .aisho-pair span { font-size:1.3rem; color:#ffd86f; }
+  .aisho-names { font-size:1rem; font-weight:bold; color:#ffd86f; margin:4px 0; }
+  .aisho-score { font-size:1.2rem; } .aisho-score b { font-size:2.3rem; color:#ffd86f; } .aisho-score small{font-size:1rem;}
+  .aisho-comment { font-size:0.9rem; line-height:1.7; color:#ece4ff; text-align:left; margin-top:8px; }
+
+  .line-cta { margin-top:22px; background:linear-gradient(135deg, rgba(6,199,85,.12), rgba(6,199,85,.05)); border:1px dashed #06c755; border-radius:16px; padding:22px 20px; }
+  .line-cta h3 { font-size:1rem; color:#7be89b; margin:6px 0 4px; }
+  .line-cta .blur { filter:blur(5px); user-select:none; color:#bfa9e6; font-size:0.85rem; line-height:1.7; margin:8px 0 14px; text-align:left; }
+  .line-list { text-align:left; font-size:0.85rem; color:#d8c8ff; margin:4px 0 16px; } .line-list li { margin:4px 0; list-style:none; }
+  .line-btn { display:inline-flex; align-items:center; gap:8px; background:#06c755; color:#fff; text-decoration:none; padding:14px 30px; border-radius:30px; font-weight:bold; font-size:1.05rem; box-shadow:0 8px 20px rgba(6,199,85,.4); }
+  .line-sub { font-size:0.72rem; color:#a892d6; margin-top:10px; }
+  .footer-note { font-size:0.66rem; color:#7d6aa8; margin-top:22px; line-height:1.7; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="crest">🐉</div>
+  <p class="temple">― 波 動 霊 石 院 ―</p>
+  <h1>守護霊石診断</h1>
+  <p class="lead">生年月日に宿る波動を、院主ソヨンが霊視する。<br>あなたを守る「守護霊石」と、いま必要なエネルギー軸を視ます。</p>
+
+  <div class="master">
+    <div class="ava">🔮</div>
+    <div class="txt"><b>龍波動伝道師 ハン・ソヨン</b><br>15年前に波動霊視の力に目覚め、龍の気配を読み、あなたの魂の震えを石に映す。</div>
+  </div>
+
+  <div class="input-row">
+    <div class="field"><label>年</label><select id="year"></select></div>
+    <div class="field"><label>月</label><select id="month"></select></div>
+    <div class="field"><label>日</label><select id="day"></select></div>
+  </div>
+  <button class="main" onclick="uranau()">ソヨンに視てもらう 🐉</button>
+  <p class="social-proof" id="socialProof"></p>
+
+  <div id="result"></div>
+  <p class="footer-note">※ 本診断はエンタメ・お守りを目的としたものです。石の意味は言い伝え・イメージに基づくもので、医療・治療・効果効能を保証するものではありません。</p>
+</div>
+
+<script>
+// ▼ 設定（lin.ee があれば差し替え推奨）
+const LINE_URL = "https://line.me/R/ti/p/@dhw5564g";
+const SHOP_URL = "https://yourshop.base.shop";
+
+const COLORS = { rose:"#ff9bb3", amethyst:"#9b59b6", crystal:"#b8c6db", tiger:"#c89b3c", lapis:"#2c5fa8", moon:"#cdd6f4", citrine:"#f4b942", aqua:"#5fc9d6", garnet:"#9b2335", turquoise:"#3bb9b3", onyx:"#3a3a44", peridot:"#9bc24a" };
+
+const STONE = {
+  rose:{emoji:"💗",name:"ローズクォーツ",nick:"愛と慈しみの守護石",color:COLORS.rose,price:2980,rarity:6,wave:78,
+    oracle:"あなたの波動は今、人を想う優しさで満ちている。だが他者に注ぎすぎ、己の器が乾いている。ローズクォーツがその渇きを潤すだろう。",
+    mean:"古来「愛の石」と呼ばれ、慈しみとご縁の象徴とされてきた石。",
+    advice:"自分を後回しにする癖がある。まず己を満たしなさい。",
+    keep:"愛・縁・自愛",lucky:"ローズピンク",day:"金曜",good:["moon","amethyst"],bad:["onyx"]},
+  amethyst:{emoji:"💜",name:"アメジスト",nick:"静寂と直感の守護石",color:COLORS.amethyst,price:3280,rarity:5,wave:82,
+    oracle:"あなたの魂は深く、夜の海のように静かだ。だが思考の渦が波動を乱している。アメジストが心の水面を鎮めるだろう。",
+    mean:"「心を静める石」として親しまれ、安らぎと直感の象徴とされる紫水晶。",
+    advice:"考えすぎが波を荒くしている。ひとりで休む夜を持ちなさい。",
+    keep:"癒やし・直感・安眠",lucky:"パープル",day:"土曜",good:["crystal","rose"],bad:["citrine"]},
+  crystal:{emoji:"💎",name:"水晶（クリスタル）",nick:"浄化と調和の守護石",color:COLORS.crystal,price:2680,rarity:8,wave:80,
+    oracle:"あなたの波動は澄んでいるが、外の濁りを吸いやすい。水晶が常にあなたを洗い、本来の輝きを保つだろう。",
+    mean:"あらゆる石の基本とされる「浄化と万能の石」。",
+    advice:"何でも背負いすぎる。時に人に委ねなさい。",
+    keep:"浄化・全体・再生",lucky:"クリア",day:"日曜",good:["amethyst","aqua"],bad:["garnet"]},
+  tiger:{emoji:"🐯",name:"タイガーアイ",nick:"決断と財運の守護石",color:COLORS.tiger,price:3480,rarity:4,wave:85,
+    oracle:"あなたの波動には進む力が宿る。だが道に迷えば空回る。タイガーアイがあなたの眼を見開かせ、好機を射抜くだろう。",
+    mean:"「見通す眼の石」と呼ばれ、決断力と仕事運の象徴とされる石。",
+    advice:"突き進む前に一度、足元を見なさい。",
+    keep:"仕事・財・決断",lucky:"ゴールドブラウン",day:"木曜",good:["citrine","onyx"],bad:["moon"]},
+  lapis:{emoji:"🔵",name:"ラピスラズリ",nick:"幸運と叡智の守護石",color:COLORS.lapis,price:3680,rarity:3,wave:88,
+    oracle:"あなたの波動は気高く、真実を求めて止まない。ラピスラズリが人生の節目で正しき道を照らすだろう。",
+    mean:"世界最古の「幸運の石」のひとつとされ、叡智と真実の象徴。",
+    advice:"己に厳しすぎる。完璧でなくてよい。",
+    keep:"幸運・叡智・成長",lucky:"ディープブルー",day:"木曜",good:["aqua","crystal"],bad:["rose"]},
+  moon:{emoji:"🌙",name:"ムーンストーン",nick:"ご縁と女性性の守護石",color:COLORS.moon,price:3180,rarity:7,wave:79,
+    oracle:"あなたの波動は月のように満ち欠けする。ムーンストーンが流れを整え、巡り来る縁を引き寄せるだろう。",
+    mean:"「月の石」と呼ばれ、ご縁と優しさの象徴とされる石。",
+    advice:"流されやすい。己の軸を月のように保ちなさい。",
+    keep:"恋愛・縁・直感",lucky:"ホワイトブルー",day:"月曜",good:["rose","amethyst"],bad:["tiger"]},
+  citrine:{emoji:"💛",name:"シトリン",nick:"豊穣と自信の守護石",color:COLORS.citrine,price:2980,rarity:6,wave:81,
+    oracle:"あなたの波動は陽だまりのように温かい。シトリンがその光を増幅し、豊かさを呼び込むだろう。",
+    mean:"「商売繁盛・豊かさの石」として親しまれる黄水晶。",
+    advice:"楽観が過ぎると詰めが甘くなる。最後のひと手間を。",
+    keep:"金運・自信・繁栄",lucky:"イエロー",day:"日曜",good:["tiger","garnet"],bad:["amethyst"]},
+  aqua:{emoji:"🩵",name:"アクアマリン",nick:"安らぎと対話の守護石",color:COLORS.aqua,price:3280,rarity:5,wave:77,
+    oracle:"あなたの波動は澄んだ水のよう。だが言葉を飲み込みすぎている。アクアマリンが心の声を流れ出させるだろう。",
+    mean:"「幸せな結婚を象徴する石」とも言われ、安らぎと対話の象徴。",
+    advice:"本音を飲み込まず、静かに伝えなさい。",
+    keep:"人間関係・癒やし・対話",lucky:"アクアブルー",day:"水曜",good:["crystal","lapis"],bad:["onyx"]},
+  garnet:{emoji:"❤️",name:"ガーネット",nick:"情熱と結実の守護石",color:COLORS.garnet,price:3180,rarity:8,wave:84,
+    oracle:"あなたの波動には消えぬ熾火がある。ガーネットがその炎を絶やさず、努力を実りへ導くだろう。",
+    mean:"「実りの石」と呼ばれ、継続と情熱の象徴とされる石。",
+    advice:"頑なさが道を狭める。時に流れに身を委ねなさい。",
+    keep:"継続・情熱・勝負",lucky:"ワインレッド",day:"火曜",good:["citrine","peridot"],bad:["crystal"]},
+  turquoise:{emoji:"🟢",name:"ターコイズ",nick:"旅路と厄除けの守護石",color:COLORS.turquoise,price:2880,rarity:6,wave:76,
+    oracle:"あなたの波動は風のように自由だ。ターコイズが旅路を守り、災いを払うだろう。",
+    mean:"古来「旅人を守る石」とされ、自由と厄除けの象徴。",
+    advice:"飽きやすさが実りを逃す。ひとつを続けてみなさい。",
+    keep:"旅・挑戦・厄除け",lucky:"ターコイズ",day:"水曜",good:["peridot","aqua"],bad:["onyx"]},
+  onyx:{emoji:"🖤",name:"オニキス",nick:"守護と意志の守護石",color:COLORS.onyx,price:2780,rarity:2,wave:83,
+    oracle:"あなたの波動は揺るがぬ岩のよう。だが孤独が影を落とす。オニキスが邪を退け、意志を支えるだろう。",
+    mean:"「魔除け・守護の石」として親しまれる黒石。",
+    advice:"抱え込まず、心を開ける者を持ちなさい。",
+    keep:"守護・意志・集中",lucky:"ブラック",day:"土曜",good:["tiger","crystal"],bad:["rose"]},
+  peridot:{emoji:"💚",name:"ペリドット",nick:"希望と再生の守護石",color:COLORS.peridot,price:3080,rarity:5,wave:80,
+    oracle:"あなたの波動は朝陽のように昇る力を持つ。ペリドットが闇を払い、希望を灯し続けるだろう。",
+    mean:"「太陽の石」と呼ばれ、希望と前向きさの象徴とされる石。",
+    advice:"頑張りすぎは空回りを生む。休むのも前進だ。",
+    keep:"希望・再生・人気",lucky:"ライトグリーン",day:"金曜",good:["garnet","turquoise"],bad:["amethyst"]}
+};
+
+const NUM_TO_STONE = [
+  "rose","amethyst","citrine","tiger","amethyst","rose","garnet","aqua","aqua","garnet",
+  "peridot","peridot","aqua","moon","moon","crystal","amethyst","crystal","garnet","tiger",
+  "lapis","lapis","onyx","onyx","lapis","tiger","tiger","crystal","turquoise","turquoise",
+  "citrine","citrine","turquoise","peridot","peridot","aqua","aqua","crystal","crystal","amethyst",
+  "moon","rose","rose","moon","lapis","turquoise","turquoise","lapis","onyx","garnet",
+  "garnet","onyx","tiger","citrine","citrine","peridot","onyx","moon","moon","rose"
+];
+
+function getNum(y,m,d){ const a=[0,31,59,30,0,31,1,32,3,33,4,34]; let b=(y-1)*365+Math.floor((y-1)/4)-Math.floor((y-1)/100)+Math.floor((y-1)/400); const lp=(y%4===0&&y%100!==0)||y%400===0; return (b+a[m-1]+((lp&&m>=3)?1:0)+d)%60; }
+
+const yearSel=document.getElementById('year'),monthSel=document.getElementById('month'),daySel=document.getElementById('day');
+for(let y=2025;y>=1930;y--)yearSel.add(new Option(y+"年",y));
+for(let m=1;m<=12;m++)monthSel.add(new Option(m+"月",m));
+function fillDays(){const y=+yearSel.value,m=+monthSel.value,dim=new Date(y,m,0).getDate(),cur=+daySel.value||1;daySel.innerHTML="";for(let d=1;d<=dim;d++)daySel.add(new Option(d+"日",d));if(cur<=dim)daySel.value=cur;}
+yearSel.value=1990;monthSel.value=1;fillDays(); yearSel.onchange=fillDays;monthSel.onchange=fillDays;
+
+function checkLine(){ if(LINE_URL.includes("XXXXXXX")){alert("（設定メモ）LINE_URLを差し替えてください。");return false;} return true; }
+
+(function(){ const t=new Date(); const seed=t.getFullYear()*1000+(t.getMonth()+1)*40+t.getDate();
+  const today=1400+(seed*73%3600); const total=72000+(seed*131%34000);
+  document.getElementById('socialProof').innerHTML=`🐉 本日 <b>${today.toLocaleString()}</b>名が霊視を受け／延べ <b>${total.toLocaleString()}</b>名を視てまいりました`; })();
+
+function saveCard(){ const el=document.getElementById('captureArea'); if(!el||typeof html2canvas==='undefined'){alert("準備中です。");return;}
+  html2canvas(el,{scale:2,backgroundColor:"#1a0d33"}).then(c=>{const a=document.createElement('a');a.download='守護霊石診断_波動霊石院.png';a.href=c.toDataURL('image/png');a.click();}); }
+
+function compatScore(me,you){ const S=STONE[me]; let b=58; if(S.good.includes(you))b=92; else if(S.bad.includes(you))b=38; else if(STONE[you].good.includes(me))b=80; else if(STONE[you].bad.includes(me))b=46; if(me===you)b=Math.max(b,74); return Math.max(25,Math.min(99,b)); }
+function compatComment(s,me,you){ const a=STONE[me].name,b=STONE[you].name;
+  if(s>=90)return `二つの波動は響き合う。${a}と${b}は重ね持つことで力を増す、得難き組み合わせ。`;
+  if(s>=75)return `${a}と${b}は心地よく調和する。共に身につければ日々が整うだろう。`;
+  if(s>=55)return `${a}と${b}は個性が異なる。場に応じて使い分けるがよい。`;
+  return `${a}と${b}は波が異なる。シーンを分けて持つことを勧める。`; }
+function shindanAisho(){ const me=window.__myStone; if(!me){alert("先にソヨンに視てもらいなさい🐉");return;}
+  const y=+document.getElementById('pyear').value,mo=+document.getElementById('pmonth').value,d=+document.getElementById('pday').value;
+  const you=NUM_TO_STONE[getNum(y,mo,d)]; const s=compatScore(me,you);
+  document.getElementById('aishoResult').innerHTML=`
+    <div class="aisho-card">
+      <div class="aisho-pair">${STONE[me].emoji} <span>×</span> ${STONE[you].emoji}</div>
+      <div class="aisho-names">${STONE[me].name} × ${STONE[you].name}</div>
+      <div class="aisho-score">波動の相性 <b>${s}</b><small>%</small></div>
+      <div class="lm-bar" style="margin:8px 0;"><div class="lm-fill" style="width:${s}%;"></div></div>
+      <div class="aisho-comment">${compatComment(s,me,you)}</div>
+      <a class="unlock-btn" style="margin-top:12px;display:inline-block;" href="${LINE_URL}" target="_blank" rel="noopener" onclick="return checkLine();">📱 二人に合う石組みをLINEで視る</a>
+    </div>`;
+  document.getElementById('aishoResult').scrollIntoView({behavior:"smooth",block:"center"}); }
+
+function uranau(){
+  const y=+yearSel.value,m=+monthSel.value,d=+daySel.value;
+  const key=NUM_TO_STONE[getNum(y,m,d)]; window.__myStone=key; const S=STONE[key];
+  const goodE=S.good.map(g=>STONE[g].emoji+STONE[g].name).join("・");
+  const badE=S.bad.map(g=>STONE[g].emoji+STONE[g].name).join("・");
+  const buyUrl=S.buy||SHOP_URL;
+  const shareText=`【波動霊石院】院主ソヨンが視た私の守護霊石は「${S.name}」🐉 (${S.nick})\n波動レベル${S.wave} / 上位${S.rarity}%！\nあなたの守護霊石は？▼`;
+
+  const res=document.getElementById('result');
+  res.innerHTML=`
+    <div id="captureArea" style="padding:14px;border-radius:20px;background:#1a0d33;">
+    <div class="rarity-badge">🏆 上位 ${S.rarity}% の希少な守護霊石</div>
+    <div class="hero-card" style="background:linear-gradient(135deg,${S.color},${S.color}99);">
+      <div class="aura"></div>
+      <div class="hero-emoji">${S.emoji}</div>
+      <div class="hero-nick">${S.nick}</div>
+      <div class="hero-name">${S.name}</div>
+      <div class="hero-catch">守護の軸：${S.keep}</div>
+    </div>
+    <div class="wave-meter">
+      <div class="lbl"><span>🐉 あなたの波動レベル</span><b>${S.wave}</b></div>
+      <div class="lm-bar"><div class="lm-fill" id="waveFill"></div></div>
+    </div>
+    <div style="font-size:0.66rem;color:#7d6aa8;margin:-4px 0 12px;">― 波動霊石院 ―</div>
+    </div><!-- /captureArea -->
+
+    <div class="oracle"><h4>🔮 院主ソヨンのお告げ</h4><p>「${S.oracle}」</p></div>
+    <div class="sec"><h4>💠 ${S.name}の意味（言い伝え）</h4>${S.mean}</div>
+
+    <div class="buy-box">
+      <div class="stone-img">${S.emoji}✨</div>
+      <h3>あなたの守護霊石「${S.name}」</h3>
+      <div class="price">¥${S.price.toLocaleString()}〜 <small>（波動を込めた天然石ブレスレット）</small></div>
+      <a class="buy-btn" href="${buyUrl}" target="_blank" rel="noopener">🛒 この守護霊石を授かる</a>
+      <p class="buy-note">お守りとして身につけたい方へ。※医療・治療・効果効能を保証するものではありません</p>
+    </div>
+
+    <div class="lucky-row">
+      <div class="lucky"><span>🎨 ラッキーカラー</span><b>${S.lucky}</b></div>
+      <div class="lucky"><span>📅 ラッキー曜日</span><b>${S.day}</b></div>
+      <div class="lucky"><span>💠 守護の軸</span><b>${S.keep}</b></div>
+    </div>
+
+    <div class="locked">
+      <div class="sec"><h4>💡 ソヨンからあなたへの導き</h4>${S.advice}</div>
+      <div class="compat">
+        <div class="compat-box good"><span>💎 響き合う石</span><b>${goodE}</b></div>
+        <div class="compat-box bad"><span>⚡ 組み合わせ注意</span><b>${badE}</b></div>
+      </div>
+      <div class="lock-overlay">
+        <div class="big">🔒🐉</div>
+        <p>「ソヨンからの導き」と「響き合う石」は<br>LINEで友だち追加すると視られます</p>
+        <a class="unlock-btn" href="${LINE_URL}" target="_blank" rel="noopener" onclick="return checkLine();">📱 LINEで結果を授かる</a>
+      </div>
+    </div>
+
+    <button class="save-btn" onclick="saveCard()">📸 結果を画像で保存（SNSにシェア）</button>
+    <div class="share-row">
+      <a class="share-btn x" href="https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(location.href)}" target="_blank" rel="noopener">𝕏 でシェア</a>
+      <a class="share-btn ln" href="https://line.me/R/msg/text/?${encodeURIComponent(shareText+" "+location.href)}" target="_blank" rel="noopener">LINEで送る</a>
+    </div>
+
+    <p style="font-size:0.76rem;color:#a892d6;margin-top:10px;">あなたの誕生日：${y}年${m}月${d}日</p>
+
+    <div class="aisho-section">
+      <h3>💎 大切な人との「波動の相性」</h3>
+      <p class="aisho-sub">相手の生年月日を入れて視る（ペア・贈り物の石選びにも）</p>
+      <div class="input-row">
+        <div class="field"><label>年</label><select id="pyear"></select></div>
+        <div class="field"><label>月</label><select id="pmonth"></select></div>
+        <div class="field"><label>日</label><select id="pday"></select></div>
+      </div>
+      <button class="aisho-btn" onclick="shindanAisho()">波動の相性を視る 💠</button>
+      <div id="aishoResult"></div>
+    </div>
+
+    <div class="line-cta">
+      <h3>🐉 ${S.name}を授かったあなたへ ― ソヨンより</h3>
+      <div class="blur">2026年、あなたの波動が大きく動くのは◯月。今のあなたに必要な石組みは△△で、龍の導きが強まる時期は……（続きはLINEにて）</div>
+      <ul class="line-list">
+        <li>✅ あなたの守護霊石・全文の霊視結果</li>
+        <li>✅ 2026年の波動の流れと開運の導き</li>
+        <li>✅ あなたに合う石組み・お守りの提案</li>
+      </ul>
+      <a class="line-btn" href="${LINE_URL}" target="_blank" rel="noopener" onclick="return checkLine();">📱 波動霊石院のLINEで続きを授かる</a>
+      <p class="line-sub">友だち追加は無料 / ブロックはいつでもできます</p>
+    </div>
+  `;
+  res.classList.remove('show'); void res.offsetWidth; res.classList.add('show');
+  const py=document.getElementById('pyear'),pm=document.getElementById('pmonth'),pd=document.getElementById('pday');
+  for(let yy=2025;yy>=1930;yy--)py.add(new Option(yy+"年",yy));
+  for(let mm=1;mm<=12;mm++)pm.add(new Option(mm+"月",mm));
+  py.value=1990;pm.value=1;
+  const fp=()=>{const dim=new Date(+py.value,+pm.value,0).getDate();pd.innerHTML="";for(let dd=1;dd<=dim;dd++)pd.add(new Option(dd+"日",dd));};
+  fp(); py.onchange=fp; pm.onchange=fp;
+  setTimeout(()=>{const f=document.getElementById('waveFill'); if(f)f.style.width=S.wave+"%";},150);
+  res.scrollIntoView({behavior:"smooth",block:"start"});
+}
+</script>
+</body>
+</html>
