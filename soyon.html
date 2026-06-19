@@ -146,7 +146,13 @@
 <script>
 // ▼ 設定（lin.ee があれば差し替え推奨）
 const LINE_URL = "https://line.me/R/ti/p/@dhw5564g";
+// ▼ BASEショップのトップURL（商品個別URLが未設定の石はここへ飛ぶ）
 const SHOP_URL = "https://yourshop.base.shop";
+// ▼ 各守護石 → BASE商品ページURL（作った商品のURLをここに貼るだけ／空欄はSHOP_URLへ）
+const BUY_LINKS = {
+  rose:"", amethyst:"", crystal:"", tiger:"", lapis:"", moon:"",
+  citrine:"", aqua:"", garnet:"", turquoise:"", onyx:"", peridot:""
+};
 
 const COLORS = { rose:"#ff9bb3", amethyst:"#9b59b6", crystal:"#b8c6db", tiger:"#c89b3c", lapis:"#2c5fa8", moon:"#cdd6f4", citrine:"#f4b942", aqua:"#5fc9d6", garnet:"#9b2335", turquoise:"#3bb9b3", onyx:"#3a3a44", peridot:"#9bc24a" };
 
@@ -274,11 +280,11 @@ function uranau(){
   // 設問（今の波動）
   const q1=document.getElementById('q1').value, q2=document.getElementById('q2').value, q3=document.getElementById('q3').value;
   const waveNow=Math.max(40,Math.min(99, S.wave + (STATE_ADJ[q1]||0) + (FLOW_ADJ[q3]||0)));
-  const needKey=WANT_STONE[q2]; const N=STONE[needKey]; const needBuy=N.buy||SHOP_URL;
+  const needKey=WANT_STONE[q2]; const N=STONE[needKey]; const needBuy=BUY_LINKS[needKey]||SHOP_URL;
   const sameStone=(needKey===key);
   const goodE=S.good.map(g=>STONE[g].emoji+STONE[g].name).join("・");
   const badE=S.bad.map(g=>STONE[g].emoji+STONE[g].name).join("・");
-  const buyUrl=S.buy||SHOP_URL;
+  const buyUrl=BUY_LINKS[key]||SHOP_URL;
   const shareText=`【波動霊石院】院主ソヨンが視た私の守護霊石は「${S.name}」🐉 (${S.nick})\n波動レベル${waveNow} / 上位${S.rarity}%！\nあなたの守護霊石は？▼`;
 
   const res=document.getElementById('result');
