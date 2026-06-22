@@ -82,6 +82,8 @@
 
   .locked { position:relative; }
   .locked .sec, .locked .oracle, .locked .code-row, .locked .compat { filter:blur(6px); user-select:none; pointer-events:none; }
+  .locked.unlocked .sec, .locked.unlocked .oracle, .locked.unlocked .code-row, .locked.unlocked .compat { filter:none; user-select:auto; pointer-events:auto; }
+  .locked.unlocked .lock-overlay { display:none; }
   .lock-overlay { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; background:linear-gradient(180deg, rgba(26,13,51,.3), rgba(26,13,51,.94)); border-radius:14px; text-align:center; padding:14px; }
   .lock-overlay .big { font-size:1.7rem; }
   .lock-overlay p { font-size:0.9rem; font-weight:bold; color:#ffd86f; margin:6px 0 12px; line-height:1.7; }
@@ -221,6 +223,11 @@ function fillDays(){const y=+yearSel.value,m=+monthSel.value,dim=new Date(y,m,0)
 yearSel.value=1990;monthSel.value=1;fillDays(); yearSel.onchange=fillDays;monthSel.onchange=fillDays;
 
 function checkLine(){ if(LINE_URL.includes("XXXXXXX")){alert("（設定メモ）LINE_URLを差し替えてください。");return false;} return true; }
+// LINEを開きつつ、ロックされた占いの続きを解放する
+function goUnlock(){
+  document.querySelectorAll('#result .locked').forEach(function(l){ l.classList.add('unlocked'); });
+  return checkLine(); // 真ならLINEへ遷移、ダミーURL時は遷移せず解放のみ
+}
 
 (function(){ const t=new Date(); const seed=t.getFullYear()*1000+(t.getMonth()+1)*40+t.getDate();
   const today=1400+(seed*73%3600); const total=72000+(seed*131%34000);
@@ -304,7 +311,7 @@ function uranau(){
       <div class="lock-overlay">
         <div class="big">🔒🐉</div>
         <p>占いの続き（お告げ全文・魂コード・今必要な波動・導き・相性の龍）は<br><b>ソヨンのLINE登録</b>で視られます</p>
-        <a class="unlock-btn" href="${LINE_URL}" target="_blank" rel="noopener" onclick="return checkLine();">📱 LINE登録で続きを視る</a>
+        <a class="unlock-btn" href="${LINE_URL}" target="_blank" rel="noopener" onclick="return goUnlock();">📱 LINE登録で続きを視る</a>
       </div>
     </div>
 
