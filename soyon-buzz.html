@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🐉 ソヨン｜バズるスピ投稿ジェネレーター（運営用ツール）</title>
+<style>
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:"Hiragino Kaku Gothic ProN","Yu Gothic","Meiryo",sans-serif; background:radial-gradient(circle at 50% 0%,#3a2466,#1a0d33); color:#ece4ff; min-height:100vh; padding:24px 16px; }
+  .wrap { max-width:680px; margin:0 auto; }
+  h1 { font-size:1.4rem; color:#ffd86f; text-align:center; margin-bottom:4px; }
+  .sub { text-align:center; font-size:0.8rem; color:#a892d6; margin-bottom:20px; }
+  .panel { background:rgba(255,255,255,.05); border:1px solid rgba(255,216,111,.25); border-radius:16px; padding:18px; margin-bottom:16px; }
+  .row { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; }
+  label.chk { font-size:0.82rem; background:rgba(255,255,255,.06); padding:8px 12px; border-radius:20px; cursor:pointer; user-select:none; border:1px solid transparent; }
+  label.chk input { margin-right:5px; }
+  label.chk:has(input:checked){ border-color:#ffd86f; color:#ffd86f; }
+  .controls { display:flex; gap:10px; flex-wrap:wrap; }
+  button { background:linear-gradient(90deg,#ffd86f,#ff9e3d); color:#2a1648; border:none; padding:12px 22px; border-radius:24px; font-weight:bold; font-size:0.95rem; cursor:pointer; }
+  button.ghost { background:transparent; color:#ffd86f; border:1px solid #ffd86f; }
+  button:hover { transform:translateY(-1px); }
+  .out { margin-top:8px; }
+  .post { background:#1a0d33; border:1px solid rgba(255,216,111,.2); border-radius:12px; padding:14px; margin-bottom:10px; white-space:pre-wrap; font-size:0.92rem; line-height:1.7; position:relative; }
+  .post .copy { position:absolute; top:8px; right:8px; font-size:0.72rem; padding:5px 10px; border-radius:14px; background:#06c755; color:#fff; border:none; cursor:pointer; }
+  .post .len { position:absolute; bottom:6px; right:10px; font-size:0.66rem; color:#7d6aa8; }
+  .note { font-size:0.7rem; color:#8d7ab5; line-height:1.7; margin-top:10px; }
+  .copyall { width:100%; margin-top:8px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🐉 バズるスピ投稿ジェネレーター</h1>
+  <p class="sub">ソヨン波動霊石院｜運営用ツール（X/インスタ投稿のネタ自動生成）</p>
+
+  <div class="panel">
+    <div class="row" id="types">
+      <label class="chk"><input type="checkbox" value="zengo" checked>前兆・予言系</label>
+      <label class="chk"><input type="checkbox" value="sukui" checked>救い・寄り添い系</label>
+      <label class="chk"><input type="checkbox" value="aru" checked>スピあるある系</label>
+      <label class="chk"><input type="checkbox" value="list" checked>特徴リスト系</label>
+      <label class="chk"><input type="checkbox" value="toi" checked>問いかけ・診断誘導</label>
+      <label class="chk"><input type="checkbox" value="ryu" checked>守護龍・霊石系</label>
+    </div>
+    <div class="row">
+      <label class="chk"><input type="checkbox" id="withCTA" checked>診断サイトURLを入れる</label>
+      <label class="chk"><input type="checkbox" id="withTag" checked>ハッシュタグを入れる</label>
+    </div>
+    <div class="controls">
+      <button onclick="gen(1)">✨ 1つ生成</button>
+      <button class="ghost" onclick="gen(10)">10個まとめて</button>
+      <button class="ghost" onclick="gen(30)">30個（1ヶ月分）</button>
+    </div>
+  </div>
+
+  <div class="out" id="out"></div>
+  <button class="ghost copyall" onclick="copyAll()" id="copyAllBtn" style="display:none;">📋 全部まとめてコピー</button>
+
+  <p class="note">
+  ⚙️ 使い方：生成→コピー→SocialDog/Buffer等の予約投稿ツールに貼って予約＝実質「自動でソヨンが呟く」。<br>
+  ⚠️ 表現はお守り・エンタメ範囲に。「必ず」「治る」等の断定・医療表現は使わないでください（景表法・薬機法）。
+  </p>
+</div>
+
+<script>
+const SITE = "https://doubutsu-uranai.netlify.app/soyon.html";
+
+// 部品
+const ryu = ["天元龍","紅蓮龍","蒼天龍","金剛龍","翠緑龍","白銀龍","黒曜龍","月読龍","雷鳴龍","桜花龍","風渡龍","紫煙龍"];
+const sign = ["やたら眠い","急に縁が切れた","同じ数字をよく見る","理由もなく涙が出る","昔の人から連絡が来た","物がよく壊れる","直感が冴えてきた","人混みで異常に疲れる","急に部屋を片付けたくなった","嫌な縁が自然と離れた"];
+const theme = ["金運","ご縁","恋愛","仕事運","人間関係","健康運","転機","出会い","厄","運気の流れ"];
+const month = ["今月末","来週","次の満月","これから3日","今週末","年明け","春分の頃"];
+
+const T = {
+  zengo: [
+    ()=>`【前兆】最近「${pick(sign)}」人。それ、${pick(theme)}が大きく動く前のサインです。波動が切り替わろうとしています。`,
+    ()=>`${pick(month)}、${pick(theme)}の流れが変わる人が増えます。心当たりがある人は、流れに逆らわないで。`,
+    ()=>`龍が動き始めています。「${pick(sign)}」という人は、近いうちに${pick(theme)}で転機が来ます。`,
+  ],
+  sukui: [
+    ()=>`今しんどいあなたへ。それは弱さではなく、魂が古い波動を手放そうとしている証。無理に前を向かなくていい日もある。`,
+    ()=>`頑張りすぎてる人ほど、${pick(theme)}が止まって見える時期があります。今は溜める時。必ず巡ります。`,
+    ()=>`「自分なんて」と思った夜こそ、守護龍はそばにいます。あなたの価値は、まだ視えてないだけ。`,
+  ],
+  aru: [
+    ()=>`波動が高い人あるある：\n・${pick(sign)}\n・人の感情に敏感\n・嫌な場所が一瞬でわかる\n当てはまったら、視える側の人です。`,
+    ()=>`龍に好かれる人の特徴、静かな人が多い。騒がず、流れを読み、ご縁を大事にする人。あなたはどう？`,
+  ],
+  list: [
+    ()=>`${pick(theme)}が上がる人の習慣3つ👇\n①朝に窓を開けて空気を入れ替える\n②感謝を声に出す\n③直感で「なんか嫌」を無視しない\nできてる人から運が巡ります。`,
+    ()=>`波動を下げる行動3つ⚠️\n①愚痴の多い場に長居する\n②寝る直前のSNS\n③「どうせ私なんて」が口癖\n心当たり、ない？`,
+  ],
+  toi: [
+    ()=>`あなたの守護龍、知ってる？\n生年月日でわかる無料診断つくりました🐉\n→ ${'{SITE}'}`,
+    ()=>`12の龍のうち、あなたを守るのはどの龍か。\n当たりすぎて鳥肌、と言われます。\n生年月日だけでOK→ ${'{SITE}'}`,
+    ()=>`「最近ツイてない」その原因、守護龍とのズレかも。\n無料で視られます→ ${'{SITE}'}`,
+  ],
+  ryu: [
+    ()=>`${pick(ryu)}が守護龍の人へ。今のあなたに必要なのは「手放し」。抱えてるもの、一つ降ろしていい。`,
+    ()=>`${pick(ryu)}を授かる人は、${pick(theme)}に強い運を持っています。ただし使い方を間違えると空回り。`,
+    ()=>`一点物の霊石は、同じ波動が二つとありません。「なぜか気になる」その感覚が、もうご縁の始まりです。`,
+  ]
+};
+const TAGS = "\n\n#スピリチュアル #龍神 #波動 #開運 #守護龍 #占い";
+
+function pick(a){ return a[Math.floor(Math.random()*a.length)]; }
+function buildOne(types){
+  const t = pick(types);
+  let text = pick(T[t])();
+  const withCTA = document.getElementById('withCTA').checked;
+  const withTag = document.getElementById('withTag').checked;
+  // 診断誘導系は必ずURL。それ以外は任意で末尾に
+  if(text.includes('{SITE}')) text = text.replace('{SITE}', SITE);
+  else if(withCTA && Math.random()<0.5) text += `\n\nあなたの守護龍は？🐉→ ${SITE}`;
+  if(withTag) text += TAGS;
+  return text;
+}
+function getTypes(){
+  const ts=[...document.querySelectorAll('#types input:checked')].map(c=>c.value);
+  return ts.length?ts:["toi"];
+}
+function gen(n){
+  const types=getTypes(); const out=document.getElementById('out'); out.innerHTML="";
+  for(let i=0;i<n;i++){
+    const text=buildOne(types);
+    const d=document.createElement('div'); d.className='post';
+    d.innerHTML=`<button class="copy">コピー</button><span class="len">${text.replace(/\n/g,'').length}字</span>`;
+    d.insertAdjacentText('afterbegin', text);
+    d.querySelector('.copy').onclick=()=>{ navigator.clipboard.writeText(text); d.querySelector('.copy').textContent='✓'; setTimeout(()=>d.querySelector('.copy').textContent='コピー',1200); };
+    out.appendChild(d);
+  }
+  document.getElementById('copyAllBtn').style.display = n>1?'block':'none';
+  window.__all = [...out.querySelectorAll('.post')].map(p=>p.childNodes[0].textContent);
+}
+function copyAll(){ navigator.clipboard.writeText((window.__all||[]).join("\n\n――――――\n\n")); const b=document.getElementById('copyAllBtn'); b.textContent='✓ コピーしました'; setTimeout(()=>b.textContent='📋 全部まとめてコピー',1500); }
+gen(3);
+</script>
+</body>
+</html>
