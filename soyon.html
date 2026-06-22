@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>波動霊石院｜院主ソヨンの守護霊石診断 🐉 生年月日であなたの守護石と波動を視る</title>
-<meta property="og:title" content="🐉 波動霊石院｜院主ソヨンが視る、あなたの守護霊石診断">
-<meta property="og:description" content="生年月日を入れるだけ。龍波動伝道師ソヨンが、あなたを守る霊石とエネルギー軸を視ます。無料診断。">
+<title>波動霊石院｜院主ソヨンの龍占い 🐉 生年月日であなたの守護龍と魂コードを視る</title>
+<meta property="og:title" content="🐉 波動霊石院｜院主ソヨンが視る、あなたの守護龍と魂コード">
+<meta property="og:description" content="生年月日を入れるだけ。龍波動伝道師ソヨンが、あなたの守護龍・魂コード・波動軸を視ます。無料診断。">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://placehold.co/1200x630/3a1c5e/ffd86f/png?text=%F0%9F%90%89+%E6%B3%A2%E5%8B%95%E9%9C%8A%E7%9F%B3%E9%99%A2">
 <meta name="twitter:card" content="summary_large_image">
@@ -28,16 +28,16 @@
   .field label { font-size:0.72rem; color:#a892d6; margin-bottom:4px; padding-left:4px; }
   select { padding:12px 14px; border:1px solid rgba(255,216,111,.3); border-radius:10px; font-size:1rem; background:#1a0d33; color:#ece4ff; cursor:pointer; outline:none; }
   select:focus { border-color:#ffd86f; }
-  button.main { background: linear-gradient(90deg,#ffd86f,#ff9e3d); color:#2a1648; border:none; padding:15px 40px; border-radius:30px; font-size:1.08rem; font-weight:bold; cursor:pointer; box-shadow:0 8px 24px rgba(255,158,61,.4); letter-spacing:1px; }
-  button.main:hover { transform:translateY(-2px); }
-  .social-proof { font-size:0.76rem; color:#a892d6; margin-top:12px; } .social-proof b { color:#ffd86f; }
   .q-block { background:rgba(255,255,255,.04); border:1px solid rgba(255,216,111,.18); border-radius:14px; padding:16px 16px 6px; margin-bottom:18px; }
   .q-title { font-size:0.78rem; color:#c8b3ff; letter-spacing:2px; margin-bottom:12px; }
   .q { text-align:left; margin-bottom:12px; }
   .q label { display:block; font-size:0.8rem; color:#ece4ff; margin-bottom:5px; }
   .q select { width:100%; }
+  button.main { background: linear-gradient(90deg,#ffd86f,#ff9e3d); color:#2a1648; border:none; padding:15px 40px; border-radius:30px; font-size:1.08rem; font-weight:bold; cursor:pointer; box-shadow:0 8px 24px rgba(255,158,61,.4); letter-spacing:1px; }
+  button.main:hover { transform:translateY(-2px); }
+  .social-proof { font-size:0.76rem; color:#a892d6; margin-top:12px; } .social-proof b { color:#ffd86f; }
   #result { margin-top:28px; opacity:0; max-height:0; overflow:hidden; transition:opacity .6s, max-height .6s; }
-  #result.show { opacity:1; max-height:5000px; }
+  #result.show { opacity:1; max-height:6000px; }
 
   .rarity-badge { display:inline-block; background:linear-gradient(90deg,#ffd86f,#ff7eb3); color:#2a1648; font-weight:bold; font-size:0.86rem; padding:7px 18px; border-radius:20px; margin-bottom:14px; box-shadow:0 6px 18px rgba(255,126,179,.35); animation:shine 2.5s infinite; }
   @keyframes shine { 0%,100%{filter:brightness(1);} 50%{filter:brightness(1.2);} }
@@ -45,11 +45,12 @@
   .hero-card::after { content:""; position:absolute; inset:0; background:radial-gradient(circle at 50% 25%, rgba(255,255,255,.45), transparent 55%); }
   .aura { position:absolute; inset:-40%; background:conic-gradient(from 0deg, transparent, rgba(255,255,255,.25), transparent 40%); animation:spin 7s linear infinite; }
   @keyframes spin { to { transform:rotate(360deg);} }
-  .hero-emoji { font-size:4.6rem; line-height:1; position:relative; animation:pop .7s; filter:drop-shadow(0 4px 14px rgba(0,0,0,.4)); }
+  .hero-emoji { font-size:4.4rem; line-height:1; position:relative; animation:pop .7s; filter:drop-shadow(0 4px 14px rgba(0,0,0,.4)); }
   @keyframes pop { 0%{transform:scale(0);} 70%{transform:scale(1.25);} 100%{transform:scale(1);} }
-  .hero-nick { font-size:0.92rem; font-weight:bold; letter-spacing:1px; margin-top:8px; position:relative; }
-  .hero-name { font-size:1.8rem; font-weight:900; margin:2px 0; position:relative; text-shadow:0 2px 8px rgba(0,0,0,.4); }
-  .hero-catch { font-size:0.9rem; opacity:.96; position:relative; }
+  .hero-nick { font-size:0.9rem; font-weight:bold; letter-spacing:1px; margin-top:8px; position:relative; }
+  .hero-name { font-size:1.85rem; font-weight:900; margin:2px 0; position:relative; text-shadow:0 2px 8px rgba(0,0,0,.4); }
+  .hero-yomi { font-size:0.78rem; opacity:.9; position:relative; }
+  .hero-catch { font-size:0.9rem; opacity:.96; position:relative; margin-top:4px; }
 
   .wave-meter { margin:4px 0 14px; }
   .wave-meter .lbl { display:flex; justify-content:space-between; font-size:0.8rem; color:#c8b3ff; margin-bottom:5px; }
@@ -60,17 +61,18 @@
   .oracle h4 { font-size:0.9rem; color:#ffd86f; margin-bottom:6px; } .oracle p { font-size:0.92rem; line-height:1.9; color:#ece4ff; }
   .sec { text-align:left; background:rgba(255,255,255,.05); border-radius:14px; padding:16px 18px; font-size:0.9rem; line-height:1.8; margin-bottom:12px; }
   .sec h4 { font-size:0.9rem; color:#c8b3ff; margin-bottom:4px; }
+  .code-row { display:flex; gap:8px; margin:4px 0 14px; }
+  .code-cell { flex:1; background:rgba(255,255,255,.05); border:1px solid rgba(255,216,111,.15); border-radius:12px; padding:11px 6px; }
+  .code-cell span { display:block; font-size:0.66rem; color:#a892d6; margin-bottom:3px; } .code-cell b { font-size:0.82rem; color:#ffd86f; }
 
-  .buy-box { background:linear-gradient(135deg, rgba(255,216,111,.14), rgba(255,126,179,.12)); border:1px solid rgba(255,216,111,.4); border-radius:18px; padding:22px 18px; margin:6px 0 14px; }
-  .buy-box .stone-img { font-size:3.2rem; }
-  .buy-box h3 { font-size:1.05rem; color:#ffd86f; margin:4px 0; }
-  .buy-box .price { font-size:1.25rem; font-weight:900; color:#ff9e3d; margin:6px 0; } .buy-box .price small { font-size:0.72rem; color:#bfa9e6; font-weight:normal; }
-  .buy-btn { display:inline-block; background:linear-gradient(90deg,#ff7a59,#ff3d8b); color:#fff; text-decoration:none; font-weight:bold; font-size:1.02rem; padding:14px 34px; border-radius:30px; box-shadow:0 8px 22px rgba(255,61,139,.45); }
-  .buy-note { font-size:0.68rem; color:#a892d6; margin-top:10px; line-height:1.5; }
-
-  .lucky-row { display:flex; gap:8px; margin:4px 0 14px; }
-  .lucky { flex:1; background:rgba(255,255,255,.05); border-radius:12px; padding:11px 6px; }
-  .lucky span { display:block; font-size:0.66rem; color:#a892d6; margin-bottom:3px; } .lucky b { font-size:0.8rem; color:#ffd86f; }
+  /* 一点物処方 CTA */
+  .shoho { background:linear-gradient(135deg, rgba(255,216,111,.16), rgba(255,126,179,.12)); border:1px solid rgba(255,216,111,.45); border-radius:18px; padding:24px 18px; margin:6px 0 14px; }
+  .shoho .dragon { font-size:2.8rem; }
+  .shoho h3 { font-size:1.05rem; color:#ffd86f; margin:6px 0; }
+  .shoho p { font-size:0.86rem; line-height:1.8; color:#ece4ff; margin:6px 0 14px; }
+  .shoho-btn { display:inline-block; background:#06c755; color:#fff; text-decoration:none; font-weight:bold; font-size:1.02rem; padding:15px 28px; border-radius:30px; box-shadow:0 8px 22px rgba(6,199,85,.45); }
+  .shoho-btn.mercari { background:linear-gradient(90deg,#ff4d4d,#ff7e3d); box-shadow:0 8px 22px rgba(255,77,77,.45); }
+  .shoho-note { font-size:0.68rem; color:#a892d6; margin-top:10px; line-height:1.5; }
 
   .compat { display:flex; gap:10px; margin:6px 0 14px; }
   .compat-box { flex:1; border-radius:14px; padding:12px 8px; font-size:0.8rem; line-height:1.6; }
@@ -112,12 +114,12 @@
 <div class="card">
   <div class="crest">🐉</div>
   <p class="temple">― 波 動 霊 石 院 ―</p>
-  <h1>守護霊石診断</h1>
-  <p class="lead">生年月日に宿る波動を、院主ソヨンが霊視する。<br>あなたを守る「守護霊石」と、いま必要なエネルギー軸を視ます。</p>
+  <h1>龍占い・守護龍診断</h1>
+  <p class="lead">生年月日に宿る龍の気配を、院主ソヨンが霊視する。<br>あなたの「守護龍」と「魂コード」、いま必要な波動軸を視ます。</p>
 
   <div class="master">
     <div class="ava">🔮</div>
-    <div class="txt"><b>龍波動伝道師 ハン・ソヨン</b><br>15年前に波動霊視の力に目覚め、龍の気配を読み、あなたの魂の震えを石に映す。</div>
+    <div class="txt"><b>龍波動伝道師 ハン・ソヨン</b><br>15年前、天元龍様との邂逅により【波動霊視】の力を授かる。魂の震えを読み、あなたに必要な霊石を処方する。</div>
   </div>
 
   <div class="input-row">
@@ -130,8 +132,8 @@
     <p class="q-title">― 今のあなたの波動を視ます ―</p>
     <div class="q"><label>Q1. 今の心の状態は？</label>
       <select id="q1"><option value="calm">凪いでいる・落ち着いている</option><option value="shake">揺れている・不安がある</option><option value="burn">燃えている・気合十分</option></select></div>
-    <div class="q"><label>Q2. いま一番ほしいものは？</label>
-      <select id="q2"><option value="love">愛・ご縁</option><option value="money">お金・成功</option><option value="peace">安らぎ・癒やし</option><option value="power">前に進む力</option></select></div>
+    <div class="q"><label>Q2. いま一番求めているものは？</label>
+      <select id="q2"><option value="love">愛・ご縁</option><option value="money">豊かさ・成功</option><option value="peace">癒やし・安らぎ</option><option value="power">突破・前へ進む力</option></select></div>
     <div class="q"><label>Q3. 最近の運の流れは？</label>
       <select id="q3"><option value="up">上向き</option><option value="flat">停滞している</option><option value="down">下り坂に感じる</option></select></div>
   </div>
@@ -140,102 +142,75 @@
   <p class="social-proof" id="socialProof"></p>
 
   <div id="result"></div>
-  <p class="footer-note">※ 本診断はエンタメ・お守りを目的としたものです。石の意味は言い伝え・イメージに基づくもので、医療・治療・効果効能を保証するものではありません。</p>
+  <p class="footer-note">※ 本診断はエンタメ・お守りを目的としたものです。龍・波動・霊石の意味は言い伝えやイメージに基づくもので、医療・治療・効果効能を保証するものではありません。</p>
 </div>
 
 <script>
-// ▼ 設定（lin.ee があれば差し替え推奨）
-const LINE_URL = "https://line.me/R/ti/p/@dhw5564g";
-// ▼ BASEショップのトップURL（商品個別URLが未設定の石はここへ飛ぶ）
-const SHOP_URL = "https://yourshop.base.shop";
-// ▼ 各守護石 → BASE商品ページURL（作った商品のURLをここに貼るだけ／空欄はSHOP_URLへ）
-const BUY_LINKS = {
-  rose:"", amethyst:"", crystal:"", tiger:"", lapis:"", moon:"",
-  citrine:"", aqua:"", garnet:"", turquoise:"", onyx:"", peridot:""
+// ▼ 設定
+const LINE_URL = "https://line.me/R/ti/p/@dhw5564g";              // 波動霊石院 LINE（lin.eeがあれば差し替え）
+const SHOP_URL = "https://jp.mercari.com/user/profile/861934708"; // 出品中の一点物霊石（メルカリ／BASEができたら差し替え）
+
+// ===== 12守護龍データ =====
+const RYU = {
+  ten:{name:"天元龍",yomi:"てんげんりゅう",emoji:"🐉",color:"#6d28d9",jiku:"根源・統べる力",code:"魂コード∞ / 原点",catch:"すべてを統べる根源の龍",rarity:2,wave:88,
+    oracle:"あなたの魂は龍脈の根源に触れている。多くを背負う器ゆえ、時に己を見失う。原点へ還りなさい。",
+    advice:"背負いすぎている。すべてを統べる前に、まず己の中心を取り戻しなさい。",good:["souten","kokuyou"],bad:["guren"]},
+  guren:{name:"紅蓮龍",yomi:"ぐれんりゅう",emoji:"🐉",color:"#c0392b",jiku:"情熱・勝負",code:"魂コード火 / 灼熱",catch:"灼熱の意志を燃やす炎の龍",rarity:6,wave:84,
+    oracle:"あなたの波動は炎のように高ぶっている。勢いは武器だが、焦りは身を焼く。",
+    advice:"勢いのまま動く前に一呼吸。炎は制御してこそ力になる。",good:["raimei","kongou"],bad:["ten"]},
+  souten:{name:"蒼天龍",yomi:"そうてんりゅう",emoji:"🐉",color:"#2563eb",jiku:"叡智・冷静",code:"魂コード天 / 澄眼",catch:"天を見通す叡智の龍",rarity:4,wave:85,
+    oracle:"あなたの魂は高く澄んでいる。だが頭で考えすぎ、心が置き去りになっている。",
+    advice:"考えるほど迷う時は、心の声を信じなさい。",good:["hakugin","tsukuyomi"],bad:["raimei"]},
+  kongou:{name:"金剛龍",yomi:"こんごうりゅう",emoji:"🐉",color:"#b8860b",jiku:"財・決断",code:"魂コード金 / 不動の柱",catch:"富と決断を司る黄金の龍",rarity:5,wave:86,
+    oracle:"あなたの波動には富を引き寄せる強さがある。だが守りに入れば淀む。",
+    advice:"好機は待たない。迷う今こそ、踏み込む時。",good:["guren","raimei"],bad:["tsukuyomi"]},
+  suiryoku:{name:"翠緑龍",yomi:"すいりょくりゅう",emoji:"🐉",color:"#2e8b57",jiku:"癒し・再生",code:"魂コード緑 / 再生",catch:"癒しと再生をもたらす緑の龍",rarity:7,wave:80,
+    oracle:"あなたの波動は深い森のように静かに再生している。無理に急がずともよい。",
+    advice:"傷ついた時は休みなさい。再生は静けさの中で起きる。",good:["ouka","hakugin"],bad:["raimei"]},
+  hakugin:{name:"白銀龍",yomi:"はくぎんりゅう",emoji:"🐉",color:"#94a3b8",jiku:"浄化・縁の整え",code:"魂コード白 / 清光",catch:"穢れを祓う白銀の龍",rarity:6,wave:81,
+    oracle:"あなたの波動は澄んでいるが、古い縁の澱みを纏っている。",
+    advice:"手放すべき縁がある。清めれば、新しい流れが入る。",good:["souten","suiryoku"],bad:["kokuyou"]},
+  kokuyou:{name:"黒曜龍",yomi:"こくようりゅう",emoji:"🐉",color:"#2d2d3a",jiku:"守護・意志",code:"魂コード黒 / 不動の盾",catch:"邪を退ける守護の龍",rarity:3,wave:83,
+    oracle:"あなたの波動は岩のように揺るがない。だが孤独が影を落としている。",
+    advice:"守りを固めすぎるな。心を開ける相手にだけは、盾を下ろしなさい。",good:["ten","kongou"],bad:["hakugin"]},
+  tsukuyomi:{name:"月読龍",yomi:"つくよみりゅう",emoji:"🐉",color:"#64748b",jiku:"縁・直感・女性性",code:"魂コード月 / 満ち欠け",catch:"縁を結ぶ月光の龍",rarity:7,wave:79,
+    oracle:"あなたの波動は月のように満ち欠けする。今は欠けの時、焦らず満ちるを待て。",
+    advice:"巡りには時がある。今動かぬことも、立派な選択。",good:["ouka","souten"],bad:["kongou"]},
+  raimei:{name:"雷鳴龍",yomi:"らいめいりゅう",emoji:"🐉",color:"#f59e0b",jiku:"決断・突破",code:"魂コード雷 / 一閃",catch:"停滞を打ち破る雷の龍",rarity:5,wave:85,
+    oracle:"あなたの波動には道を切り拓く一閃が宿る。だが迷えば雷は鈍る。",
+    advice:"迷いが力を鈍らせている。決めた瞬間、道は開く。",good:["guren","kongou"],bad:["suiryoku"]},
+  ouka:{name:"桜花龍",yomi:"おうかりゅう",emoji:"🐉",color:"#ec6f9e",jiku:"愛・優しさ・縁",code:"魂コード桜 / 慈愛",catch:"愛と慈しみを纏う桜の龍",rarity:8,wave:78,
+    oracle:"あなたの波動は人を想う優しさで満ちている。だが己を後回しにしすぎだ。",
+    advice:"人に注ぐ愛を、まず自分にも向けなさい。",good:["tsukuyomi","suiryoku"],bad:["kokuyou"]},
+  kaze:{name:"風渡龍",yomi:"かぜわたりゅう",emoji:"🐉",color:"#14b8a6",jiku:"自由・旅・対話",code:"魂コード風 / 巡翼",catch:"自由に駆ける風の龍",rarity:6,wave:77,
+    oracle:"あなたの波動は風のように自由だ。だが根を持たねば、ただ流れて終わる。",
+    advice:"自由を活かすには、帰る場所を一つ持ちなさい。",good:["souten","tsukuyomi"],bad:["kokuyou"]},
+  shien:{name:"紫煙龍",yomi:"しえんりゅう",emoji:"🐉",color:"#8b5cf6",jiku:"神秘・霊性・癒し",code:"魂コード紫 / 視霊",catch:"霊性を司る紫煙の龍",rarity:4,wave:82,
+    oracle:"あなたの魂は視えざるものを感じ取る。だが感じ過ぎて疲れている。",
+    advice:"感じ取る力は才。だが時に心を閉じ、休みなさい。",good:["souten","ouka"],bad:["guren"]}
 };
 
-const COLORS = { rose:"#ff9bb3", amethyst:"#9b59b6", crystal:"#b8c6db", tiger:"#c89b3c", lapis:"#2c5fa8", moon:"#cdd6f4", citrine:"#f4b942", aqua:"#5fc9d6", garnet:"#9b2335", turquoise:"#3bb9b3", onyx:"#3a3a44", peridot:"#9bc24a" };
-
-const STONE = {
-  rose:{emoji:"💗",name:"ローズクォーツ",nick:"愛と慈しみの守護石",color:COLORS.rose,price:2980,rarity:6,wave:78,
-    oracle:"あなたの波動は今、人を想う優しさで満ちている。だが他者に注ぎすぎ、己の器が乾いている。ローズクォーツがその渇きを潤すだろう。",
-    mean:"古来「愛の石」と呼ばれ、慈しみとご縁の象徴とされてきた石。",
-    advice:"自分を後回しにする癖がある。まず己を満たしなさい。",
-    keep:"愛・縁・自愛",lucky:"ローズピンク",day:"金曜",good:["moon","amethyst"],bad:["onyx"]},
-  amethyst:{emoji:"💜",name:"アメジスト",nick:"静寂と直感の守護石",color:COLORS.amethyst,price:3280,rarity:5,wave:82,
-    oracle:"あなたの魂は深く、夜の海のように静かだ。だが思考の渦が波動を乱している。アメジストが心の水面を鎮めるだろう。",
-    mean:"「心を静める石」として親しまれ、安らぎと直感の象徴とされる紫水晶。",
-    advice:"考えすぎが波を荒くしている。ひとりで休む夜を持ちなさい。",
-    keep:"癒やし・直感・安眠",lucky:"パープル",day:"土曜",good:["crystal","rose"],bad:["citrine"]},
-  crystal:{emoji:"💎",name:"水晶（クリスタル）",nick:"浄化と調和の守護石",color:COLORS.crystal,price:2680,rarity:8,wave:80,
-    oracle:"あなたの波動は澄んでいるが、外の濁りを吸いやすい。水晶が常にあなたを洗い、本来の輝きを保つだろう。",
-    mean:"あらゆる石の基本とされる「浄化と万能の石」。",
-    advice:"何でも背負いすぎる。時に人に委ねなさい。",
-    keep:"浄化・全体・再生",lucky:"クリア",day:"日曜",good:["amethyst","aqua"],bad:["garnet"]},
-  tiger:{emoji:"🐯",name:"タイガーアイ",nick:"決断と財運の守護石",color:COLORS.tiger,price:3480,rarity:4,wave:85,
-    oracle:"あなたの波動には進む力が宿る。だが道に迷えば空回る。タイガーアイがあなたの眼を見開かせ、好機を射抜くだろう。",
-    mean:"「見通す眼の石」と呼ばれ、決断力と仕事運の象徴とされる石。",
-    advice:"突き進む前に一度、足元を見なさい。",
-    keep:"仕事・財・決断",lucky:"ゴールドブラウン",day:"木曜",good:["citrine","onyx"],bad:["moon"]},
-  lapis:{emoji:"🔵",name:"ラピスラズリ",nick:"幸運と叡智の守護石",color:COLORS.lapis,price:3680,rarity:3,wave:88,
-    oracle:"あなたの波動は気高く、真実を求めて止まない。ラピスラズリが人生の節目で正しき道を照らすだろう。",
-    mean:"世界最古の「幸運の石」のひとつとされ、叡智と真実の象徴。",
-    advice:"己に厳しすぎる。完璧でなくてよい。",
-    keep:"幸運・叡智・成長",lucky:"ディープブルー",day:"木曜",good:["aqua","crystal"],bad:["rose"]},
-  moon:{emoji:"🌙",name:"ムーンストーン",nick:"ご縁と女性性の守護石",color:COLORS.moon,price:3180,rarity:7,wave:79,
-    oracle:"あなたの波動は月のように満ち欠けする。ムーンストーンが流れを整え、巡り来る縁を引き寄せるだろう。",
-    mean:"「月の石」と呼ばれ、ご縁と優しさの象徴とされる石。",
-    advice:"流されやすい。己の軸を月のように保ちなさい。",
-    keep:"恋愛・縁・直感",lucky:"ホワイトブルー",day:"月曜",good:["rose","amethyst"],bad:["tiger"]},
-  citrine:{emoji:"💛",name:"シトリン",nick:"豊穣と自信の守護石",color:COLORS.citrine,price:2980,rarity:6,wave:81,
-    oracle:"あなたの波動は陽だまりのように温かい。シトリンがその光を増幅し、豊かさを呼び込むだろう。",
-    mean:"「商売繁盛・豊かさの石」として親しまれる黄水晶。",
-    advice:"楽観が過ぎると詰めが甘くなる。最後のひと手間を。",
-    keep:"金運・自信・繁栄",lucky:"イエロー",day:"日曜",good:["tiger","garnet"],bad:["amethyst"]},
-  aqua:{emoji:"🩵",name:"アクアマリン",nick:"安らぎと対話の守護石",color:COLORS.aqua,price:3280,rarity:5,wave:77,
-    oracle:"あなたの波動は澄んだ水のよう。だが言葉を飲み込みすぎている。アクアマリンが心の声を流れ出させるだろう。",
-    mean:"「幸せな結婚を象徴する石」とも言われ、安らぎと対話の象徴。",
-    advice:"本音を飲み込まず、静かに伝えなさい。",
-    keep:"人間関係・癒やし・対話",lucky:"アクアブルー",day:"水曜",good:["crystal","lapis"],bad:["onyx"]},
-  garnet:{emoji:"❤️",name:"ガーネット",nick:"情熱と結実の守護石",color:COLORS.garnet,price:3180,rarity:8,wave:84,
-    oracle:"あなたの波動には消えぬ熾火がある。ガーネットがその炎を絶やさず、努力を実りへ導くだろう。",
-    mean:"「実りの石」と呼ばれ、継続と情熱の象徴とされる石。",
-    advice:"頑なさが道を狭める。時に流れに身を委ねなさい。",
-    keep:"継続・情熱・勝負",lucky:"ワインレッド",day:"火曜",good:["citrine","peridot"],bad:["crystal"]},
-  turquoise:{emoji:"🟢",name:"ターコイズ",nick:"旅路と厄除けの守護石",color:COLORS.turquoise,price:2880,rarity:6,wave:76,
-    oracle:"あなたの波動は風のように自由だ。ターコイズが旅路を守り、災いを払うだろう。",
-    mean:"古来「旅人を守る石」とされ、自由と厄除けの象徴。",
-    advice:"飽きやすさが実りを逃す。ひとつを続けてみなさい。",
-    keep:"旅・挑戦・厄除け",lucky:"ターコイズ",day:"水曜",good:["peridot","aqua"],bad:["onyx"]},
-  onyx:{emoji:"🖤",name:"オニキス",nick:"守護と意志の守護石",color:COLORS.onyx,price:2780,rarity:2,wave:83,
-    oracle:"あなたの波動は揺るがぬ岩のよう。だが孤独が影を落とす。オニキスが邪を退け、意志を支えるだろう。",
-    mean:"「魔除け・守護の石」として親しまれる黒石。",
-    advice:"抱え込まず、心を開ける者を持ちなさい。",
-    keep:"守護・意志・集中",lucky:"ブラック",day:"土曜",good:["tiger","crystal"],bad:["rose"]},
-  peridot:{emoji:"💚",name:"ペリドット",nick:"希望と再生の守護石",color:COLORS.peridot,price:3080,rarity:5,wave:80,
-    oracle:"あなたの波動は朝陽のように昇る力を持つ。ペリドットが闇を払い、希望を灯し続けるだろう。",
-    mean:"「太陽の石」と呼ばれ、希望と前向きさの象徴とされる石。",
-    advice:"頑張りすぎは空回りを生む。休むのも前進だ。",
-    keep:"希望・再生・人気",lucky:"ライトグリーン",day:"金曜",good:["garnet","turquoise"],bad:["amethyst"]}
-};
-
-const NUM_TO_STONE = [
-  "rose","amethyst","citrine","tiger","amethyst","rose","garnet","aqua","aqua","garnet",
-  "peridot","peridot","aqua","moon","moon","crystal","amethyst","crystal","garnet","tiger",
-  "lapis","lapis","onyx","onyx","lapis","tiger","tiger","crystal","turquoise","turquoise",
-  "citrine","citrine","turquoise","peridot","peridot","aqua","aqua","crystal","crystal","amethyst",
-  "moon","rose","rose","moon","lapis","turquoise","turquoise","lapis","onyx","garnet",
-  "garnet","onyx","tiger","citrine","citrine","peridot","onyx","moon","moon","rose"
+const NUM_TO_RYU = [
+  "ouka","shien","guren","kongou","shien","ouka","raimei","suiryoku","suiryoku","raimei",
+  "kokuyou","kokuyou","suiryoku","tsukuyomi","tsukuyomi","hakugin","shien","hakugin","raimei","kongou",
+  "souten","souten","ten","ten","souten","kongou","kongou","hakugin","kaze","kaze",
+  "guren","guren","kaze","kokuyou","kokuyou","suiryoku","suiryoku","hakugin","hakugin","shien",
+  "tsukuyomi","ouka","ouka","tsukuyomi","souten","kaze","kaze","souten","ten","raimei",
+  "raimei","ten","kongou","guren","guren","kokuyou","ten","tsukuyomi","tsukuyomi","ouka"
 ];
 
 function getNum(y,m,d){ const a=[0,31,59,30,0,31,1,32,3,33,4,34]; let b=(y-1)*365+Math.floor((y-1)/4)-Math.floor((y-1)/100)+Math.floor((y-1)/400); const lp=(y%4===0&&y%100!==0)||y%400===0; return (b+a[m-1]+((lp&&m>=3)?1:0)+d)%60; }
 
-// 今の波動（設問）→ 必要な石・お告げ補正
-const WANT_STONE = { love:"rose", money:"citrine", peace:"amethyst", power:"peridot" };
-const WANT_WORD  = { love:"愛とご縁", money:"豊かさと成功", peace:"安らぎと癒やし", power:"前へ進む力" };
+// 今の波動（設問）
+const WANT_AXIS = { love:"愛とご縁の波動", money:"豊かさと勝負の波動", peace:"癒やしと浄化の波動", power:"突破と前進の波動" };
+const WANT_TIP = {
+  love:"人との縁を結ぶ時。心を開き、与えることから始めなさい。",
+  money:"勝負と豊かさの時。守りに入らず、好機に踏み込みなさい。",
+  peace:"立ち止まり、整える時。無理に進まず、自分を労わりなさい。",
+  power:"道を切り拓く時。迷いを断ち、一歩を決めなさい。"
+};
 const STATE_WORD = { calm:"いま、あなたの波動は静かに整っている。", shake:"いま、あなたの波動は揺らぎ、わずかに乱れが見える。", burn:"いま、あなたの波動は熱く高ぶっている。" };
-const FLOW_WORD  = { up:"運気は上昇の流れにある。追い風を逃さぬように。", flat:"運気は停滞の淵にある。今は石で流れを整える時。", down:"運気は下りの局面にある。だが、底を打てば必ず昇る。" };
-// 波動レベル補正
+const FLOW_WORD  = { up:"運気は上昇の流れにある。追い風を逃さぬように。", flat:"運気は停滞の淵にある。今は波動を整える時。", down:"運気は下りの局面にある。だが、底を打てば必ず昇る。" };
 const STATE_ADJ = { calm:6, shake:-8, burn:3 };
 const FLOW_ADJ  = { up:6, flat:-3, down:-7 };
 
@@ -252,22 +227,22 @@ function checkLine(){ if(LINE_URL.includes("XXXXXXX")){alert("（設定メモ）
   document.getElementById('socialProof').innerHTML=`🐉 本日 <b>${today.toLocaleString()}</b>名が霊視を受け／延べ <b>${total.toLocaleString()}</b>名を視てまいりました`; })();
 
 function saveCard(){ const el=document.getElementById('captureArea'); if(!el||typeof html2canvas==='undefined'){alert("準備中です。");return;}
-  html2canvas(el,{scale:2,backgroundColor:"#1a0d33"}).then(c=>{const a=document.createElement('a');a.download='守護霊石診断_波動霊石院.png';a.href=c.toDataURL('image/png');a.click();}); }
+  html2canvas(el,{scale:2,backgroundColor:"#1a0d33"}).then(c=>{const a=document.createElement('a');a.download='守護龍診断_波動霊石院.png';a.href=c.toDataURL('image/png');a.click();}); }
 
-function compatScore(me,you){ const S=STONE[me]; let b=58; if(S.good.includes(you))b=92; else if(S.bad.includes(you))b=38; else if(STONE[you].good.includes(me))b=80; else if(STONE[you].bad.includes(me))b=46; if(me===you)b=Math.max(b,74); return Math.max(25,Math.min(99,b)); }
-function compatComment(s,me,you){ const a=STONE[me].name,b=STONE[you].name;
-  if(s>=90)return `二つの波動は響き合う。${a}と${b}は重ね持つことで力を増す、得難き組み合わせ。`;
-  if(s>=75)return `${a}と${b}は心地よく調和する。共に身につければ日々が整うだろう。`;
-  if(s>=55)return `${a}と${b}は個性が異なる。場に応じて使い分けるがよい。`;
-  return `${a}と${b}は波が異なる。シーンを分けて持つことを勧める。`; }
-function shindanAisho(){ const me=window.__myStone; if(!me){alert("先にソヨンに視てもらいなさい🐉");return;}
+function compatScore(me,you){ const S=RYU[me]; let b=58; if(S.good.includes(you))b=92; else if(S.bad.includes(you))b=38; else if(RYU[you].good.includes(me))b=80; else if(RYU[you].bad.includes(me))b=46; if(me===you)b=Math.max(b,74); return Math.max(25,Math.min(99,b)); }
+function compatComment(s,me,you){ const a=RYU[me].name,b=RYU[you].name;
+  if(s>=90)return `二龍は響き合う。${a}と${b}は互いの波動を高め合う、得難き縁。`;
+  if(s>=75)return `${a}と${b}は心地よく調和する。共にあれば日々が整うだろう。`;
+  if(s>=55)return `${a}と${b}は気質が異なる。違いを認め合えば、良き縁となる。`;
+  return `${a}と${b}は波が異なる。間合いを大切にすれば、学びの縁となる。`; }
+function shindanAisho(){ const me=window.__myRyu; if(!me){alert("先にソヨンに視てもらいなさい🐉");return;}
   const y=+document.getElementById('pyear').value,mo=+document.getElementById('pmonth').value,d=+document.getElementById('pday').value;
-  const you=NUM_TO_STONE[getNum(y,mo,d)]; const s=compatScore(me,you);
+  const you=NUM_TO_RYU[getNum(y,mo,d)]; const s=compatScore(me,you);
   document.getElementById('aishoResult').innerHTML=`
     <div class="aisho-card">
-      <div class="aisho-pair">${STONE[me].emoji} <span>×</span> ${STONE[you].emoji}</div>
-      <div class="aisho-names">${STONE[me].name} × ${STONE[you].name}</div>
-      <div class="aisho-score">波動の相性 <b>${s}</b><small>%</small></div>
+      <div class="aisho-pair">${RYU[me].emoji} <span>×</span> ${RYU[you].emoji}</div>
+      <div class="aisho-names">${RYU[me].name} × ${RYU[you].name}</div>
+      <div class="aisho-score">龍の相性 <b>${s}</b><small>%</small></div>
       <div class="lm-bar" style="margin:8px 0;"><div class="lm-fill" style="width:${s}%;"></div></div>
       <div class="aisho-comment">${compatComment(s,me,you)}</div>
       <a class="unlock-btn" style="margin-top:12px;display:inline-block;" href="${LINE_URL}" target="_blank" rel="noopener" onclick="return checkLine();">📱 二人に合う石組みをLINEで視る</a>
@@ -276,27 +251,24 @@ function shindanAisho(){ const me=window.__myStone; if(!me){alert("先にソヨ�
 
 function uranau(){
   const y=+yearSel.value,m=+monthSel.value,d=+daySel.value;
-  const key=NUM_TO_STONE[getNum(y,m,d)]; window.__myStone=key; const S=STONE[key];
-  // 設問（今の波動）
-  const q1=document.getElementById('q1').value, q2=document.getElementById('q2').value, q3=document.getElementById('q3').value;
+  const key=NUM_TO_RYU[getNum(y,m,d)]; window.__myRyu=key; const S=RYU[key];
+  const q1=document.getElementById('q1').value,q2=document.getElementById('q2').value,q3=document.getElementById('q3').value;
   const waveNow=Math.max(40,Math.min(99, S.wave + (STATE_ADJ[q1]||0) + (FLOW_ADJ[q3]||0)));
-  const needKey=WANT_STONE[q2]; const N=STONE[needKey]; const needBuy=BUY_LINKS[needKey]||SHOP_URL;
-  const sameStone=(needKey===key);
-  const goodE=S.good.map(g=>STONE[g].emoji+STONE[g].name).join("・");
-  const badE=S.bad.map(g=>STONE[g].emoji+STONE[g].name).join("・");
-  const buyUrl=BUY_LINKS[key]||SHOP_URL;
-  const shareText=`【波動霊石院】院主ソヨンが視た私の守護霊石は「${S.name}」🐉 (${S.nick})\n波動レベル${waveNow} / 上位${S.rarity}%！\nあなたの守護霊石は？▼`;
+  const goodE=S.good.map(g=>RYU[g].emoji+RYU[g].name).join("・");
+  const badE=S.bad.map(g=>RYU[g].emoji+RYU[g].name).join("・");
+  const shareText=`【波動霊石院】院主ソヨンが視た私の守護龍は「${S.name}（${S.yomi}）」🐉\n${S.code}／波動レベル${waveNow}・上位${S.rarity}%！\nあなたの守護龍は？▼`;
 
   const res=document.getElementById('result');
   res.innerHTML=`
     <div id="captureArea" style="padding:14px;border-radius:20px;background:#1a0d33;">
-    <div class="rarity-badge">🏆 上位 ${S.rarity}% の希少な守護霊石</div>
+    <div class="rarity-badge">🏆 上位 ${S.rarity}% の希少な守護龍</div>
     <div class="hero-card" style="background:linear-gradient(135deg,${S.color},${S.color}99);">
       <div class="aura"></div>
       <div class="hero-emoji">${S.emoji}</div>
-      <div class="hero-nick">${S.nick}</div>
+      <div class="hero-nick">あなたの守護龍</div>
       <div class="hero-name">${S.name}</div>
-      <div class="hero-catch">守護の軸：${S.keep}</div>
+      <div class="hero-yomi">― ${S.yomi} ―</div>
+      <div class="hero-catch">${S.catch}</div>
     </div>
     <div class="wave-meter">
       <div class="lbl"><span>🐉 今のあなたの波動レベル</span><b>${waveNow}</b></div>
@@ -306,48 +278,38 @@ function uranau(){
     </div><!-- /captureArea -->
 
     <div class="oracle"><h4>🔮 院主ソヨンのお告げ</h4><p>「${STATE_WORD[q1]}${FLOW_WORD[q3]}<br><br>${S.oracle}」</p></div>
-    <div class="sec"><h4>💠 ${S.name}の意味（言い伝え）</h4>${S.mean}</div>
 
-    ${sameStone ? `
-    <div class="oracle" style="border-color:rgba(126,255,179,.4);">
-      <h4>✨ 今あなたに必要な石</h4>
-      <p>あなたが今求める「${WANT_WORD[q2]}」。それを司るのは、まさにあなたの守護霊石「${S.name}」そのもの。今このタイミングで持つべき石が、生まれ持った石と重なっている――稀なる導きです。</p>
-    </div>` : `
-    <div class="buy-box" style="border-color:rgba(126,255,179,.5);">
-      <div style="font-size:0.78rem;color:#8effc0;font-weight:bold;margin-bottom:4px;">✨ 今あなたに必要な石</div>
-      <div class="stone-img">${N.emoji}</div>
-      <h3>${N.name}</h3>
-      <p style="font-size:0.86rem;line-height:1.8;color:#ece4ff;margin:6px 0;">今のあなたが求める「${WANT_WORD[q2]}」を司る石。守護霊石「${S.name}」と重ね持つことで、今の波動を整える助けとなるでしょう。</p>
-      <div class="price">¥${N.price.toLocaleString()}〜 <small>（${N.name}ブレスレット）</small></div>
-      <a class="buy-btn" href="${needBuy}" target="_blank" rel="noopener">🛒 ${N.name}を授かる</a>
-      <p class="buy-note">受注制作のため発送まで約5〜10日。※効果効能を保証するものではありません</p>
-    </div>`}
-
-    <div class="buy-box">
-      <div class="stone-img">${S.emoji}✨</div>
-      <h3>あなたの守護霊石「${S.name}」</h3>
-      <div class="price">¥${S.price.toLocaleString()}〜 <small>（波動を込めた天然石ブレスレット）</small></div>
-      <a class="buy-btn" href="${buyUrl}" target="_blank" rel="noopener">🛒 この守護霊石を授かる</a>
-      <p class="buy-note">お守りとして身につけたい方へ。一つひとつ心を込めた受注制作のため、発送まで約5〜10日いただきます。※医療・治療・効果効能を保証するものではありません</p>
+    <div class="code-row">
+      <div class="code-cell"><span>魂コード</span><b>${S.code}</b></div>
+      <div class="code-cell"><span>波動軸</span><b>${S.jiku}</b></div>
     </div>
 
-    <div class="lucky-row">
-      <div class="lucky"><span>🎨 ラッキーカラー</span><b>${S.lucky}</b></div>
-      <div class="lucky"><span>📅 ラッキー曜日</span><b>${S.day}</b></div>
-      <div class="lucky"><span>💠 守護の軸</span><b>${S.keep}</b></div>
+    <div class="oracle" style="border-color:rgba(126,255,179,.4);">
+      <h4>✨ 今あなたに必要な波動</h4>
+      <p>あなたが今求める「${WANT_AXIS[q2]}」。${WANT_TIP[q2]}<br>この波動を宿す一点物の霊石が、いまのあなたを支えるでしょう。</p>
     </div>
 
     <div class="locked">
-      <div class="sec"><h4>💡 ソヨンからあなたへの導き</h4>${S.advice}</div>
+      <div class="sec"><h4>💡 ${S.name}からあなたへの導き</h4>${S.advice}</div>
       <div class="compat">
-        <div class="compat-box good"><span>💎 響き合う石</span><b>${goodE}</b></div>
-        <div class="compat-box bad"><span>⚡ 組み合わせ注意</span><b>${badE}</b></div>
+        <div class="compat-box good"><span>🐉 響き合う龍</span><b>${goodE}</b></div>
+        <div class="compat-box bad"><span>⚡ 間合いに注意</span><b>${badE}</b></div>
       </div>
       <div class="lock-overlay">
         <div class="big">🔒🐉</div>
-        <p>「ソヨンからの導き」と「響き合う石」は<br>LINEで友だち追加すると視られます</p>
+        <p>「ソヨンからの導き」と「響き合う龍」は<br>LINEで友だち追加すると視られます</p>
         <a class="unlock-btn" href="${LINE_URL}" target="_blank" rel="noopener" onclick="return checkLine();">📱 LINEで結果を授かる</a>
       </div>
+    </div>
+
+    <!-- 一点物の霊石処方（物販の核） -->
+    <div class="shoho">
+      <div class="dragon">🐉✨</div>
+      <h3>あなたに共鳴する“一点物の霊石”を処方します</h3>
+      <p>院主ソヨンが、あなたの守護龍「${S.name}」と今の波動を視て、共鳴する一点物の霊石をお選びします。すべて浄化・波動調整済み。同じ波動の石は二つとありません。</p>
+      <a class="shoho-btn mercari" href="${SHOP_URL}" target="_blank" rel="noopener">🛒 一点物の霊石を今すぐ見る（出品一覧）</a>
+      <a class="shoho-btn" href="${LINE_URL}" target="_blank" rel="noopener" onclick="return checkLine();" style="margin-top:10px;">📱 LINEで“あなたに合う石”を処方してもらう</a>
+      <p class="shoho-note">一点物のため再入荷はありません。気になった石こそ、今のあなたに必要な縁。<br>※エンタメ・お守り目的の品です。効果効能を保証するものではありません。</p>
     </div>
 
     <button class="save-btn" onclick="saveCard()">📸 結果を画像で保存（SNSにシェア）</button>
@@ -359,24 +321,24 @@ function uranau(){
     <p style="font-size:0.76rem;color:#a892d6;margin-top:10px;">あなたの誕生日：${y}年${m}月${d}日</p>
 
     <div class="aisho-section">
-      <h3>💎 大切な人との「波動の相性」</h3>
+      <h3>🐉 大切な人との「龍の相性」</h3>
       <p class="aisho-sub">相手の生年月日を入れて視る（ペア・贈り物の石選びにも）</p>
       <div class="input-row">
         <div class="field"><label>年</label><select id="pyear"></select></div>
         <div class="field"><label>月</label><select id="pmonth"></select></div>
         <div class="field"><label>日</label><select id="pday"></select></div>
       </div>
-      <button class="aisho-btn" onclick="shindanAisho()">波動の相性を視る 💠</button>
+      <button class="aisho-btn" onclick="shindanAisho()">龍の相性を視る 🐉</button>
       <div id="aishoResult"></div>
     </div>
 
     <div class="line-cta">
-      <h3>🐉 ${S.name}を授かったあなたへ ― ソヨンより</h3>
+      <h3>🐉 守護龍「${S.name}」を授かったあなたへ ― ソヨンより</h3>
       <div class="blur">2026年、あなたの波動が大きく動くのは◯月。今のあなたに必要な石組みは△△で、龍の導きが強まる時期は……（続きはLINEにて）</div>
       <ul class="line-list">
-        <li>✅ あなたの守護霊石・全文の霊視結果</li>
+        <li>✅ あなたの守護龍・魂コードの全文リーディング</li>
         <li>✅ 2026年の波動の流れと開運の導き</li>
-        <li>✅ あなたに合う石組み・お守りの提案</li>
+        <li>✅ あなたに共鳴する一点物の霊石の処方</li>
       </ul>
       <a class="line-btn" href="${LINE_URL}" target="_blank" rel="noopener" onclick="return checkLine();">📱 波動霊石院のLINEで続きを授かる</a>
       <p class="line-sub">友だち追加は無料 / ブロックはいつでもできます</p>
@@ -389,7 +351,7 @@ function uranau(){
   py.value=1990;pm.value=1;
   const fp=()=>{const dim=new Date(+py.value,+pm.value,0).getDate();pd.innerHTML="";for(let dd=1;dd<=dim;dd++)pd.add(new Option(dd+"日",dd));};
   fp(); py.onchange=fp; pm.onchange=fp;
-  setTimeout(()=>{const f=document.getElementById('waveFill'); if(f)f.style.width=S.wave+"%";},150);
+  setTimeout(()=>{const f=document.getElementById('waveFill'); if(f)f.style.width=waveNow+"%";},150);
   res.scrollIntoView({behavior:"smooth",block:"start"});
 }
 </script>
