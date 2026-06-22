@@ -323,18 +323,6 @@ function uranau(){
 
     <p style="font-size:0.76rem;color:#a892d6;margin-top:10px;">あなたの誕生日：${y}年${m}月${d}日</p>
 
-    <div class="aisho-section">
-      <h3>🐉 大切な人との「龍の相性」</h3>
-      <p class="aisho-sub">相手の生年月日を入れて視る（ペア・贈り物の石選びにも）</p>
-      <div class="input-row">
-        <div class="field"><label>年</label><select id="pyear"></select></div>
-        <div class="field"><label>月</label><select id="pmonth"></select></div>
-        <div class="field"><label>日</label><select id="pday"></select></div>
-      </div>
-      <button class="aisho-btn" onclick="shindanAisho()">龍の相性を視る 🐉</button>
-      <div id="aishoResult"></div>
-    </div>
-
     <div class="line-cta">
       <h3>🐉 守護龍「${S.name}」を授かったあなたへ ― ソヨンより</h3>
       <div class="blur">2026年、あなたの波動が大きく動くのは◯月。今のあなたに必要な石組みは△△で、龍の導きが強まる時期は……（続きはLINEにて）</div>
@@ -348,12 +336,6 @@ function uranau(){
     </div>
   `;
   res.classList.remove('show'); void res.offsetWidth; res.classList.add('show');
-  const py=document.getElementById('pyear'),pm=document.getElementById('pmonth'),pd=document.getElementById('pday');
-  for(let yy=2025;yy>=1930;yy--)py.add(new Option(yy+"年",yy));
-  for(let mm=1;mm<=12;mm++)pm.add(new Option(mm+"月",mm));
-  py.value=1990;pm.value=1;
-  const fp=()=>{const dim=new Date(+py.value,+pm.value,0).getDate();pd.innerHTML="";for(let dd=1;dd<=dim;dd++)pd.add(new Option(dd+"日",dd));};
-  fp(); py.onchange=fp; pm.onchange=fp;
   setTimeout(()=>{const f=document.getElementById('waveFill'); if(f)f.style.width=waveNow+"%";},150);
   res.scrollIntoView({behavior:"smooth",block:"start"});
 }
