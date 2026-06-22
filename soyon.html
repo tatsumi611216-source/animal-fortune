@@ -81,7 +81,7 @@
   .compat-box.bad  { background:rgba(157,123,255,.14); color:#c8b3ff; }
 
   .locked { position:relative; }
-  .locked .sec { filter:blur(6px); user-select:none; pointer-events:none; }
+  .locked .sec, .locked .oracle, .locked .code-row, .locked .compat { filter:blur(6px); user-select:none; pointer-events:none; }
   .lock-overlay { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; background:linear-gradient(180deg, rgba(26,13,51,.3), rgba(26,13,51,.94)); border-radius:14px; text-align:center; padding:14px; }
   .lock-overlay .big { font-size:1.7rem; }
   .lock-overlay p { font-size:0.9rem; font-weight:bold; color:#ffd86f; margin:6px 0 12px; line-height:1.7; }
@@ -277,19 +277,25 @@ function uranau(){
     <div style="font-size:0.66rem;color:#7d6aa8;margin:-4px 0 12px;">― 波動霊石院 ―</div>
     </div><!-- /captureArea -->
 
-    <div class="oracle"><h4>🔮 院主ソヨンのお告げ</h4><p>「${STATE_WORD[q1]}${FLOW_WORD[q3]}<br><br>${S.oracle}」</p></div>
+    <div class="oracle"><h4>🔮 院主ソヨンのお告げ</h4><p>「${STATE_WORD[q1]}${FLOW_WORD[q3]}<br><br>${S.name}が、あなたに伝えたい言葉がある……」</p></div>
 
-    <div class="code-row">
-      <div class="code-cell"><span>魂コード</span><b>${S.code}</b></div>
-      <div class="code-cell"><span>波動軸</span><b>${S.jiku}</b></div>
+    <!-- 一点物の霊石（登録前でも見える＝販売導線） -->
+    <div class="shoho">
+      <div class="dragon">🐉✨</div>
+      <h3>あなたに共鳴する“一点物の霊石”</h3>
+      <p>院主ソヨンが浄化・波動調整した一点物の霊石。同じ波動の石は二つとありません。気になった石こそ、今のあなたに必要な縁です。</p>
+      <a class="shoho-btn mercari" href="${SHOP_URL}" target="_blank" rel="noopener">🛒 一点物の霊石を見る（メルカリ）</a>
+      <p class="shoho-note">一点物のため再入荷はありません。※エンタメ・お守り目的の品です。効果効能を保証するものではありません。</p>
     </div>
 
-    <div class="oracle" style="border-color:rgba(126,255,179,.4);">
-      <h4>✨ 今あなたに必要な波動</h4>
-      <p>あなたが今求める「${WANT_AXIS[q2]}」。${WANT_TIP[q2]}<br>この波動を宿す一点物の霊石が、いまのあなたを支えるでしょう。</p>
-    </div>
-
+    <!-- 占いの続き＝LINE登録必須 -->
     <div class="locked">
+      <div class="oracle"><h4>🔮 お告げの続き</h4><p>「${S.oracle}」</p></div>
+      <div class="code-row">
+        <div class="code-cell"><span>魂コード</span><b>${S.code}</b></div>
+        <div class="code-cell"><span>波動軸</span><b>${S.jiku}</b></div>
+      </div>
+      <div class="sec"><h4>✨ 今あなたに必要な波動</h4>あなたが今求める「${WANT_AXIS[q2]}」。${WANT_TIP[q2]}</div>
       <div class="sec"><h4>💡 ${S.name}からあなたへの導き</h4>${S.advice}</div>
       <div class="compat">
         <div class="compat-box good"><span>🐉 響き合う龍</span><b>${goodE}</b></div>
@@ -297,19 +303,9 @@ function uranau(){
       </div>
       <div class="lock-overlay">
         <div class="big">🔒🐉</div>
-        <p>「ソヨンからの導き」と「響き合う龍」は<br>LINEで友だち追加すると視られます</p>
-        <a class="unlock-btn" href="${LINE_URL}" target="_blank" rel="noopener" onclick="return checkLine();">📱 LINEで結果を授かる</a>
+        <p>占いの続き（お告げ全文・魂コード・今必要な波動・導き・相性の龍）は<br><b>ソヨンのLINE登録</b>で視られます</p>
+        <a class="unlock-btn" href="${LINE_URL}" target="_blank" rel="noopener" onclick="return checkLine();">📱 LINE登録で続きを視る</a>
       </div>
-    </div>
-
-    <!-- 一点物の霊石処方（物販の核） -->
-    <div class="shoho">
-      <div class="dragon">🐉✨</div>
-      <h3>あなたに共鳴する“一点物の霊石”を処方します</h3>
-      <p>院主ソヨンが、あなたの守護龍「${S.name}」と今の波動を視て、共鳴する一点物の霊石をお選びします。すべて浄化・波動調整済み。同じ波動の石は二つとありません。</p>
-      <a class="shoho-btn mercari" href="${SHOP_URL}" target="_blank" rel="noopener">🛒 一点物の霊石を今すぐ見る（出品一覧）</a>
-      <a class="shoho-btn" href="${LINE_URL}" target="_blank" rel="noopener" onclick="return checkLine();" style="margin-top:10px;">📱 LINEで“あなたに合う石”を処方してもらう</a>
-      <p class="shoho-note">一点物のため再入荷はありません。気になった石こそ、今のあなたに必要な縁。<br>※エンタメ・お守り目的の品です。効果効能を保証するものではありません。</p>
     </div>
 
     <button class="save-btn" onclick="saveCard()">📸 結果を画像で保存（SNSにシェア）</button>
