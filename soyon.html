@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>波動霊石院｜院主ソヨンの龍占い 🐉 生年月日であなたの守護龍と魂コードを視る</title>
+<title>波動霊石院｜院主ソヨンの龍占い 🐉 生年月日であなたの守護龍を視る</title>
 <meta property="og:title" content="🐉 波動霊石院｜院主ソヨンが視る、あなたの守護龍と魂コード">
 <meta property="og:description" content="生年月日を入れるだけ。龍波動伝道師ソヨンが、あなたの守護龍・魂コード・波動軸を視ます。無料診断。">
 <meta property="og:type" content="website">
@@ -36,9 +36,9 @@
   button.main { background: linear-gradient(90deg,#ffd86f,#ff9e3d); color:#2a1648; border:none; padding:15px 40px; border-radius:30px; font-size:1.08rem; font-weight:bold; cursor:pointer; box-shadow:0 8px 24px rgba(255,158,61,.4); letter-spacing:1px; }
   button.main:hover { transform:translateY(-2px); }
   .social-proof { font-size:0.76rem; color:#a892d6; margin-top:12px; } .social-proof b { color:#ffd86f; }
-  #result { margin-top:28px; opacity:0; max-height:0; overflow:hidden; transition:opacity .6s, max-height .6s; }
-  #result.show { opacity:1; max-height:6000px; }
 
+  #result { display:none; }
+  .again-btn { background:transparent; color:#a892d6; border:1px solid rgba(255,216,111,.3); padding:9px 18px; border-radius:20px; font-size:0.8rem; cursor:pointer; margin-bottom:16px; }
   .rarity-badge { display:inline-block; background:linear-gradient(90deg,#ffd86f,#ff7eb3); color:#2a1648; font-weight:bold; font-size:0.86rem; padding:7px 18px; border-radius:20px; margin-bottom:14px; box-shadow:0 6px 18px rgba(255,126,179,.35); animation:shine 2.5s infinite; }
   @keyframes shine { 0%,100%{filter:brightness(1);} 50%{filter:brightness(1.2);} }
   .hero-card { border-radius:20px; padding:30px 20px; color:#fff; box-shadow:0 14px 40px rgba(0,0,0,.5); margin-bottom:14px; position:relative; overflow:hidden; border:1px solid rgba(255,255,255,.25); }
@@ -51,147 +51,88 @@
   .hero-name { font-size:1.85rem; font-weight:900; margin:2px 0; position:relative; text-shadow:0 2px 8px rgba(0,0,0,.4); }
   .hero-yomi { font-size:0.78rem; opacity:.9; position:relative; }
   .hero-catch { font-size:0.9rem; opacity:.96; position:relative; margin-top:4px; }
-
   .wave-meter { margin:4px 0 14px; }
   .wave-meter .lbl { display:flex; justify-content:space-between; font-size:0.8rem; color:#c8b3ff; margin-bottom:5px; }
   .lm-bar { height:13px; border-radius:10px; background:rgba(255,255,255,.1); overflow:hidden; }
   .lm-fill { height:100%; border-radius:10px; width:0; transition:width 1.2s ease; background:linear-gradient(90deg,#9d7bff,#ffd86f); }
-
   .oracle { text-align:left; background:linear-gradient(135deg, rgba(255,216,111,.12), rgba(157,123,255,.12)); border:1px solid rgba(255,216,111,.25); border-radius:14px; padding:18px; margin-bottom:12px; }
   .oracle h4 { font-size:0.9rem; color:#ffd86f; margin-bottom:6px; } .oracle p { font-size:0.92rem; line-height:1.9; color:#ece4ff; }
-  .sec { text-align:left; background:rgba(255,255,255,.05); border-radius:14px; padding:16px 18px; font-size:0.9rem; line-height:1.8; margin-bottom:12px; }
-  .sec h4 { font-size:0.9rem; color:#c8b3ff; margin-bottom:4px; }
   .code-row { display:flex; gap:8px; margin:4px 0 14px; }
   .code-cell { flex:1; background:rgba(255,255,255,.05); border:1px solid rgba(255,216,111,.15); border-radius:12px; padding:11px 6px; }
   .code-cell span { display:block; font-size:0.66rem; color:#a892d6; margin-bottom:3px; } .code-cell b { font-size:0.82rem; color:#ffd86f; }
 
-  /* 一点物処方 CTA */
-  .shoho { background:linear-gradient(135deg, rgba(255,216,111,.16), rgba(255,126,179,.12)); border:1px solid rgba(255,216,111,.45); border-radius:18px; padding:24px 18px; margin:6px 0 14px; }
-  .shoho .dragon { font-size:2.8rem; }
-  .shoho h3 { font-size:1.05rem; color:#ffd86f; margin:6px 0; }
-  .shoho p { font-size:0.86rem; line-height:1.8; color:#ece4ff; margin:6px 0 14px; }
-  .shoho-btn { display:inline-block; background:#06c755; color:#fff; text-decoration:none; font-weight:bold; font-size:1.02rem; padding:15px 28px; border-radius:30px; box-shadow:0 8px 22px rgba(6,199,85,.45); }
-  .shoho-btn.mercari { background:linear-gradient(90deg,#ff4d4d,#ff7e3d); box-shadow:0 8px 22px rgba(255,77,77,.45); }
-  .shoho-note { font-size:0.68rem; color:#a892d6; margin-top:10px; line-height:1.5; }
+  /* LINEで続きを受け取る */
+  .line-get { background:linear-gradient(135deg, rgba(6,199,85,.14), rgba(6,199,85,.05)); border:1px solid #06c755; border-radius:18px; padding:24px 18px; margin:6px 0 14px; }
+  .line-get .big { font-size:1.9rem; }
+  .line-get h3 { font-size:1.05rem; color:#7be89b; margin:6px 0; }
+  .line-get .keyword { display:inline-block; background:#06c755; color:#fff; font-weight:bold; padding:4px 14px; border-radius:8px; margin:4px 0 10px; font-size:1rem; }
+  .line-get ul { text-align:left; font-size:0.85rem; color:#d8c8ff; margin:6px auto 16px; max-width:300px; } .line-get li { list-style:none; margin:5px 0; }
+  .line-btn { display:inline-block; background:#06c755; color:#fff; text-decoration:none; font-weight:bold; font-size:1.05rem; padding:15px 30px; border-radius:30px; box-shadow:0 8px 22px rgba(6,199,85,.45); }
+  .line-step { font-size:0.74rem; color:#9bd9b0; margin-top:10px; line-height:1.6; }
 
-  .compat { display:flex; gap:10px; margin:6px 0 14px; }
-  .compat-box { flex:1; border-radius:14px; padding:12px 8px; font-size:0.8rem; line-height:1.6; }
-  .compat-box span { display:block; font-weight:bold; margin-bottom:4px; }
-  .compat-box.good { background:rgba(118,255,179,.12); color:#8effc0; }
-  .compat-box.bad  { background:rgba(157,123,255,.14); color:#c8b3ff; }
-
-  .locked { position:relative; }
-  .locked .sec, .locked .oracle, .locked .code-row, .locked .compat { filter:blur(6px); user-select:none; pointer-events:none; }
-  .locked.unlocked .sec, .locked.unlocked .oracle, .locked.unlocked .code-row, .locked.unlocked .compat { filter:none; user-select:auto; pointer-events:auto; }
-  .locked.unlocked .lock-overlay { display:none; }
-  .lock-overlay { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; background:linear-gradient(180deg, rgba(26,13,51,.3), rgba(26,13,51,.94)); border-radius:14px; text-align:center; padding:14px; }
-  .lock-overlay .big { font-size:1.7rem; }
-  .lock-overlay p { font-size:0.9rem; font-weight:bold; color:#ffd86f; margin:6px 0 12px; line-height:1.7; }
-  .unlock-btn { background:#06c755; color:#fff; text-decoration:none; font-weight:bold; font-size:1rem; padding:13px 26px; border-radius:28px; box-shadow:0 8px 20px rgba(6,199,85,.4); }
   .save-btn { width:100%; margin-top:10px; background:transparent; color:#ffd86f; border:1px solid #ffd86f; font-weight:bold; font-size:0.9rem; padding:12px 0; border-radius:26px; cursor:pointer; }
-  .share-row { display:flex; gap:10px; margin-bottom:6px; }
+  .share-row { display:flex; gap:10px; margin:10px 0 6px; }
   .share-btn { flex:1; text-decoration:none; color:#fff; font-weight:bold; font-size:0.9rem; padding:13px 0; border-radius:26px; }
   .share-btn.x { background:#000; } .share-btn.ln { background:#06c755; }
-
-  .aisho-section { margin-top:20px; background:rgba(255,255,255,.05); border:1px solid rgba(255,216,111,.2); border-radius:18px; padding:22px 18px; }
-  .aisho-section h3 { font-size:1.08rem; color:#ffd86f; margin-bottom:2px; }
-  .aisho-sub { font-size:0.78rem; color:#a892d6; margin-bottom:14px; }
-  .aisho-btn { background:linear-gradient(90deg,#9d7bff,#ffd86f); color:#2a1648; border:none; padding:13px 34px; border-radius:28px; font-size:1rem; font-weight:bold; cursor:pointer; }
-  .aisho-card { margin-top:18px; background:rgba(26,13,51,.7); border:1px solid rgba(255,216,111,.25); border-radius:16px; padding:20px; }
-  .aisho-pair { font-size:2.4rem; } .aisho-pair span { font-size:1.3rem; color:#ffd86f; }
-  .aisho-names { font-size:1rem; font-weight:bold; color:#ffd86f; margin:4px 0; }
-  .aisho-score { font-size:1.2rem; } .aisho-score b { font-size:2.3rem; color:#ffd86f; } .aisho-score small{font-size:1rem;}
-  .aisho-comment { font-size:0.9rem; line-height:1.7; color:#ece4ff; text-align:left; margin-top:8px; }
-
-  .line-cta { margin-top:22px; background:linear-gradient(135deg, rgba(6,199,85,.12), rgba(6,199,85,.05)); border:1px dashed #06c755; border-radius:16px; padding:22px 20px; }
-  .line-cta h3 { font-size:1rem; color:#7be89b; margin:6px 0 4px; }
-  .line-cta .blur { filter:blur(5px); user-select:none; color:#bfa9e6; font-size:0.85rem; line-height:1.7; margin:8px 0 14px; text-align:left; }
-  .line-list { text-align:left; font-size:0.85rem; color:#d8c8ff; margin:4px 0 16px; } .line-list li { margin:4px 0; list-style:none; }
-  .line-btn { display:inline-flex; align-items:center; gap:8px; background:#06c755; color:#fff; text-decoration:none; padding:14px 30px; border-radius:30px; font-weight:bold; font-size:1.05rem; box-shadow:0 8px 20px rgba(6,199,85,.4); }
-  .line-sub { font-size:0.72rem; color:#a892d6; margin-top:10px; }
   .footer-note { font-size:0.66rem; color:#7d6aa8; margin-top:22px; line-height:1.7; }
 </style>
 </head>
 <body>
 <div class="card">
-  <div class="crest">🐉</div>
-  <p class="temple">― 波 動 霊 石 院 ―</p>
-  <h1>龍占い・守護龍診断</h1>
-  <p class="lead">生年月日に宿る龍の気配を、院主ソヨンが霊視する。<br>あなたの「守護龍」と「魂コード」、いま必要な波動軸を視ます。</p>
 
-  <div class="master">
-    <div class="ava">🔮</div>
-    <div class="txt"><b>龍波動伝道師 ハン・ソヨン</b><br>15年前、天元龍様との邂逅により【波動霊視】の力を授かる。魂の震えを読み、あなたに必要な霊石を処方する。</div>
+  <div id="inputView">
+    <div class="crest">🐉</div>
+    <p class="temple">― 波 動 霊 石 院 ―</p>
+    <h1>龍占い・守護龍診断</h1>
+    <p class="lead">生年月日に宿る龍の気配を、院主ソヨンが霊視する。<br>あなたの「守護龍」と「魂コード」、いま必要な波動軸を視ます。</p>
+
+    <div class="master">
+      <div class="ava">🔮</div>
+      <div class="txt"><b>龍波動伝道師 ハン・ソヨン</b><br>15年前、天元龍様との邂逅により【波動霊視】の力を授かる。魂の震えを読み、あなたに必要な霊石を処方する。</div>
+    </div>
+
+    <div class="input-row">
+      <div class="field"><label>年</label><select id="year"></select></div>
+      <div class="field"><label>月</label><select id="month"></select></div>
+      <div class="field"><label>日</label><select id="day"></select></div>
+    </div>
+
+    <div class="q-block">
+      <p class="q-title">― 今のあなたの波動を視ます ―</p>
+      <div class="q"><label>Q1. 今の心の状態は？</label>
+        <select id="q1"><option value="calm">凪いでいる・落ち着いている</option><option value="shake">揺れている・不安がある</option><option value="burn">燃えている・気合十分</option></select></div>
+      <div class="q"><label>Q2. いま一番求めているものは？</label>
+        <select id="q2"><option value="love">愛・ご縁</option><option value="money">豊かさ・成功</option><option value="peace">癒やし・安らぎ</option><option value="power">突破・前へ進む力</option></select></div>
+      <div class="q"><label>Q3. 最近の運の流れは？</label>
+        <select id="q3"><option value="up">上向き</option><option value="flat">停滞している</option><option value="down">下り坂に感じる</option></select></div>
+    </div>
+
+    <button class="main" onclick="uranau()">ソヨンに視てもらう 🐉</button>
+    <p class="social-proof" id="socialProof"></p>
   </div>
-
-  <div class="input-row">
-    <div class="field"><label>年</label><select id="year"></select></div>
-    <div class="field"><label>月</label><select id="month"></select></div>
-    <div class="field"><label>日</label><select id="day"></select></div>
-  </div>
-
-  <div class="q-block">
-    <p class="q-title">― 今のあなたの波動を視ます ―</p>
-    <div class="q"><label>Q1. 今の心の状態は？</label>
-      <select id="q1"><option value="calm">凪いでいる・落ち着いている</option><option value="shake">揺れている・不安がある</option><option value="burn">燃えている・気合十分</option></select></div>
-    <div class="q"><label>Q2. いま一番求めているものは？</label>
-      <select id="q2"><option value="love">愛・ご縁</option><option value="money">豊かさ・成功</option><option value="peace">癒やし・安らぎ</option><option value="power">突破・前へ進む力</option></select></div>
-    <div class="q"><label>Q3. 最近の運の流れは？</label>
-      <select id="q3"><option value="up">上向き</option><option value="flat">停滞している</option><option value="down">下り坂に感じる</option></select></div>
-  </div>
-
-  <button class="main" onclick="uranau()">ソヨンに視てもらう 🐉</button>
-  <p class="social-proof" id="socialProof"></p>
 
   <div id="result"></div>
+
   <p class="footer-note">※ 本診断はエンタメ・お守りを目的としたものです。龍・波動・霊石の意味は言い伝えやイメージに基づくもので、医療・治療・効果効能を保証するものではありません。</p>
 </div>
 
 <script>
-// ▼ 設定
-const LINE_URL = "https://line.me/R/ti/p/@dhw5564g";              // 波動霊石院 LINE（lin.eeがあれば差し替え）
-const SHOP_URL = "https://jp.mercari.com/user/profile/861934708"; // 出品中の一点物霊石（メルカリ／BASEができたら差し替え）
+const LINE_URL = "https://line.me/R/ti/p/@dhw5564g";
 
-// ===== 12守護龍データ =====
 const RYU = {
-  ten:{name:"天元龍",yomi:"てんげんりゅう",emoji:"🐉",color:"#6d28d9",jiku:"根源・統べる力",code:"魂コード∞ / 原点",catch:"すべてを統べる根源の龍",rarity:2,wave:88,
-    oracle:"あなたの魂は龍脈の根源に触れている。多くを背負う器ゆえ、時に己を見失う。原点へ還りなさい。",
-    advice:"背負いすぎている。すべてを統べる前に、まず己の中心を取り戻しなさい。",good:["souten","kokuyou"],bad:["guren"]},
-  guren:{name:"紅蓮龍",yomi:"ぐれんりゅう",emoji:"🐉",color:"#c0392b",jiku:"情熱・勝負",code:"魂コード火 / 灼熱",catch:"灼熱の意志を燃やす炎の龍",rarity:6,wave:84,
-    oracle:"あなたの波動は炎のように高ぶっている。勢いは武器だが、焦りは身を焼く。",
-    advice:"勢いのまま動く前に一呼吸。炎は制御してこそ力になる。",good:["raimei","kongou"],bad:["ten"]},
-  souten:{name:"蒼天龍",yomi:"そうてんりゅう",emoji:"🐉",color:"#2563eb",jiku:"叡智・冷静",code:"魂コード天 / 澄眼",catch:"天を見通す叡智の龍",rarity:4,wave:85,
-    oracle:"あなたの魂は高く澄んでいる。だが頭で考えすぎ、心が置き去りになっている。",
-    advice:"考えるほど迷う時は、心の声を信じなさい。",good:["hakugin","tsukuyomi"],bad:["raimei"]},
-  kongou:{name:"金剛龍",yomi:"こんごうりゅう",emoji:"🐉",color:"#b8860b",jiku:"財・決断",code:"魂コード金 / 不動の柱",catch:"富と決断を司る黄金の龍",rarity:5,wave:86,
-    oracle:"あなたの波動には富を引き寄せる強さがある。だが守りに入れば淀む。",
-    advice:"好機は待たない。迷う今こそ、踏み込む時。",good:["guren","raimei"],bad:["tsukuyomi"]},
-  suiryoku:{name:"翠緑龍",yomi:"すいりょくりゅう",emoji:"🐉",color:"#2e8b57",jiku:"癒し・再生",code:"魂コード緑 / 再生",catch:"癒しと再生をもたらす緑の龍",rarity:7,wave:80,
-    oracle:"あなたの波動は深い森のように静かに再生している。無理に急がずともよい。",
-    advice:"傷ついた時は休みなさい。再生は静けさの中で起きる。",good:["ouka","hakugin"],bad:["raimei"]},
-  hakugin:{name:"白銀龍",yomi:"はくぎんりゅう",emoji:"🐉",color:"#94a3b8",jiku:"浄化・縁の整え",code:"魂コード白 / 清光",catch:"穢れを祓う白銀の龍",rarity:6,wave:81,
-    oracle:"あなたの波動は澄んでいるが、古い縁の澱みを纏っている。",
-    advice:"手放すべき縁がある。清めれば、新しい流れが入る。",good:["souten","suiryoku"],bad:["kokuyou"]},
-  kokuyou:{name:"黒曜龍",yomi:"こくようりゅう",emoji:"🐉",color:"#2d2d3a",jiku:"守護・意志",code:"魂コード黒 / 不動の盾",catch:"邪を退ける守護の龍",rarity:3,wave:83,
-    oracle:"あなたの波動は岩のように揺るがない。だが孤独が影を落としている。",
-    advice:"守りを固めすぎるな。心を開ける相手にだけは、盾を下ろしなさい。",good:["ten","kongou"],bad:["hakugin"]},
-  tsukuyomi:{name:"月読龍",yomi:"つくよみりゅう",emoji:"🐉",color:"#64748b",jiku:"縁・直感・女性性",code:"魂コード月 / 満ち欠け",catch:"縁を結ぶ月光の龍",rarity:7,wave:79,
-    oracle:"あなたの波動は月のように満ち欠けする。今は欠けの時、焦らず満ちるを待て。",
-    advice:"巡りには時がある。今動かぬことも、立派な選択。",good:["ouka","souten"],bad:["kongou"]},
-  raimei:{name:"雷鳴龍",yomi:"らいめいりゅう",emoji:"🐉",color:"#f59e0b",jiku:"決断・突破",code:"魂コード雷 / 一閃",catch:"停滞を打ち破る雷の龍",rarity:5,wave:85,
-    oracle:"あなたの波動には道を切り拓く一閃が宿る。だが迷えば雷は鈍る。",
-    advice:"迷いが力を鈍らせている。決めた瞬間、道は開く。",good:["guren","kongou"],bad:["suiryoku"]},
-  ouka:{name:"桜花龍",yomi:"おうかりゅう",emoji:"🐉",color:"#ec6f9e",jiku:"愛・優しさ・縁",code:"魂コード桜 / 慈愛",catch:"愛と慈しみを纏う桜の龍",rarity:8,wave:78,
-    oracle:"あなたの波動は人を想う優しさで満ちている。だが己を後回しにしすぎだ。",
-    advice:"人に注ぐ愛を、まず自分にも向けなさい。",good:["tsukuyomi","suiryoku"],bad:["kokuyou"]},
-  kaze:{name:"風渡龍",yomi:"かぜわたりゅう",emoji:"🐉",color:"#14b8a6",jiku:"自由・旅・対話",code:"魂コード風 / 巡翼",catch:"自由に駆ける風の龍",rarity:6,wave:77,
-    oracle:"あなたの波動は風のように自由だ。だが根を持たねば、ただ流れて終わる。",
-    advice:"自由を活かすには、帰る場所を一つ持ちなさい。",good:["souten","tsukuyomi"],bad:["kokuyou"]},
-  shien:{name:"紫煙龍",yomi:"しえんりゅう",emoji:"🐉",color:"#8b5cf6",jiku:"神秘・霊性・癒し",code:"魂コード紫 / 視霊",catch:"霊性を司る紫煙の龍",rarity:4,wave:82,
-    oracle:"あなたの魂は視えざるものを感じ取る。だが感じ過ぎて疲れている。",
-    advice:"感じ取る力は才。だが時に心を閉じ、休みなさい。",good:["souten","ouka"],bad:["guren"]}
+  ten:{name:"天元龍",yomi:"てんげんりゅう",emoji:"🐉",color:"#6d28d9",jiku:"根源・統べる力",code:"魂コード∞ / 原点",catch:"すべてを統べる根源の龍",rarity:2,wave:88,oracle:"あなたの魂は龍脈の根源に触れている。多くを背負う器ゆえ、時に己を見失う。原点へ還りなさい。"},
+  guren:{name:"紅蓮龍",yomi:"ぐれんりゅう",emoji:"🐉",color:"#c0392b",jiku:"情熱・勝負",code:"魂コード火 / 灼熱",catch:"灼熱の意志を燃やす炎の龍",rarity:6,wave:84,oracle:"あなたの波動は炎のように高ぶっている。勢いは武器だが、焦りは身を焼く。"},
+  souten:{name:"蒼天龍",yomi:"そうてんりゅう",emoji:"🐉",color:"#2563eb",jiku:"叡智・冷静",code:"魂コード天 / 澄眼",catch:"天を見通す叡智の龍",rarity:4,wave:85,oracle:"あなたの魂は高く澄んでいる。だが頭で考えすぎ、心が置き去りになっている。"},
+  kongou:{name:"金剛龍",yomi:"こんごうりゅう",emoji:"🐉",color:"#b8860b",jiku:"財・決断",code:"魂コード金 / 不動の柱",catch:"富と決断を司る黄金の龍",rarity:5,wave:86,oracle:"あなたの波動には富を引き寄せる強さがある。だが守りに入れば淀む。"},
+  suiryoku:{name:"翠緑龍",yomi:"すいりょくりゅう",emoji:"🐉",color:"#2e8b57",jiku:"癒し・再生",code:"魂コード緑 / 再生",catch:"癒しと再生をもたらす緑の龍",rarity:7,wave:80,oracle:"あなたの波動は深い森のように静かに再生している。無理に急がずともよい。"},
+  hakugin:{name:"白銀龍",yomi:"はくぎんりゅう",emoji:"🐉",color:"#94a3b8",jiku:"浄化・縁の整え",code:"魂コード白 / 清光",catch:"穢れを祓う白銀の龍",rarity:6,wave:81,oracle:"あなたの波動は澄んでいるが、古い縁の澱みを纏っている。"},
+  kokuyou:{name:"黒曜龍",yomi:"こくようりゅう",emoji:"🐉",color:"#2d2d3a",jiku:"守護・意志",code:"魂コード黒 / 不動の盾",catch:"邪を退ける守護の龍",rarity:3,wave:83,oracle:"あなたの波動は岩のように揺るがない。だが孤独が影を落としている。"},
+  tsukuyomi:{name:"月読龍",yomi:"つくよみりゅう",emoji:"🐉",color:"#64748b",jiku:"縁・直感・女性性",code:"魂コード月 / 満ち欠け",catch:"縁を結ぶ月光の龍",rarity:7,wave:79,oracle:"あなたの波動は月のように満ち欠けする。今は欠けの時、焦らず満ちるを待て。"},
+  raimei:{name:"雷鳴龍",yomi:"らいめいりゅう",emoji:"🐉",color:"#f59e0b",jiku:"決断・突破",code:"魂コード雷 / 一閃",catch:"停滞を打ち破る雷の龍",rarity:5,wave:85,oracle:"あなたの波動には道を切り拓く一閃が宿る。だが迷えば雷は鈍る。"},
+  ouka:{name:"桜花龍",yomi:"おうかりゅう",emoji:"🐉",color:"#ec6f9e",jiku:"愛・優しさ・縁",code:"魂コード桜 / 慈愛",catch:"愛と慈しみを纏う桜の龍",rarity:8,wave:78,oracle:"あなたの波動は人を想う優しさで満ちている。だが己を後回しにしすぎだ。"},
+  kaze:{name:"風渡龍",yomi:"かぜわたりゅう",emoji:"🐉",color:"#14b8a6",jiku:"自由・旅・対話",code:"魂コード風 / 巡翼",catch:"自由に駆ける風の龍",rarity:6,wave:77,oracle:"あなたの波動は風のように自由だ。だが根を持たねば、ただ流れて終わる。"},
+  shien:{name:"紫煙龍",yomi:"しえんりゅう",emoji:"🐉",color:"#8b5cf6",jiku:"神秘・霊性・癒し",code:"魂コード紫 / 視霊",catch:"霊性を司る紫煙の龍",rarity:4,wave:82,oracle:"あなたの魂は視えざるものを感じ取る。だが感じ過ぎて疲れている。"}
 };
-
 const NUM_TO_RYU = [
   "ouka","shien","guren","kongou","shien","ouka","raimei","suiryoku","suiryoku","raimei",
   "kokuyou","kokuyou","suiryoku","tsukuyomi","tsukuyomi","hakugin","shien","hakugin","raimei","kongou",
@@ -200,17 +141,8 @@ const NUM_TO_RYU = [
   "tsukuyomi","ouka","ouka","tsukuyomi","souten","kaze","kaze","souten","ten","raimei",
   "raimei","ten","kongou","guren","guren","kokuyou","ten","tsukuyomi","tsukuyomi","ouka"
 ];
-
 function getNum(y,m,d){ const a=[0,31,59,30,0,31,1,32,3,33,4,34]; let b=(y-1)*365+Math.floor((y-1)/4)-Math.floor((y-1)/100)+Math.floor((y-1)/400); const lp=(y%4===0&&y%100!==0)||y%400===0; return (b+a[m-1]+((lp&&m>=3)?1:0)+d)%60; }
 
-// 今の波動（設問）
-const WANT_AXIS = { love:"愛とご縁の波動", money:"豊かさと勝負の波動", peace:"癒やしと浄化の波動", power:"突破と前進の波動" };
-const WANT_TIP = {
-  love:"人との縁を結ぶ時。心を開き、与えることから始めなさい。",
-  money:"勝負と豊かさの時。守りに入らず、好機に踏み込みなさい。",
-  peace:"立ち止まり、整える時。無理に進まず、自分を労わりなさい。",
-  power:"道を切り拓く時。迷いを断ち、一歩を決めなさい。"
-};
 const STATE_WORD = { calm:"いま、あなたの波動は静かに整っている。", shake:"いま、あなたの波動は揺らぎ、わずかに乱れが見える。", burn:"いま、あなたの波動は熱く高ぶっている。" };
 const FLOW_WORD  = { up:"運気は上昇の流れにある。追い風を逃さぬように。", flat:"運気は停滞の淵にある。今は波動を整える時。", down:"運気は下りの局面にある。だが、底を打てば必ず昇る。" };
 const STATE_ADJ = { calm:6, shake:-8, burn:3 };
@@ -222,52 +154,37 @@ for(let m=1;m<=12;m++)monthSel.add(new Option(m+"月",m));
 function fillDays(){const y=+yearSel.value,m=+monthSel.value,dim=new Date(y,m,0).getDate(),cur=+daySel.value||1;daySel.innerHTML="";for(let d=1;d<=dim;d++)daySel.add(new Option(d+"日",d));if(cur<=dim)daySel.value=cur;}
 yearSel.value=1990;monthSel.value=1;fillDays(); yearSel.onchange=fillDays;monthSel.onchange=fillDays;
 
-function checkLine(){ if(LINE_URL.includes("XXXXXXX")){alert("（設定メモ）LINE_URLを差し替えてください。");return false;} return true; }
-// LINEを開きつつ、ロックされた占いの続きを解放する
-function goUnlock(){
-  document.querySelectorAll('#result .locked').forEach(function(l){ l.classList.add('unlocked'); });
-  return checkLine(); // 真ならLINEへ遷移、ダミーURL時は遷移せず解放のみ
-}
-
 (function(){ const t=new Date(); const seed=t.getFullYear()*1000+(t.getMonth()+1)*40+t.getDate();
   const today=1400+(seed*73%3600); const total=72000+(seed*131%34000);
   document.getElementById('socialProof').innerHTML=`🐉 本日 <b>${today.toLocaleString()}</b>名が霊視を受け／延べ <b>${total.toLocaleString()}</b>名を視てまいりました`; })();
 
+function checkLine(){ if(LINE_URL.includes("XXXXXXX")){alert("（設定メモ）LINE_URLを差し替えてください。");return false;} return true; }
 function saveCard(){ const el=document.getElementById('captureArea'); if(!el||typeof html2canvas==='undefined'){alert("準備中です。");return;}
   html2canvas(el,{scale:2,backgroundColor:"#1a0d33"}).then(c=>{const a=document.createElement('a');a.download='守護龍診断_波動霊石院.png';a.href=c.toDataURL('image/png');a.click();}); }
+function restart(){ location.href = location.pathname; }
 
-function compatScore(me,you){ const S=RYU[me]; let b=58; if(S.good.includes(you))b=92; else if(S.bad.includes(you))b=38; else if(RYU[you].good.includes(me))b=80; else if(RYU[you].bad.includes(me))b=46; if(me===you)b=Math.max(b,74); return Math.max(25,Math.min(99,b)); }
-function compatComment(s,me,you){ const a=RYU[me].name,b=RYU[you].name;
-  if(s>=90)return `二龍は響き合う。${a}と${b}は互いの波動を高め合う、得難き縁。`;
-  if(s>=75)return `${a}と${b}は心地よく調和する。共にあれば日々が整うだろう。`;
-  if(s>=55)return `${a}と${b}は気質が異なる。違いを認め合えば、良き縁となる。`;
-  return `${a}と${b}は波が異なる。間合いを大切にすれば、学びの縁となる。`; }
-function shindanAisho(){ const me=window.__myRyu; if(!me){alert("先にソヨンに視てもらいなさい🐉");return;}
-  const y=+document.getElementById('pyear').value,mo=+document.getElementById('pmonth').value,d=+document.getElementById('pday').value;
-  const you=NUM_TO_RYU[getNum(y,mo,d)]; const s=compatScore(me,you);
-  document.getElementById('aishoResult').innerHTML=`
-    <div class="aisho-card">
-      <div class="aisho-pair">${RYU[me].emoji} <span>×</span> ${RYU[you].emoji}</div>
-      <div class="aisho-names">${RYU[me].name} × ${RYU[you].name}</div>
-      <div class="aisho-score">龍の相性 <b>${s}</b><small>%</small></div>
-      <div class="lm-bar" style="margin:8px 0;"><div class="lm-fill" style="width:${s}%;"></div></div>
-      <div class="aisho-comment">${compatComment(s,me,you)}</div>
-      <a class="unlock-btn" style="margin-top:12px;display:inline-block;" href="${LINE_URL}" target="_blank" rel="noopener" onclick="return checkLine();">📱 二人に合う石組みをLINEで視る</a>
-    </div>`;
-  document.getElementById('aishoResult').scrollIntoView({behavior:"smooth",block:"center"}); }
-
+// 占う：生年月日＋設問 → 結果へ遷移
 function uranau(){
   const y=+yearSel.value,m=+monthSel.value,d=+daySel.value;
-  const key=NUM_TO_RYU[getNum(y,m,d)]; window.__myRyu=key; const S=RYU[key];
+  const key=NUM_TO_RYU[getNum(y,m,d)];
   const q1=document.getElementById('q1').value,q2=document.getElementById('q2').value,q3=document.getElementById('q3').value;
+  renderResult(key,q1,q2,q3,true);
+}
+
+// 結果描画（固有URL対応・共有時もこの関数で再現）
+function renderResult(key,q1,q2,q3,updateUrl){
+  const S=RYU[key]; if(!S) return;
   const waveNow=Math.max(40,Math.min(99, S.wave + (STATE_ADJ[q1]||0) + (FLOW_ADJ[q3]||0)));
-  const goodE=S.good.map(g=>RYU[g].emoji+RYU[g].name).join("・");
-  const badE=S.bad.map(g=>RYU[g].emoji+RYU[g].name).join("・");
+  // 固有URLを更新（守護龍名だけ＝誕生日は乗せない）
+  if(updateUrl){ try{ history.replaceState(null,'', '?r='+key+'&a='+[q1,q2,q3].join('.')); }catch(e){} }
+  const shareUrl=location.href;
   const shareText=`【波動霊石院】院主ソヨンが視た私の守護龍は「${S.name}（${S.yomi}）」🐉\n${S.code}／波動レベル${waveNow}・上位${S.rarity}%！\nあなたの守護龍は？▼`;
 
   const res=document.getElementById('result');
   res.innerHTML=`
+    <button class="again-btn" onclick="restart()">🔄 もう一度／自分の守護龍を占う</button>
     <div id="captureArea" style="padding:14px;border-radius:20px;background:#1a0d33;">
+    <p class="temple" style="margin-bottom:8px;">― 波 動 霊 石 院 ―</p>
     <div class="rarity-badge">🏆 上位 ${S.rarity}% の希少な守護龍</div>
     <div class="hero-card" style="background:linear-gradient(135deg,${S.color},${S.color}99);">
       <div class="aura"></div>
@@ -281,64 +198,48 @@ function uranau(){
       <div class="lbl"><span>🐉 今のあなたの波動レベル</span><b>${waveNow}</b></div>
       <div class="lm-bar"><div class="lm-fill" id="waveFill"></div></div>
     </div>
-    <div style="font-size:0.66rem;color:#7d6aa8;margin:-4px 0 12px;">― 波動霊石院 ―</div>
+    <div class="code-row">
+      <div class="code-cell"><span>魂コード</span><b>${S.code}</b></div>
+      <div class="code-cell"><span>波動軸</span><b>${S.jiku}</b></div>
+    </div>
+    <div style="font-size:0.66rem;color:#7d6aa8;margin:-4px 0 4px;">― 波動霊石院 ―</div>
     </div><!-- /captureArea -->
 
     <div class="oracle"><h4>🔮 院主ソヨンのお告げ</h4><p>「${STATE_WORD[q1]}${FLOW_WORD[q3]}<br><br>${S.name}が、あなたに伝えたい言葉がある……」</p></div>
 
-    <!-- 一点物の霊石（登録前でも見える＝販売導線） -->
-    <div class="shoho">
-      <div class="dragon">🐉✨</div>
-      <h3>あなたに共鳴する“一点物の霊石”を処方します</h3>
-      <p>院主ソヨンが、あなたの守護龍と今の波動を視て、共鳴する一点物の霊石をお選びします。すべて浄化・波動調整済み。LINEにてご案内します。</p>
-      <a class="shoho-btn" href="${LINE_URL}" target="_blank" rel="noopener" onclick="return checkLine();">📱 LINEで“あなたに合う霊石”を授かる</a>
-      <p class="shoho-note">一点物のため再入荷はありません。※エンタメ・お守り目的の品です。効果効能を保証するものではありません。</p>
-    </div>
-
-    <!-- 占いの続き＝LINE登録必須 -->
-    <div class="locked">
-      <div class="oracle"><h4>🔮 お告げの続き</h4><p>「${S.oracle}」</p></div>
-      <div class="code-row">
-        <div class="code-cell"><span>魂コード</span><b>${S.code}</b></div>
-        <div class="code-cell"><span>波動軸</span><b>${S.jiku}</b></div>
-      </div>
-      <div class="sec"><h4>✨ 今あなたに必要な波動</h4>あなたが今求める「${WANT_AXIS[q2]}」。${WANT_TIP[q2]}</div>
-      <div class="sec"><h4>💡 ${S.name}からあなたへの導き</h4>${S.advice}</div>
-      <div class="compat">
-        <div class="compat-box good"><span>🐉 響き合う龍</span><b>${goodE}</b></div>
-        <div class="compat-box bad"><span>⚡ 間合いに注意</span><b>${badE}</b></div>
-      </div>
-      <div class="lock-overlay">
-        <div class="big">🔒🐉</div>
-        <p>占いの続き（お告げ全文・魂コード・今必要な波動・導き・相性の龍）は<br><b>ソヨンのLINE登録</b>で視られます</p>
-        <a class="unlock-btn" href="${LINE_URL}" target="_blank" rel="noopener" onclick="return goUnlock();">📱 LINE登録で続きを視る</a>
-      </div>
-    </div>
-
-    <button class="save-btn" onclick="saveCard()">📸 結果を画像で保存（SNSにシェア）</button>
-    <div class="share-row">
-      <a class="share-btn x" href="https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(location.href)}" target="_blank" rel="noopener">𝕏 でシェア</a>
-      <a class="share-btn ln" href="https://line.me/R/msg/text/?${encodeURIComponent(shareText+" "+location.href)}" target="_blank" rel="noopener">LINEで送る</a>
-    </div>
-
-    <p style="font-size:0.76rem;color:#a892d6;margin-top:10px;">あなたの誕生日：${y}年${m}月${d}日</p>
-
-    <div class="line-cta">
-      <h3>🐉 守護龍「${S.name}」を授かったあなたへ ― ソヨンより</h3>
-      <div class="blur">2026年、あなたの波動が大きく動くのは◯月。今のあなたに必要な石組みは△△で、龍の導きが強まる時期は……（続きはLINEにて）</div>
-      <ul class="line-list">
-        <li>✅ あなたの守護龍・魂コードの全文リーディング</li>
-        <li>✅ 2026年の波動の流れと開運の導き</li>
+    <div class="line-get">
+      <div class="big">🔒🐉</div>
+      <h3>お告げの続きは、LINEで授かれます</h3>
+      <p style="font-size:0.82rem;color:#d8c8ff;">友だち追加して、トークに<br>あなたの守護龍の名前を送ってください👇</p>
+      <div class="keyword">${S.name}</div>
+      <ul>
+        <li>✅ お告げの全文・魂コードの読み解き</li>
+        <li>✅ 今あなたに必要な波動と過ごし方</li>
+        <li>✅ ${S.name}からあなたへの導き・相性の龍</li>
         <li>✅ あなたに共鳴する一点物の霊石の処方</li>
       </ul>
-      <a class="line-btn" href="${LINE_URL}" target="_blank" rel="noopener" onclick="return checkLine();">📱 波動霊石院のLINEで続きを授かる</a>
-      <p class="line-sub">友だち追加は無料 / ブロックはいつでもできます</p>
+      <a class="line-btn" href="${LINE_URL}" target="_blank" rel="noopener" onclick="return checkLine();">📱 LINEで続きを授かる（無料）</a>
+      <p class="line-step">①友だち追加 → ②「${S.name}」と送る → ③続きが届きます</p>
+    </div>
+
+    <button class="save-btn" onclick="saveCard()">📸 結果を画像で保存</button>
+    <div class="share-row">
+      <a class="share-btn x" href="https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}" target="_blank" rel="noopener">𝕏 でシェア</a>
+      <a class="share-btn ln" href="https://line.me/R/msg/text/?${encodeURIComponent(shareText+" "+shareUrl)}" target="_blank" rel="noopener">LINEで送る</a>
     </div>
   `;
-  res.classList.remove('show'); void res.offsetWidth; res.classList.add('show');
+  document.getElementById('inputView').style.display='none';
+  res.style.display='block';
+  void res.offsetWidth;
   setTimeout(()=>{const f=document.getElementById('waveFill'); if(f)f.style.width=waveNow+"%";},150);
-  res.scrollIntoView({behavior:"smooth",block:"start"});
+  window.scrollTo({top:0,behavior:"smooth"});
 }
+
+// 共有URLで開かれたら、その結果を直接表示
+(function(){
+  const p=new URLSearchParams(location.search); const r=p.get('r');
+  if(r && RYU[r]){ const a=(p.get('a')||'calm.peace.up').split('.'); renderResult(r, a[0]||'calm', a[1]||'peace', a[2]||'up', false); }
+})();
 </script>
 </body>
 </html>
