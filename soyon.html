@@ -117,7 +117,9 @@
 </div>
 
 <script>
-const LINE_URL = "https://line.me/R/ti/p/@dhw5564g";
+const LINE_URL = "https://line.me/R/ti/p/@dhw5564g";   // 友だち追加
+const OA_ID = "@dhw5564g";                              // メッセージ事前入力に使用
+function oaMsg(text){ return "https://line.me/R/oaMessage/"+encodeURIComponent(OA_ID)+"/?"+encodeURIComponent(text); }
 
 const RYU = {
   ten:{name:"天元龍",yomi:"てんげんりゅう",emoji:"🐉",color:"#6d28d9",jiku:"根源・統べる力",code:"魂コード∞ / 原点",catch:"すべてを統べる根源の龍",rarity:2,wave:88,oracle:"あなたの魂は龍脈の根源に触れている。多くを背負う器ゆえ、時に己を見失う。原点へ還りなさい。"},
@@ -210,16 +212,15 @@ function renderResult(key,q1,q2,q3,updateUrl){
     <div class="line-get">
       <div class="big">🔒🐉</div>
       <h3>お告げの続きは、LINEで授かれます</h3>
-      <p style="font-size:0.82rem;color:#d8c8ff;">友だち追加して、トークに<br>あなたの守護龍の名前を送ってください👇</p>
-      <div class="keyword">${S.name}</div>
+      <p style="font-size:0.82rem;color:#d8c8ff;">ボタンを押すと「<b style="color:#7be89b;">${S.name}</b>」が自動入力されます。<br>送信するだけで、あなたへの続きが届きます👇</p>
       <ul>
         <li>✅ お告げの全文・魂コードの読み解き</li>
         <li>✅ 今あなたに必要な波動と過ごし方</li>
         <li>✅ ${S.name}からあなたへの導き・相性の龍</li>
         <li>✅ あなたに共鳴する一点物の霊石の処方</li>
       </ul>
-      <a class="line-btn" href="${LINE_URL}" target="_blank" rel="noopener" onclick="return checkLine();">📱 LINEで続きを授かる（無料）</a>
-      <p class="line-step">①友だち追加 → ②「${S.name}」と送る → ③続きが届きます</p>
+      <a class="line-btn" href="${oaMsg(S.name)}" target="_blank" rel="noopener" onclick="return checkLine();">📱 LINEで続きを授かる（無料）</a>
+      <p class="line-step">タップ → 送信を押すだけ（入力不要）→ 続きが届きます</p>
     </div>
 
     <button class="save-btn" onclick="saveCard()">📸 結果を画像で保存</button>
