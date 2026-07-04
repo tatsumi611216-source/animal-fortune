@@ -75,7 +75,8 @@ const SITE = SITES.soyon; // 後方互換
 // 部品
 const ryu = ["天元龍","紅蓮龍","蒼天龍","金剛龍","翠緑龍","白銀龍","黒曜龍","月読龍","雷鳴龍","桜花龍","風渡龍","紫煙龍"];
 const sign = ["やたら眠い","急に縁が切れた","同じ数字をよく見る","理由もなく涙が出る","昔の人から連絡が来た","物がよく壊れる","直感が冴えてきた","人混みで異常に疲れる","急に部屋を片付けたくなった","嫌な縁が自然と離れた"];
-const theme = ["金運","ご縁","恋愛","仕事運","人間関係","健康運","転機","出会い","厄","運気の流れ"];
+const theme = ["金運","ご縁","恋愛","仕事運","人間関係","出会い"]; // 文法が崩れる語（転機・厄・運気の流れ）は除外
+const upTheme = ["運気","金運","波動"]; // 「◯◯が上がる」系専用
 const month = ["今月末","来週","次の満月","これから3日","今週末","年明け","春分の頃"];
 
 const T = {
@@ -94,7 +95,7 @@ const T = {
     ()=>`龍に好かれる人の特徴、静かな人が多い。騒がず、流れを読み、ご縁を大事にする人。あなたはどう？`,
   ],
   list: [
-    ()=>`${pick(theme)}が上がる人の習慣3つ👇\n①朝に窓を開けて空気を入れ替える\n②感謝を声に出す\n③直感で「なんか嫌」を無視しない\nできてる人から運が巡ります。`,
+    ()=>`${pick(upTheme)}が上がる人の習慣3つ👇\n①朝に窓を開けて空気を入れ替える\n②感謝を声に出す\n③直感で「なんか嫌」を無視しない\nできてる人から運が巡ります。`,
     ()=>`波動を下げる行動3つ⚠️\n①愚痴の多い場に長居する\n②寝る直前のSNS\n③「どうせ私なんて」が口癖\n心当たり、ない？`,
   ],
   toi: [
@@ -159,8 +160,11 @@ function getTypes(){
 }
 function gen(n){
   const types=getTypes(); const out=document.getElementById('out'); out.innerHTML="";
+  const seen=new Set();
   for(let i=0;i<n;i++){
-    const text=buildOne(types);
+    let text, tries=0;
+    do{ text=buildOne(types); tries++; }while(seen.has(text)&&tries<30); // 重複排除（連投スパム対策）
+    seen.add(text);
     const d=document.createElement('div'); d.className='post';
     d.innerHTML=`<button class="copy">コピー</button><span class="len">${text.replace(/\n/g,'').length}字</span>`;
     d.insertAdjacentText('afterbegin', text);
