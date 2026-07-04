@@ -104,6 +104,18 @@
   .line-btn { display:inline-flex; align-items:center; gap:8px; background:#06c755; color:#fff; text-decoration:none; padding:14px 30px; border-radius:30px; font-weight:bold; font-size:1.05rem; box-shadow:0 8px 20px rgba(6,199,85,.4); }
   .line-sub { font-size:0.72rem; color:#999; margin-top:10px; }
   .footer-note { font-size:0.7rem; color:#b8a8c8; margin-top:22px; }
+
+  /* 診断中オーバーレイ */
+  #ritual { position:fixed; inset:0; background:radial-gradient(circle at 50% 40%, #4a2a80 0%, #1c0f38 80%); display:none; align-items:center; justify-content:center; flex-direction:column; z-index:99; }
+  #ritual.on { display:flex; }
+  .ritual-ring { width:140px; height:140px; border-radius:50%; border:2px solid rgba(255,255,255,.5); display:flex; align-items:center; justify-content:center; position:relative; animation:rpulse 1.4s ease-in-out infinite; }
+  .ritual-ring::before { content:""; position:absolute; inset:-16px; border-radius:50%; border:2px dashed rgba(255,94,219,.55); animation:rspin 6s linear infinite; }
+  .ritual-icon { font-size:3.4rem; animation:rfloat 1.8s ease-in-out infinite; filter:drop-shadow(0 0 16px rgba(255,94,219,.7)); }
+  @keyframes rpulse { 0%,100%{box-shadow:0 0 20px rgba(140,82,255,.25);} 50%{box-shadow:0 0 60px rgba(255,94,219,.5);} }
+  @keyframes rspin { to{transform:rotate(360deg);} }
+  @keyframes rfloat { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-8px);} }
+  .ritual-text { margin-top:24px; color:#fff; font-size:0.95rem; letter-spacing:2px; text-shadow:0 0 12px rgba(255,94,219,.7); }
+  .again-btn { background:transparent; color:#8c52ff; border:1px solid #c9b3f0; padding:9px 18px; border-radius:20px; font-size:0.8rem; cursor:pointer; margin-bottom:14px; }
   .affi-card { margin-top:18px; background:linear-gradient(135deg,#fff4e6,#ffe8f3); border:1px solid #ffd2a8; border-radius:16px; padding:20px 18px; }
   .affi-emoji { font-size:2.4rem; }
   .affi-card h3 { font-size:1.02rem; color:#d6336c; margin:4px 0 6px; }
@@ -113,7 +125,12 @@
 </style>
 </head>
 <body>
+<div id="ritual">
+  <div class="ritual-ring"><div class="ritual-icon">🎀</div></div>
+  <div class="ritual-text" id="ritualText">推し活波動をスキャン中</div>
+</div>
 <div class="card">
+  <div id="inputView">
   <h1>🎀 推し活アニマル診断</h1>
   <p class="sub">生年月日で、あなたの推し活タイプ・沼り度・界隈での立ち回りを診断</p>
   <div class="hearts">🐾 💜 🎀 ✨ 🎤 📣</div>
@@ -125,6 +142,7 @@
   </div>
   <button onclick="uranau()">推し活タイプを診断 🎤</button>
   <p class="social-proof" id="socialProof"></p>
+  </div><!-- /inputView -->
 
   <div id="result"></div>
   <p class="footer-note">※ 生年月日に基づく推し活タイプ診断（エンタメ目的）です</p>
@@ -325,10 +343,18 @@ function shindanAisho(){
   box.scrollIntoView({behavior:"smooth",block:"center"});
 }
 
+const RITUAL_LINES=["推し活波動をスキャン中","界隈での立ち回りを解析中","あなたのアニマルが確定しました"];
 function uranau(){
   const y=+yearSel.value,m=+monthSel.value,d=+daySel.value;
   const name=NUM_TO_ANIMAL[getAnimalNumber(y,m,d)];
+  const ov=document.getElementById('ritual'), tx=document.getElementById('ritualText');
+  ov.classList.add('on'); let i=0; tx.textContent=RITUAL_LINES[0];
+  const timer=setInterval(()=>{ i++; if(i<RITUAL_LINES.length) tx.textContent=RITUAL_LINES[i]; },900);
+  setTimeout(()=>{ clearInterval(timer); ov.classList.remove('on'); renderOshi(name, `${y}年${m}月${d}日`, true); },2700);
+}
+function renderOshi(name, birthText, updateUrl){
   window.__myAnimal=name;
+  if(updateUrl){ try{ history.replaceState(null,'','?r='+encodeURIComponent(name)); }catch(e){} }
   const b=BASE[name], O=OSHI[name], E=EXTRA[name], V=VOICE[name];
   const goodE=O.good.map(g=>BASE[g].emoji+g).join("・");
   const badE=O.bad.map(g=>BASE[g].emoji+g).join("・");
@@ -336,6 +362,7 @@ function uranau(){
 
   const res=document.getElementById('result');
   res.innerHTML=`
+    <button class="again-btn" onclick="location.href=location.pathname;">🔄 もう一度／自分のタイプを診断</button>
     <div id="captureArea" style="padding:14px;border-radius:22px;background:#fff;">
     <div class="rarity-badge">🏆 上位 ${O.rarity}% の激レア推し活タイプ</div>
     <div class="hero-card" style="background:linear-gradient(135deg,${b.color},${b.color}cc);">
@@ -386,7 +413,7 @@ function uranau(){
       <a class="share-btn ln" href="https://line.me/R/msg/text/?${encodeURIComponent(shareText+" "+location.href)}" target="_blank" rel="noopener">LINEで送る</a>
     </div>
 
-    <p style="font-size:0.78rem;color:#b8a;margin-top:10px;">あなたの誕生日：${y}年${m}月${d}日</p>
+    ${birthText?`<p style="font-size:0.78rem;color:#b8a;margin-top:10px;">あなたの誕生日：${birthText}</p>`:""}
 
     <div class="affi-card">
       <div class="affi-emoji">🔮</div>
@@ -421,6 +448,7 @@ function uranau(){
       <p class="line-sub">友だち追加するだけ・無料 / ブロックはいつでもOK</p>
     </div>
   `;
+  document.getElementById('inputView').style.display='none';
   res.classList.remove('show'); void res.offsetWidth; res.classList.add('show');
   const py=document.getElementById('pyear'),pm=document.getElementById('pmonth'),pd=document.getElementById('pday');
   for(let yy=2025;yy>=1930;yy--)py.add(new Option(yy+"年",yy));
@@ -429,8 +457,14 @@ function uranau(){
   const fillPDays=()=>{const dim=new Date(+py.value,+pm.value,0).getDate();pd.innerHTML="";for(let dd=1;dd<=dim;dd++)pd.add(new Option(dd+"日",dd));};
   fillPDays(); py.onchange=fillPDays; pm.onchange=fillPDays;
   setTimeout(()=>{const f=document.getElementById('lmFill'); if(f)f.style.width=O.score+"%";},150);
-  res.scrollIntoView({behavior:"smooth",block:"start"});
+  window.scrollTo({top:0,behavior:"smooth"});
 }
+
+// 共有URL（?r=タイプ名）で開かれたら直接結果を表示
+(function(){
+  const p=new URLSearchParams(location.search); const r=p.get('r');
+  if(r){ const name=decodeURIComponent(r); if(OSHI[name]) renderOshi(name, null, false); }
+})();
 </script>
 </body>
 </html>

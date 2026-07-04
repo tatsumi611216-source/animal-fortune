@@ -33,6 +33,10 @@
   <p class="sub">ソヨン波動霊石院｜運営用ツール（X/インスタ投稿のネタ自動生成）</p>
 
   <div class="panel">
+    <div class="row" id="brands">
+      <label class="chk"><input type="radio" name="brand" value="soyon" checked>🐉 ソヨン（スピ）</label>
+      <label class="chk"><input type="radio" name="brand" value="oshi">🎀 推し活アニマル</label>
+    </div>
     <div class="row" id="types">
       <label class="chk"><input type="checkbox" value="zengo" checked>前兆・予言系</label>
       <label class="chk"><input type="checkbox" value="sukui" checked>救い・寄り添い系</label>
@@ -54,6 +58,7 @@
 
   <div class="out" id="out"></div>
   <button class="ghost copyall" onclick="copyAll()" id="copyAllBtn" style="display:none;">📋 全部まとめてコピー</button>
+  <button class="ghost copyall" onclick="dlCSV()" id="csvBtn" style="display:none;">📥 CSV保存（Make×スプレッドシート用）</button>
 
   <p class="note">
   ⚙️ 使い方：生成→コピー→SocialDog/Buffer等の予約投稿ツールに貼って予約＝実質「自動でソヨンが呟く」。<br>
@@ -62,7 +67,10 @@
 </div>
 
 <script>
-const SITE = "https://doubutsu-uranai.netlify.app/soyon.html";
+const SITES = { soyon:"https://doubutsu-uranai.netlify.app/soyon.html", oshi:"https://doubutsu-uranai.netlify.app/oshikatsu.html" };
+const TAGSET = { soyon:"\n\n#スピリチュアル #龍神 #波動 #開運 #守護龍 #占い", oshi:"\n\n#推し活 #オタ活 #推しのいる生活 #診断 #界隈" };
+function brand(){ return document.querySelector('#brands input:checked').value; }
+const SITE = SITES.soyon; // 後方互換
 
 // 部品
 const ryu = ["天元龍","紅蓮龍","蒼天龍","金剛龍","翠緑龍","白銀龍","黒曜龍","月読龍","雷鳴龍","桜花龍","風渡龍","紫煙龍"];
@@ -100,18 +108,49 @@ const T = {
     ()=>`一点物の霊石は、同じ波動が二つとありません。「なぜか気になる」その感覚が、もうご縁の始まりです。`,
   ]
 };
-const TAGS = "\n\n#スピリチュアル #龍神 #波動 #開運 #守護龍 #占い";
+// ===== 推し活アニマル用テンプレ =====
+const oshiAnimal=["チーター","黒ひょう","ライオン","とら","たぬき","こじか","猿","ペガサス","ゾウ","ひつじ","オオカミ","コアラ"];
+const oshiKoto=["新規供給","チケット戦争","遠征","痛バ作り","同担との絆","積みグッズ","現場の余韻","推しの尊さ"];
+const OT = {
+  zengo: [
+    ()=>`${pick(oshiKoto)}の前日に限って眠れないの、推し活民あるあるすぎる。`,
+    ()=>`給料日と供給日が重なった時の財布、静かに息を引き取る。`,
+  ],
+  sukui: [
+    ()=>`推しに会えない期間も、推しはあなたの生活の中で生きてる。在宅も立派な推し活です。`,
+    ()=>`「こんなに課金して大丈夫かな」って思う日もあるけど、推しがくれる元気はプライスレス。無理のない範囲でね。`,
+  ],
+  aru: [
+    ()=>`推し活${pick(oshiAnimal)}タイプあるある：\n・${pick(oshiKoto)}で本気を出す\n・スケジュール帳が推し中心\n・「最後の1個」に弱い\nあなたはどのアニマル？`,
+    ()=>`同担と繋がるか一人で推すか、ここで推し活の性格出るよね。あなたはどっち派？`,
+  ],
+  list: [
+    ()=>`推し活が長続きする人の特徴3つ👇\n①無理な課金をしない\n②比較しない\n③自分の推し方を正解にする\n全部できたら推し活マスター。`,
+    ()=>`散財しがちな人の危険サイン⚠️\n①「限定」で思考停止\n②積む枚数が挨拶代わり\n③財布を見ない\n心当たりは？`,
+  ],
+  toi: [
+    ()=>`あなたの推し活タイプ、動物でわかるって知ってた？🎀\n生年月日だけで診断→ {SITE}`,
+    ()=>`散財度・沼り度・界隈での立ち回りまで丸わかり。\n推し活アニマル診断→ {SITE}`,
+    ()=>`私は${pick(oshiAnimal)}タイプだった…当たりすぎて怖い。\nあなたは？→ {SITE}`,
+  ],
+  ryu: [
+    ()=>`${pick(oshiAnimal)}タイプの推し活民は、${pick(oshiKoto)}に全力を出す傾向。わかる人RT。`,
+    ()=>`推し活の相性、実はタイプで決まってる。同担と揉めやすい組み合わせもある…🎀`,
+  ]
+};
 
 function pick(a){ return a[Math.floor(Math.random()*a.length)]; }
 function buildOne(types){
-  const t = pick(types);
-  let text = pick(T[t])();
+  const b=brand();
+  const lib = b==='oshi' ? OT : T;
+  const site = SITES[b];
+  const t = pick(types.filter(x=>lib[x]&&lib[x].length));
+  let text = pick(lib[t])();
   const withCTA = document.getElementById('withCTA').checked;
   const withTag = document.getElementById('withTag').checked;
-  // 診断誘導系は必ずURL。それ以外は任意で末尾に
-  if(text.includes('{SITE}')) text = text.replace('{SITE}', SITE);
-  else if(withCTA && Math.random()<0.5) text += `\n\nあなたの守護龍は？🐉→ ${SITE}`;
-  if(withTag) text += TAGS;
+  if(text.includes('{SITE}')) text = text.replace('{SITE}', site);
+  else if(withCTA && Math.random()<0.5) text += (b==='oshi' ? `\n\nあなたの推し活タイプは？🎀→ ${site}` : `\n\nあなたの守護龍は？🐉→ ${site}`);
+  if(withTag) text += TAGSET[b];
   return text;
 }
 function getTypes(){
@@ -129,9 +168,18 @@ function gen(n){
     out.appendChild(d);
   }
   document.getElementById('copyAllBtn').style.display = n>1?'block':'none';
+  document.getElementById('csvBtn').style.display = n>1?'block':'none';
   window.__all = [...out.querySelectorAll('.post')].map(p=>p.childNodes[0].textContent);
 }
 function copyAll(){ navigator.clipboard.writeText((window.__all||[]).join("\n\n――――――\n\n")); const b=document.getElementById('copyAllBtn'); b.textContent='✓ コピーしました'; setTimeout(()=>b.textContent='📋 全部まとめてコピー',1500); }
+// Make×スプレッドシート用CSV（A:投稿文 B:状態 C:投稿日時）
+function dlCSV(){
+  const rows=[["投稿文","状態","投稿日時"]].concat((window.__all||[]).map(t=>[t,"",""]));
+  const csv="﻿"+rows.map(r=>r.map(c=>'"'+String(c).replace(/"/g,'""')+'"').join(",")).join("\r\n");
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"}));
+  a.download=(brand()==='oshi'?'oshikatsu':'soyon')+"_posts.csv"; a.click();
+}
 gen(3);
 </script>
 </body>
