@@ -158,7 +158,7 @@
 </div>
 
 <script>
-const LINE_URL = "https://line.me/R/ti/p/@dhw5564g";   // 友だち追加
+const LINE_URL = "https://lin.ee/VpaAd4E";   // 友だち追加（公式の友だち追加リンク）
 const OA_ID = "@dhw5564g";                              // メッセージ事前入力に使用
 function oaMsg(text){ return "https://line.me/R/oaMessage/"+encodeURIComponent(OA_ID)+"/?"+encodeURIComponent(text); }
 
@@ -315,15 +315,15 @@ function renderResult(key,q1,q2,q3,updateUrl){
     <div class="line-get">
       <div class="big">🔒🐉</div>
       <h3>お告げの続きは、LINEで授かれます</h3>
-      <p style="font-size:0.82rem;color:#d8c8ff;">ボタンを押すと「<b style="color:#7be89b;">${S.name}</b>」が自動入力されます。<br>送信するだけで、あなたへの続きが届きます👇</p>
+      <p style="font-size:0.82rem;color:#d8c8ff;">友だち追加して「<b style="color:#7be89b;">${S.name}</b>」と送るだけ。<br>あなたへの続きが届きます👇</p>
       <ul>
         <li>✅ お告げの全文・魂コードの読み解き</li>
         <li>✅ 今あなたに必要な波動と過ごし方</li>
         <li>✅ ${S.name}からあなたへの導き・相性の龍</li>
         <li>✅ あなたに共鳴する一点物の霊石の処方</li>
       </ul>
-      <a class="line-btn" href="${oaMsg(S.name)}" target="_blank" rel="noopener" onclick="return checkLine();">📱 LINEで続きを授かる（無料）</a>
-      <p class="line-step">タップ → 送信を押すだけ（入力不要）→ 続きが届きます</p>
+      <a class="line-btn" href="${LINE_URL}" target="_blank" rel="noopener" onclick="return checkLine();">📱 LINEで続きを授かる（無料）</a>
+      <p class="line-step">タップ →「追加」→ トークで「${S.name}」と送信 → 続きが届きます</p>
     </div>
 
     <button class="save-btn" onclick="saveCard()">📸 結果を画像で保存</button>
